@@ -276,7 +276,7 @@ def obter_dia_semana_ptbr():
 
 class AgendadorHopService(win32serviceutil.ServiceFramework):
     _svc_name_ = "AgendadorHopService"
-    _svc_display_name_ = "Agendador de Workflows e Pepilines ETL"
+    _svc_display_name_ = "Agendador de Workflows e Pepilines ETL pyflowt3"
     _svc_description_ = "Serviço para agendamento e execução de workflows e pipelines ETL"
 
     def __init__(self, args):
