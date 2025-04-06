@@ -30,6 +30,7 @@ import logging
 from pathlib import Path
 import ctypes
 import unicodedata
+from dotenv import load_dotenv
 
 # Configuração do diretório de trabalho
 SERVICE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -39,9 +40,10 @@ os.chdir(SERVICE_DIR)
 ctypes.windll.kernel32.SetDllDirectoryW(None)
 
 # Definição de comandos para executar na linha de comando
-APACHE_HOP = r'C:\Apache-hop\hop-run.bat'
-PENTAHO_JOB = r'C:\data-integration\Kitchen.bat'
-PENTAHO_TRANSFORMATION = r'C:\data-integration\Pan.bat'
+load_dotenv()
+APACHE_HOP = os.getenv("APACHE_HOP", r'C:\Apache-hop\hop-run.bat')
+PENTAHO_JOB = os.getenv("PENTAHO_JOB", r'C:\data-integration\Kitchen.bat') 
+PENTAHO_TRANSFORMATION = os.getenv("PENTAHO_TRANSFORMATION", r'C:\data-integration\Pan.bat')  
 
 # Configurações do aplicativo
 DB_PATH = os.path.join(SERVICE_DIR, "agendador.db")

@@ -16,12 +16,17 @@ import sys
 import sqlite3
 import datetime
 import os
+from dotenv import load_dotenv
+
 from PyQt6.QtWidgets import (QApplication, QWidget, QVBoxLayout, QLabel, 
                             QPushButton, QTextEdit, QTableWidget, 
                             QTableWidgetItem, QLineEdit, QDateEdit)
-from PyQt6.QtCore import QDate
+from PyQt6.QtCore import QDate, Qt   
+from PyQt6.QtGui import QPixmap , QIcon
 
-DB_PATH = "agendador.db"
+load_dotenv()
+
+DB_PATH = os.getenv("DB_PATH", "agendador.db")
 
 class AgendadorGUI(QWidget):
     def __init__(self):
@@ -30,7 +35,8 @@ class AgendadorGUI(QWidget):
     
     def initUI(self):
         self.setWindowTitle("PyFlowT3 - Monitoramento do Agendador de Workflows e Pipelines")
-        self.setGeometry(100, 100, 1000, 600)
+        self.setGeometry(100, 100, 1000, 700)
+        self.setWindowIcon(QIcon('pyflowt3.ico'))  # ou .png, .jpg
         
         layout = QVBoxLayout()
         
@@ -70,9 +76,42 @@ class AgendadorGUI(QWidget):
         self.texto_logs = QTextEdit()
         self.texto_logs.setReadOnly(True)
         layout.addWidget(self.texto_logs)
+
+        # Adicionar a logo centralizada abaixo dos logs
+        self.logo_label = QLabel()
+        self.carregar_logo()
+        self.logo_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.logo_label.setContentsMargins(0, 5, 0, 0)  # Margem apenas no topo
+        layout.addWidget(self.logo_label)
         
         self.setLayout(layout)
         self.atualizar_tudo()
+
+    def carregar_logo(self):
+        """Carrega a logo da aplicação"""
+        try:
+            # Tenta carregar em diferentes formatos
+            pixmap = QPixmap('pyflowt3.ico')
+            if pixmap.isNull():
+                pixmap = QPixmap('pyflowt3.png')
+            
+            if not pixmap.isNull():
+                # Redimensionar mantendo proporção
+                pixmap = pixmap.scaled(150, 100, 
+                                     Qt.AspectRatioMode.KeepAspectRatio,
+                                     Qt.TransformationMode.SmoothTransformation)
+                self.logo_label.setPixmap(pixmap)
+            else:
+                # Texto alternativo se a imagem não for encontrada
+                self.logo_label.setText("PyFlowT3 Monitor")
+                self.logo_label.setStyleSheet("""
+                    font-size: 16px; 
+                    font-weight: bold;
+                    color: #333;
+                    padding: 5px;
+                """)
+        except Exception as e:
+            print(f"Erro ao carregar logo: {e}")
     
     def atualizar_tudo(self):
         """Atualiza tanto os agendamentos quanto os logs"""

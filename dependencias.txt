@@ -13,9 +13,11 @@ No Linux (Ubuntu):
 sudo apt update && sudo apt install -y python3-pip 
  # Certifique-se de que o pip está instalado
 python3 -m pip install PyQt6
+python3 -m pip python-dotenv
 
 No Windows:
 
 pip install PyQt6 pywin32
+pip install python-dotenv
 
 

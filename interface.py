@@ -14,22 +14,27 @@
 
 from PyQt6.QtWidgets import (
     QApplication, QMainWindow, QWidget, QVBoxLayout, QGridLayout, QLabel, QPushButton, 
-    QTableWidget, QTableWidgetItem, QLineEdit, QFileDialog, QMessageBox, QHBoxLayout, QComboBox, QHeaderView, QAbstractItemView,
-    QCheckBox
+    QTableWidget, QTableWidgetItem, QLineEdit, QFileDialog, QMessageBox, QHBoxLayout, QComboBox, 
+    QHeaderView, QAbstractItemView, QCheckBox
 )
 from PyQt6.QtCore import Qt, QRegularExpression
-from PyQt6.QtGui import QRegularExpressionValidator
+from PyQt6.QtGui import QRegularExpressionValidator, QIcon, QPixmap
 import sqlite3
 import sys
+import os
+from dotenv import load_dotenv
 
-DB_PATH = "agendador.db"
+load_dotenv()
+
+DB_PATH = os.getenv("DB_PATH", "agendador.db")
 
 class AgendadorGUI(QMainWindow):
     def __init__(self):
         super().__init__()
 
         self.setWindowTitle("PyFlowT3 - Agendador de Workflows e Pipelines")
-        self.setGeometry(100, 100, 1000, 600)
+        self.setGeometry(100, 100, 1000, 700)
+        self.setWindowIcon(QIcon('pyflowt3.ico'))  # ou .png, .jpg
 
         # Variável para armazenar o ID do agendamento sendo editado
         self.agendamento_editando = None
@@ -65,7 +70,6 @@ class AgendadorGUI(QMainWindow):
         self.btn_selecionar.clicked.connect(self.selecionar_arquivo)
         self.layout_grid.addWidget(self.btn_selecionar, 0, 2)
 
-        
         # Linha 2: Arquivo + Input + Botão Selecionar
         self.layout_grid.addWidget(QLabel("Ferramenta ETL:*"), 1, 0)
         self.entry_etl = QComboBox()
@@ -102,7 +106,6 @@ class AgendadorGUI(QMainWindow):
         self.layout_grid.addWidget(self.entry_intervalo, 5, 1, 1, 2)
 
         # Linha 7: Dias da semana
-        # Por este código:
         self.layout_grid.addWidget(QLabel("Dias da Semana:"), 6, 0)
 
         # Cria um widget container para os checkboxes
@@ -175,7 +178,7 @@ class AgendadorGUI(QMainWindow):
         self.tabela.setSelectionBehavior(QTableWidget.SelectionBehavior.SelectRows)
         self.tabela.setSelectionMode(QTableWidget.SelectionMode.SingleSelection)
         
-        # Ajuste de redimensionamento (PyQt6) - FORMA CORRETA
+        # Ajuste de redimensionamento (PyQt6)
         header = self.tabela.horizontalHeader()
         ResizeMode = QHeaderView.ResizeMode  # Atalho para os modos de redimensionamento
         
@@ -204,8 +207,6 @@ class AgendadorGUI(QMainWindow):
         
         self.layout_principal.addWidget(self.tabela)
 
-        # fim tabela
-
         # Layout horizontal para botões Editar e Excluir
         botoes_layout = QHBoxLayout()
         
@@ -218,6 +219,32 @@ class AgendadorGUI(QMainWindow):
         botoes_layout.addWidget(self.btn_excluir)
 
         self.layout_principal.addLayout(botoes_layout)
+
+        # Adicionar a logo centralizada
+        logo_label = QLabel()
+        try:
+            # Tente carregar o ícone primeiro (se estiver no formato .ico)
+            pixmap = QPixmap('pyflowt3.ico')
+            if pixmap.isNull():
+                # Se o .ico não carregar, tente outros formatos
+                pixmap = QPixmap('pyflowt3.png')  # ou .jpg, .svg
+            
+            if not pixmap.isNull():
+                # Redimensionar mantendo proporção
+                pixmap = pixmap.scaled(150, 100, Qt.AspectRatioMode.KeepAspectRatio, 
+                                     Qt.TransformationMode.SmoothTransformation)
+                logo_label.setPixmap(pixmap)
+                logo_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
+                logo_label.setContentsMargins(0, 5, 0, 5)  # Margens: topo e baixo
+            else:
+                # Caso não encontre a imagem, exibe um texto alternativo
+                logo_label.setText("PyFlowT3")
+                logo_label.setStyleSheet("font-size: 16px; font-weight: bold;")
+                logo_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        except Exception as e:
+            print(f"Erro ao carregar a logo: {e}")
+        
+        self.layout_principal.addWidget(logo_label)
 
         self.criar_banco_dados()
         self.listar_agendamentos()

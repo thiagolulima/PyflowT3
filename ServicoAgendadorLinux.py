@@ -26,15 +26,17 @@ import logging
 from pathlib import Path
 import signal
 import unicodedata
+from dotenv import load_dotenv
 
 # Configuração do diretório de trabalho
 SERVICE_DIR = os.path.dirname(os.path.abspath(__file__))
 os.chdir(SERVICE_DIR)
 
 # Definição de comandos para executar na linha de comando (ajuste para Linux)
-APACHE_HOP = '/opt/Apache-hop/hop-run.sh'
-PENTAHO_JOB = '/opt/data-integration/kitchen.sh'
-PENTAHO_TRANSFORMATION = '/opt/data-integration/pan.sh'
+load_dotenv()
+APACHE_HOP =  os.getenv("APACHE_HOP", '/opt/Apache-hop/hop-run.sh') 
+PENTAHO_JOB = os.getenv("PENTAHO_JOB", '/opt/data-integration/kitchen.sh') 
+PENTAHO_TRANSFORMATION = os.getenv("PENTAHO_TRANSFORMATION", '/opt/data-integration/pan.sh')  
 
 # Configurações do aplicativo
 DB_PATH = os.path.join(SERVICE_DIR, "agendador.db")
