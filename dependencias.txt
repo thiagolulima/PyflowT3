@@ -1,0 +1,21 @@
+1. Pacotes principais do seu projeto:
+PyQt6 (GUI)
+python3 -m pip install PyQt6
+
+pywin32 (para win32serviceutil, win32service, win32event, servicemanager - somente no Windows)
+
+python3 -m pip install pywin32
+
+Execute os seguintes comandos no terminal:
+
+No Linux (Ubuntu):
+
+sudo apt update && sudo apt install -y python3-pip 
+ # Certifique-se de que o pip está instalado
+python3 -m pip install PyQt6
+
+No Windows:
+
+pip install PyQt6 pywin32
+
+

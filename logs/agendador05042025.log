@@ -1,0 +1,1391 @@
+2025-04-05 15:34:27 - Agendamento cumpre condi√ß√µes para execu√ß√£o: C:/data-integration/etl/atualiza_informacoes.kjb
+2025-04-05 15:34:27 - Processo iniciado (PID: 25216)
+2025-04-05 15:34:27 - [PENTAHO] Iniciando execu√ß√£o do arquivo: C:\data-integration\etl\atualiza_informacoes.kjb
+2025-04-05 15:34:27 - [PENTAHO] Comando completo: C:\data-integration\Kitchen.bat /file:"C:\data-integration\etl\atualiza_informacoes.kjb"
+2025-04-05 15:34:27 - [PENTAHO] Diret√≥rio de trabalho: C:\data-integration
+2025-04-05 15:34:27 - [PENTAHO] Vari√°veis de ambiente configuradas
+DEBUG: Using PENTAHO_JAVA_HOME
+DEBUG: _PENTAHO_JAVA_HOME=C:\Program Files\Java\jdk1.8.0_201
+DEBUG: _PENTAHO_JAVA=C:\Program Files\Java\jdk1.8.0_201\bin\java.exe
+
+C:\data-integration>"C:\Program Files\Java\jdk1.8.0_201\bin\java.exe"  -Xms1024m -Xmx2048m "-Dhttps.protocols=TLSv1,TLSv1.1,TLSv1.2" "-Djava.library.path=libswt\win64" "-DKETTLE_HOME=C:\data-integration" "-DKETTLE_REPOSITORY=" "-DKETTLE_USER=" "-DKETTLE_PASSWORD=" "-DKETTLE_PLUGIN_PACKAGES=" "-DKETTLE_LOG_SIZE_LIMIT=" "-DKETTLE_JNDI_ROOT=C:\data-integration\simple-jndi" "-Duser.timezone=GMT-3" -jar launcher\launcher.jar -lib ..\libswt\win64  -main org.pentaho.di.kitchen.Kitchen -initialDir "C:\data-integration"\ /file:"C:\data-integration\etl\atualiza_informacoes.kjb" 
+15:34:30,705 INFO  [KarafBoot] Checking to see if org.pentaho.clean.karaf.cache is enabled
+15:34:38,978 INFO  [KarafInstance] 
+*******************************************************************************
+*** Karaf Instance Number: 1 at C:\data-integration\.\system\karaf\caches\k ***
+***   itchen\data-1                                                         ***
+*** FastBin Provider Port:52901                                             ***
+*** Karaf Port:8802                                                         ***
+*** OSGI Service Port:9051                                                  ***
+*******************************************************************************
+abr 05, 2025 3:34:40 PM org.apache.karaf.main.Main$KarafLockCallback lockAquired
+INFORMA«’ES: Lock acquired. Setting startlevel to 100
+2025/04/05 15:34:40 - Kitchen - Start of run.
+Updating configuration from org.ops4j.pax.web.cfg
+Updating configuration from org.apache.karaf.shell.cfg
+Updating configuration from org.apache.aries.rsa.provider.fastbin.cfg
+2025-04-05 15:34:43.392:INFO:oejs.Server:jetty-8.1.15.v20140411
+2025-04-05 15:34:43.436:INFO:oejs.AbstractConnector:Started NIOSocketConnectorWrapper@0.0.0.0:9051
+abr 05, 2025 3:34:44 PM org.apache.cxf.bus.blueprint.NamespaceHandlerRegisterer register
+INFORMA«’ES: Registered blueprint namespace handler for http://cxf.apache.org/blueprint/core
+abr 05, 2025 3:34:44 PM org.apache.cxf.bus.blueprint.NamespaceHandlerRegisterer register
+INFORMA«’ES: Registered blueprint namespace handler for http://cxf.apache.org/configuration/beans
+abr 05, 2025 3:34:44 PM org.apache.cxf.bus.blueprint.NamespaceHandlerRegisterer register
+INFORMA«’ES: Registered blueprint namespace handler for http://cxf.apache.org/configuration/parameterized-types
+abr 05, 2025 3:34:44 PM org.apache.cxf.bus.blueprint.NamespaceHandlerRegisterer register
+INFORMA«’ES: Registered blueprint namespace handler for http://cxf.apache.org/configuration/security
+abr 05, 2025 3:34:44 PM org.apache.cxf.bus.blueprint.NamespaceHandlerRegisterer register
+INFORMA«’ES: Registered blueprint namespace handler for http://schemas.xmlsoap.org/wsdl/
+abr 05, 2025 3:34:44 PM org.apache.cxf.bus.blueprint.NamespaceHandlerRegisterer register
+INFORMA«’ES: Registered blueprint namespace handler for http://www.w3.org/2005/08/addressing
+abr 05, 2025 3:34:44 PM org.apache.cxf.bus.blueprint.NamespaceHandlerRegisterer register
+INFORMA«’ES: Registered blueprint namespace handler for http://schemas.xmlsoap.org/ws/2004/08/addressing
+abr 05, 2025 3:34:44 PM org.apache.cxf.bus.osgi.CXFExtensionBundleListener addExtensions
+INFORMA«’ES: Adding the extensions from bundle org.apache.cxf.cxf-rt-management (195) [org.apache.cxf.management.InstrumentationManager]
+abr 05, 2025 3:34:44 PM org.apache.cxf.bus.osgi.CXFExtensionBundleListener addExtensions
+INFORMA«’ES: Adding the extensions from bundle org.apache.cxf.cxf-rt-wsdl (198) [org.apache.cxf.wsdl.WSDLManager]
+abr 05, 2025 3:34:44 PM org.apache.cxf.bus.osgi.CXFExtensionBundleListener addExtensions
+INFORMA«’ES: Adding the extensions from bundle org.apache.cxf.cxf-rt-bindings-xml (200) [org.apache.cxf.binding.xml.XMLBindingFactory, org.apache.cxf.binding.xml.wsdl11.XMLWSDLExtensionLoader]
+abr 05, 2025 3:34:44 PM org.apache.cxf.bus.osgi.CXFExtensionBundleListener addExtensions
+INFORMA«’ES: Adding the extensions from bundle org.apache.cxf.cxf-rt-bindings-soap (201) [org.apache.cxf.binding.soap.SoapBindingFactory, org.apache.cxf.binding.soap.SoapTransportFactory]
+abr 05, 2025 3:34:44 PM org.apache.cxf.bus.blueprint.NamespaceHandlerRegisterer register
+INFORMA«’ES: Registered blueprint namespace handler for http://cxf.apache.org/blueprint/bindings/soap
+abr 05, 2025 3:34:44 PM org.apache.cxf.bus.osgi.CXFExtensionBundleListener addExtensions
+INFORMA«’ES: Adding the extensions from bundle org.apache.cxf.cxf-rt-ws-policy (220) [org.apache.cxf.ws.policy.PolicyEngine, org.apache.cxf.policy.PolicyDataEngine, org.apache.cxf.ws.policy.AssertionBuilderRegistry, org.apache.cxf.ws.policy.PolicyInterceptorProviderRegistry, org.apache.cxf.ws.policy.PolicyBuilder, org.apache.cxf.ws.policy.PolicyAnnotationListener, org.apache.cxf.ws.policy.attachment.ServiceModelPolicyProvider, org.apache.cxf.ws.policy.attachment.external.DomainExpressionBuilderRegistry, org.apache.cxf.ws.policy.attachment.external.EndpointReferenceDomainExpressionBuilder, org.apache.cxf.ws.policy.attachment.external.URIDomainExpressionBuilder, org.apache.cxf.ws.policy.attachment.wsdl11.Wsdl11AttachmentPolicyProvider, org.apache.cxf.ws.policy.mtom.MTOMAssertionBuilder, org.apache.cxf.ws.policy.mtom.MTOMPolicyInterceptorProvider]
+abr 05, 2025 3:34:44 PM org.apache.cxf.bus.osgi.CXFExtensionBundleListener addExtensions
+INFORMA«’ES: Adding the extensions from bundle org.apache.cxf.cxf-rt-transports-http (202) [org.apache.cxf.transport.http.HTTPTransportFactory, org.apache.cxf.transport.http.HTTPWSDLExtensionLoader, org.apache.cxf.transport.http.policy.HTTPClientAssertionBuilder, org.apache.cxf.transport.http.policy.HTTPServerAssertionBuilder, org.apache.cxf.transport.http.policy.NoOpPolicyInterceptorProvider]
+abr 05, 2025 3:34:44 PM org.apache.cxf.bus.blueprint.NamespaceHandlerRegisterer register
+INFORMA«’ES: Registered blueprint namespace handler for http://cxf.apache.org/transports/http/configuration
+abr 05, 2025 3:34:44 PM org.apache.cxf.bus.blueprint.NamespaceHandlerRegisterer register
+INFORMA«’ES: Registered blueprint namespace handler for http://cxf.apache.org/blueprint/simple
+abr 05, 2025 3:34:44 PM org.apache.cxf.bus.osgi.CXFExtensionBundleListener addExtensions
+INFORMA«’ES: Adding the extensions from bundle org.apache.cxf.cxf-rt-frontend-jaxws (204) [org.apache.cxf.jaxws.context.WebServiceContextResourceResolver]
+abr 05, 2025 3:34:44 PM org.apache.cxf.bus.blueprint.NamespaceHandlerRegisterer register
+INFORMA«’ES: Registered blueprint namespace handler for http://cxf.apache.org/blueprint/jaxws
+abr 05, 2025 3:34:44 PM org.apache.cxf.bus.blueprint.NamespaceHandlerRegisterer register
+INFORMA«’ES: Registered blueprint namespace handler for http://cxf.apache.org/blueprint/jaxrs
+abr 05, 2025 3:34:44 PM org.apache.cxf.bus.blueprint.NamespaceHandlerRegisterer register
+INFORMA«’ES: Registered blueprint namespace handler for http://cxf.apache.org/blueprint/jaxrs-client
+abr 05, 2025 3:34:44 PM org.apache.cxf.bus.blueprint.NamespaceHandlerRegisterer register
+INFORMA«’ES: Registered blueprint namespace handler for http://cxf.apache.org/binding/coloc
+abr 05, 2025 3:34:44 PM org.apache.cxf.bus.osgi.CXFExtensionBundleListener addExtensions
+INFORMA«’ES: Adding the extensions from bundle org.apache.cxf.cxf-rt-transports-local (216) [org.apache.cxf.transport.local.LocalTransportFactory]
+abr 05, 2025 3:34:44 PM org.apache.cxf.bus.osgi.CXFExtensionBundleListener addExtensions
+INFORMA«’ES: Adding the extensions from bundle org.apache.cxf.cxf-rt-bindings-object (217) [org.apache.cxf.binding.object.ObjectBindingFactory]
+abr 05, 2025 3:34:44 PM org.apache.cxf.bus.blueprint.NamespaceHandlerRegisterer register
+INFORMA«’ES: Registered blueprint namespace handler for http://cxf.apache.org/blueprint/binding/object
+abr 05, 2025 3:34:44 PM org.apache.cxf.bus.blueprint.NamespaceHandlerRegisterer register
+INFORMA«’ES: Registered blueprint namespace handler for http://cxf.apache.org/policy
+abr 05, 2025 3:34:44 PM org.apache.cxf.bus.blueprint.NamespaceHandlerRegisterer register
+INFORMA«’ES: Registered blueprint namespace handler for http://www.w3.org/ns/ws-policy
+abr 05, 2025 3:34:44 PM org.apache.cxf.bus.blueprint.NamespaceHandlerRegisterer register
+INFORMA«’ES: Registered blueprint namespace handler for http://www.w3.org/2006/07/ws-policy
+abr 05, 2025 3:34:44 PM org.apache.cxf.bus.blueprint.NamespaceHandlerRegisterer register
+INFORMA«’ES: Registered blueprint namespace handler for http://schemas.xmlsoap.org/ws/2004/09/policy
+abr 05, 2025 3:34:44 PM org.apache.cxf.bus.blueprint.NamespaceHandlerRegisterer register
+INFORMA«’ES: Registered blueprint namespace handler for http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd
+abr 05, 2025 3:34:44 PM org.apache.cxf.bus.blueprint.NamespaceHandlerRegisterer register
+INFORMA«’ES: Registered blueprint namespace handler for http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd
+abr 05, 2025 3:34:44 PM org.apache.cxf.bus.blueprint.NamespaceHandlerRegisterer register
+INFORMA«’ES: Registered blueprint namespace handler for http://www.w3.org/2000/09/xmldsig#
+abr 05, 2025 3:34:44 PM org.apache.cxf.bus.blueprint.NamespaceHandlerRegisterer register
+INFORMA«’ES: Registered blueprint namespace handler for http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702
+abr 05, 2025 3:34:44 PM org.apache.cxf.bus.osgi.CXFExtensionBundleListener addExtensions
+INFORMA«’ES: Adding the extensions from bundle org.apache.cxf.cxf-rt-ws-addr (237) [org.apache.cxf.ws.addressing.policy.AddressingAssertionBuilder, org.apache.cxf.ws.addressing.policy.UsingAddressingAssertionBuilder, org.apache.cxf.ws.addressing.policy.AddressingPolicyInterceptorProvider, org.apache.cxf.ws.addressing.impl.AddressingWSDLExtensionLoader, org.apache.cxf.ws.addressing.WSAddressingFeature$WSAddressingFeatureApplier, org.apache.cxf.ws.addressing.MAPAggregator$MAPAggregatorLoader]
+abr 05, 2025 3:34:44 PM org.apache.cxf.bus.blueprint.NamespaceHandlerRegisterer register
+INFORMA«’ES: Registered blueprint namespace handler for http://cxf.apache.org/ws/addressing
+abr 05, 2025 3:34:44 PM org.apache.cxf.bus.osgi.CXFExtensionBundleListener addExtensions
+INFORMA«’ES: Adding the extensions from bundle org.apache.cxf.cxf-rt-ws-security (239) [org.apache.cxf.ws.security.policy.WSSecurityPolicyLoader, org.apache.cxf.ws.security.cache.CacheCleanupListener]
+abr 05, 2025 3:34:44 PM org.apache.cxf.bus.osgi.CXFExtensionBundleListener addExtensions
+INFORMA«’ES: Adding the extensions from bundle org.apache.cxf.cxf-rt-ws-rm (241) [org.apache.cxf.ws.rm.RMManager, org.apache.cxf.ws.rm.policy.RMPolicyInterceptorProvider, org.apache.cxf.ws.rm.policy.RM10AssertionBuilder, org.apache.cxf.ws.rm.policy.RM12AssertionBuilder, org.apache.cxf.ws.rm.policy.WSRMP12PolicyLoader, org.apache.cxf.ws.rm.policy.MC11PolicyLoader, org.apache.cxf.ws.rm.policy.RSPPolicyLoader]
+abr 05, 2025 3:34:44 PM org.apache.cxf.bus.blueprint.NamespaceHandlerRegisterer register
+INFORMA«’ES: Registered blueprint namespace handler for http://cxf.apache.org/ws/rm/manager
+abr 05, 2025 3:34:44 PM org.apache.cxf.bus.blueprint.NamespaceHandlerRegisterer register
+INFORMA«’ES: Registered blueprint namespace handler for http://schemas.xmlsoap.org/ws/2005/02/rm/policy
+abr 05, 2025 3:34:44 PM org.apache.cxf.bus.osgi.CXFExtensionBundleListener addExtensions
+INFORMA«’ES: Adding the extensions from bundle org.apache.cxf.cxf-rt-javascript (242) [org.apache.cxf.javascript.JavascriptServerListener]
+abr 05, 2025 3:34:44 PM org.pentaho.caching.impl.PentahoCacheManagerFactory$RegistrationHandler$1 onSuccess
+INFORMA«’ES: New Caching Service registered
+SLF4J: Class path contains multiple SLF4J bindings.
+SLF4J: Found binding in [jar:file:/C:/data-integration/launcher/../lib/slf4j-log4j12-1.7.7.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: Found binding in [jar:file:/C:/data-integration/plugins/pentaho-big-data-plugin/lib/slf4j-log4j12-1.7.7.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: See http://www.slf4j.org/codes.html#multiple_bindings for an explanation.
+SLF4J: Actual binding is of type [org.slf4j.impl.Log4jLoggerFactory]
+abr 05, 2025 3:34:46 PM org.apache.cxf.endpoint.ServerImpl initDestination
+INFORMA«’ES: Setting the server's publish address to be /lineage
+abr 05, 2025 3:34:46 PM org.apache.cxf.endpoint.ServerImpl initDestination
+INFORMA«’ES: Setting the server's publish address to be /i18n
+2025-04-05 15:34:47 weka.gui.GenericObjectEditor registerEditors
+INFO: ---Registering Weka Editors---
+abr 05, 2025 3:34:47 PM org.apache.cxf.endpoint.ServerImpl initDestination
+INFORMA«’ES: Setting the server's publish address to be /marketplace
+Could not find user-specific install location for R in registry either.
+Could not find user-specific install location for R in registry either.
+2025-04-05 15:34:48 weka.experiment.DatabaseUtils initialize
+WARNING: Trying to add database driver (JDBC): jdbc.idbDriver - Warning, not in CLASSPATH?
+Could not find user-specific install location for R in registry either.
+2025-04-05 15:34:49 weka.gui.beans.BeansProperties loadProperties
+INFO: [KnowledgeFlow] Loading properties and plugins...
+2025-04-05 15:34:49 weka.gui.beans.KnowledgeFlowApp init
+INFO: [KnowledgeFlow] Initializing KF...
+[Weka] Skipping package distributedWekaBase because it is not compatible with Weka 3.8.0
+[Weka] Skipping package distributedWekaSpark2Dev because it is not compatible with Weka 3.8.0
+[Weka] Skipping package RPlugin because it is not compatible with Weka 3.8.0
+[Weka] Skipping package wekaDeeplearning4j because it is not compatible with Weka 3.8.0
+2025-04-05 15:34:50 weka.gui.GenericObjectEditor registerEditors
+INFO: ---Registering Weka Editors---
+2025-04-05 15:34:50 weka.gui.GenericObjectEditor registerEditor
+WARNING: Problem registering ShowGlobalInfoToolTip/true: java.lang.ClassNotFoundException: ShowGlobalInfoToolTip
+2025-04-05 15:34:51 weka.experiment.DatabaseUtils initialize
+WARNING: Trying to add database driver (JDBC): jdbc.idbDriver - Warning, not in CLASSPATH?
+2025-04-05 15:34:51 weka.gui.beans.BeansProperties loadProperties
+INFO: [KnowledgeFlow] Loading properties and plugins...
+2025-04-05 15:34:51 weka.gui.beans.KnowledgeFlowApp init
+INFO: [KnowledgeFlow] Initializing KF...
+2025/04/05 15:34:51 - atualiza_informacoes - InÌcio da execuÁ„o do job
+2025/04/05 15:34:51 - Carte - Installing timer to purge stale objects after 1440 minutes.
+2025/04/05 15:34:51 - atualiza_informacoes - Starting entry [Enviando Email ]
+2025/04/05 15:34:52 - atualiza_informacoes - Starting entry [Success]
+2025/04/05 15:34:52 - atualiza_informacoes - Finished job entry [Success] (result=[true])
+2025/04/05 15:34:52 - atualiza_informacoes - Finished job entry [Enviando Email ] (result=[true])
+2025/04/05 15:34:52 - atualiza_informacoes - Job execution finished
+2025/04/05 15:34:52 - Kitchen - Finished!
+2025/04/05 15:34:52 - Kitchen - Start=2025/04/05 15:34:40.408, Stop=2025/04/05 15:34:52.401
+2025/04/05 15:34:52 - Kitchen - Processing ended after 11 seconds.
+2025-04-05 15:46:32 - Agendamento cumpre condi√ß√µes para execu√ß√£o: C:/Apache-hop/config/projects/default/atualiza_informacoes.hwf
+2025-04-05 15:46:32 - Processo iniciado (PID: 14028)
+2025-04-05 15:46:33 - [HOP] Executando: C:\Apache-hop\hop-run.bat -j default -r local -f C:\Apache-hop\config\projects\default\atualiza_informacoes.hwf
+2025-04-05 15:46:33 - [HOP] Diret√≥rio: C:\Apache-hop
+===[Environment Settings - hop-run.bat]===================================
+
+Java identified as "C:\Program Files\Java\jre17.0.14\bin\java"
+
+HOP_OPTIONS="-Xmx2048m" -DHOP_AUDIT_FOLDER=.\audit -DHOP_PLATFORM_OS=Windows -DHOP_PLATFORM_RUNTIME=Run -DHOP_AUTO_CREATE_CONFIG=Y --add-opens java.xml/jdk.xml.internal=ALL-UNNAMED --add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.lang.invoke=ALL-UNNAMED --add-opens java.base/java.lang.reflect=ALL-UNNAMED --add-opens java.base/java.io=ALL-UNNAMED --add-opens java.base/java.net=ALL-UNNAMED --add-opens java.base/java.nio=ALL-UNNAMED --add-opens java.base/java.util=ALL-UNNAMED --add-opens java.base/java.util.concurrent=ALL-UNNAMED --add-opens java.base/java.util.concurrent.atomic=ALL-UNNAMED --add-opens java.base/sun.nio.ch=ALL-UNNAMED --add-opens java.base/sun.nio.cs=ALL-UNNAMED --add-opens java.base/sun.security.action=ALL-UNNAMED --add-opens java.base/sun.util.calendar=ALL-UNNAMED --add-opens java.security.jgss/sun.security.krb5=ALL-UNNAMED --add-exports java.base/sun.nio.ch=ALL-UNNAMED
+
+
+Consolidated parameters to pass to HopRun are
+-j default -r local -f C:\Apache-hop\config\projects\default\atualiza_informacoes.hwf
+
+Command to start HopRun will be:
+"C:\Program Files\Java\jre17.0.14\bin\java" -classpath lib\core\*;lib\beam\*;lib\swt\win64\* -Djava.library.path=lib\core;lib\beam "-Xmx2048m" -DHOP_AUDIT_FOLDER=.\audit -DHOP_PLATFORM_OS=Windows -DHOP_PLATFORM_RUNTIME=Run -DHOP_AUTO_CREATE_CONFIG=Y --add-opens java.xml/jdk.xml.internal=ALL-UNNAMED --add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.lang.invoke=ALL-UNNAMED --add-opens java.base/java.lang.reflect=ALL-UNNAMED --add-opens java.base/java.io=ALL-UNNAMED --add-opens java.base/java.net=ALL-UNNAMED --add-opens java.base/java.nio=ALL-UNNAMED --add-opens java.base/java.util=ALL-UNNAMED --add-opens java.base/java.util.concurrent=ALL-UNNAMED --add-opens java.base/java.util.concurrent.atomic=ALL-UNNAMED --add-opens java.base/sun.nio.ch=ALL-UNNAMED --add-opens java.base/sun.nio.cs=ALL-UNNAMED --add-opens java.base/sun.security.action=ALL-UNNAMED --add-opens java.base/sun.util.calendar=ALL-UNNAMED --add-opens java.security.jgss/sun.security.krb5=ALL-UNNAMED --add-exports java.base/sun.nio.ch=ALL-UNNAMED org.apache.hop.run.HopRun -j default -r local -f C:\Apache-hop\config\projects\default\atualiza_informacoes.hwf
+
+===[Starting HopRun]=========================================================
+2025/04/05 15:46:37 - HopRun - Enabling project 'default'
+2025/04/05 15:46:37 - HopRun - Starting workflow: C:\Apache-hop\config\projects\default\atualiza_informacoes.hwf
+2025/04/05 15:46:38 - atualiza_informacoes - Start of workflow execution
+2025/04/05 15:46:38 - atualiza_informacoes - Starting action [Success]
+2025/04/05 15:46:38 - atualiza_informacoes - Finished action [Success] (result=[true])
+2025/04/05 15:46:38 - atualiza_informacoes - Workflow execution finished
+2025/04/05 15:46:38 - atualiza_informacoes - Workflow duration : 0.293 seconds [  0.293" ]
+HopRun exit.
+2025-04-05 15:46:38 - [HOP] Executado com sucesso
+2025-04-05 15:50:34 - Agendamento cumpre condi√ß√µes para execu√ß√£o: C:/data-integration/etl/atualiza_info.ktr
+2025-04-05 15:50:34 - Processo iniciado (PID: 8432)
+2025-04-05 15:50:34 - [PENTAHO] Iniciando execu√ß√£o do arquivo: C:\data-integration\etl\atualiza_info.ktr
+2025-04-05 15:50:34 - [PENTAHO] Comando completo: C:\data-integration\Pan.bat /file:"C:\data-integration\etl\atualiza_info.ktr"
+2025-04-05 15:50:34 - [PENTAHO] Diret√≥rio de trabalho: C:\data-integration
+2025-04-05 15:50:34 - [PENTAHO] Vari√°veis de ambiente configuradas
+DEBUG: Using PENTAHO_JAVA_HOME
+DEBUG: _PENTAHO_JAVA_HOME=C:\Program Files\Java\jdk1.8.0_201
+DEBUG: _PENTAHO_JAVA=C:\Program Files\Java\jdk1.8.0_201\bin\java.exe
+
+C:\data-integration>"C:\Program Files\Java\jdk1.8.0_201\bin\java.exe"  -Xms1024m -Xmx2048m "-Dhttps.protocols=TLSv1,TLSv1.1,TLSv1.2" "-Djava.library.path=libswt\win64" "-DKETTLE_HOME=C:\data-integration" "-DKETTLE_REPOSITORY=" "-DKETTLE_USER=" "-DKETTLE_PASSWORD=" "-DKETTLE_PLUGIN_PACKAGES=" "-DKETTLE_LOG_SIZE_LIMIT=" "-DKETTLE_JNDI_ROOT=C:\data-integration\simple-jndi" "-Duser.timezone=GMT-3" -jar launcher\launcher.jar -lib ..\libswt\win64  -main org.pentaho.di.pan.Pan -initialDir "C:\data-integration"\ /file:"C:\data-integration\etl\atualiza_info.ktr" 
+15:50:37,267 INFO  [KarafBoot] Checking to see if org.pentaho.clean.karaf.cache is enabled
+15:50:45,527 INFO  [KarafInstance] 
+*******************************************************************************
+*** Karaf Instance Number: 1 at C:\data-integration\.\system\karaf\caches\p ***
+***   an\data-1                                                             ***
+*** FastBin Provider Port:52901                                             ***
+*** Karaf Port:8802                                                         ***
+*** OSGI Service Port:9051                                                  ***
+*******************************************************************************
+abr 05, 2025 3:50:46 PM org.apache.karaf.main.Main$KarafLockCallback lockAquired
+INFORMA«’ES: Lock acquired. Setting startlevel to 100
+Updating configuration from org.ops4j.pax.web.cfg
+Updating configuration from org.apache.karaf.shell.cfg
+Updating configuration from org.apache.aries.rsa.provider.fastbin.cfg
+2025-04-05 15:50:49.103:INFO:oejs.Server:jetty-8.1.15.v20140411
+2025-04-05 15:50:49.141:INFO:oejs.AbstractConnector:Started NIOSocketConnectorWrapper@0.0.0.0:9051
+abr 05, 2025 3:50:49 PM org.apache.cxf.bus.blueprint.NamespaceHandlerRegisterer register
+INFORMA«’ES: Registered blueprint namespace handler for http://cxf.apache.org/blueprint/core
+abr 05, 2025 3:50:49 PM org.apache.cxf.bus.blueprint.NamespaceHandlerRegisterer register
+INFORMA«’ES: Registered blueprint namespace handler for http://cxf.apache.org/configuration/beans
+abr 05, 2025 3:50:49 PM org.apache.cxf.bus.blueprint.NamespaceHandlerRegisterer register
+INFORMA«’ES: Registered blueprint namespace handler for http://cxf.apache.org/configuration/parameterized-types
+abr 05, 2025 3:50:49 PM org.apache.cxf.bus.blueprint.NamespaceHandlerRegisterer register
+INFORMA«’ES: Registered blueprint namespace handler for http://cxf.apache.org/configuration/security
+abr 05, 2025 3:50:49 PM org.apache.cxf.bus.blueprint.NamespaceHandlerRegisterer register
+INFORMA«’ES: Registered blueprint namespace handler for http://schemas.xmlsoap.org/wsdl/
+abr 05, 2025 3:50:49 PM org.apache.cxf.bus.blueprint.NamespaceHandlerRegisterer register
+INFORMA«’ES: Registered blueprint namespace handler for http://www.w3.org/2005/08/addressing
+abr 05, 2025 3:50:49 PM org.apache.cxf.bus.blueprint.NamespaceHandlerRegisterer register
+INFORMA«’ES: Registered blueprint namespace handler for http://schemas.xmlsoap.org/ws/2004/08/addressing
+abr 05, 2025 3:50:49 PM org.apache.cxf.bus.osgi.CXFExtensionBundleListener addExtensions
+INFORMA«’ES: Adding the extensions from bundle org.apache.cxf.cxf-rt-management (195) [org.apache.cxf.management.InstrumentationManager]
+abr 05, 2025 3:50:49 PM org.apache.cxf.bus.osgi.CXFExtensionBundleListener addExtensions
+INFORMA«’ES: Adding the extensions from bundle org.apache.cxf.cxf-rt-wsdl (198) [org.apache.cxf.wsdl.WSDLManager]
+abr 05, 2025 3:50:49 PM org.apache.cxf.bus.osgi.CXFExtensionBundleListener addExtensions
+INFORMA«’ES: Adding the extensions from bundle org.apache.cxf.cxf-rt-bindings-xml (200) [org.apache.cxf.binding.xml.XMLBindingFactory, org.apache.cxf.binding.xml.wsdl11.XMLWSDLExtensionLoader]
+abr 05, 2025 3:50:49 PM org.apache.cxf.bus.osgi.CXFExtensionBundleListener addExtensions
+INFORMA«’ES: Adding the extensions from bundle org.apache.cxf.cxf-rt-bindings-soap (201) [org.apache.cxf.binding.soap.SoapBindingFactory, org.apache.cxf.binding.soap.SoapTransportFactory]
+abr 05, 2025 3:50:49 PM org.apache.cxf.bus.blueprint.NamespaceHandlerRegisterer register
+INFORMA«’ES: Registered blueprint namespace handler for http://cxf.apache.org/blueprint/bindings/soap
+abr 05, 2025 3:50:49 PM org.apache.cxf.bus.osgi.CXFExtensionBundleListener addExtensions
+INFORMA«’ES: Adding the extensions from bundle org.apache.cxf.cxf-rt-transports-http (202) [org.apache.cxf.transport.http.HTTPTransportFactory, org.apache.cxf.transport.http.HTTPWSDLExtensionLoader, org.apache.cxf.transport.http.policy.HTTPClientAssertionBuilder, org.apache.cxf.transport.http.policy.HTTPServerAssertionBuilder, org.apache.cxf.transport.http.policy.NoOpPolicyInterceptorProvider]
+abr 05, 2025 3:50:49 PM org.apache.cxf.bus.osgi.CXFExtensionBundleListener addExtensions
+INFORMA«’ES: Adding the extensions from bundle org.apache.cxf.cxf-rt-ws-policy (220) [org.apache.cxf.ws.policy.PolicyEngine, org.apache.cxf.policy.PolicyDataEngine, org.apache.cxf.ws.policy.AssertionBuilderRegistry, org.apache.cxf.ws.policy.PolicyInterceptorProviderRegistry, org.apache.cxf.ws.policy.PolicyBuilder, org.apache.cxf.ws.policy.PolicyAnnotationListener, org.apache.cxf.ws.policy.attachment.ServiceModelPolicyProvider, org.apache.cxf.ws.policy.attachment.external.DomainExpressionBuilderRegistry, org.apache.cxf.ws.policy.attachment.external.EndpointReferenceDomainExpressionBuilder, org.apache.cxf.ws.policy.attachment.external.URIDomainExpressionBuilder, org.apache.cxf.ws.policy.attachment.wsdl11.Wsdl11AttachmentPolicyProvider, org.apache.cxf.ws.policy.mtom.MTOMAssertionBuilder, org.apache.cxf.ws.policy.mtom.MTOMPolicyInterceptorProvider]
+abr 05, 2025 3:50:49 PM org.apache.cxf.bus.blueprint.NamespaceHandlerRegisterer register
+INFORMA«’ES: Registered blueprint namespace handler for http://cxf.apache.org/transports/http/configuration
+abr 05, 2025 3:50:49 PM org.apache.cxf.bus.blueprint.NamespaceHandlerRegisterer register
+INFORMA«’ES: Registered blueprint namespace handler for http://cxf.apache.org/blueprint/simple
+abr 05, 2025 3:50:49 PM org.apache.cxf.bus.osgi.CXFExtensionBundleListener addExtensions
+INFORMA«’ES: Adding the extensions from bundle org.apache.cxf.cxf-rt-frontend-jaxws (204) [org.apache.cxf.jaxws.context.WebServiceContextResourceResolver]
+abr 05, 2025 3:50:49 PM org.apache.cxf.bus.blueprint.NamespaceHandlerRegisterer register
+INFORMA«’ES: Registered blueprint namespace handler for http://cxf.apache.org/blueprint/jaxws
+abr 05, 2025 3:50:49 PM org.apache.cxf.bus.blueprint.NamespaceHandlerRegisterer register
+INFORMA«’ES: Registered blueprint namespace handler for http://cxf.apache.org/blueprint/jaxrs
+abr 05, 2025 3:50:49 PM org.apache.cxf.bus.blueprint.NamespaceHandlerRegisterer register
+INFORMA«’ES: Registered blueprint namespace handler for http://cxf.apache.org/blueprint/jaxrs-client
+abr 05, 2025 3:50:49 PM org.apache.cxf.bus.blueprint.NamespaceHandlerRegisterer register
+INFORMA«’ES: Registered blueprint namespace handler for http://cxf.apache.org/binding/coloc
+abr 05, 2025 3:50:49 PM org.apache.cxf.bus.osgi.CXFExtensionBundleListener addExtensions
+INFORMA«’ES: Adding the extensions from bundle org.apache.cxf.cxf-rt-transports-local (216) [org.apache.cxf.transport.local.LocalTransportFactory]
+abr 05, 2025 3:50:49 PM org.apache.cxf.bus.osgi.CXFExtensionBundleListener addExtensions
+INFORMA«’ES: Adding the extensions from bundle org.apache.cxf.cxf-rt-bindings-object (217) [org.apache.cxf.binding.object.ObjectBindingFactory]
+abr 05, 2025 3:50:49 PM org.apache.cxf.bus.blueprint.NamespaceHandlerRegisterer register
+INFORMA«’ES: Registered blueprint namespace handler for http://cxf.apache.org/blueprint/binding/object
+abr 05, 2025 3:50:49 PM org.apache.cxf.bus.blueprint.NamespaceHandlerRegisterer register
+INFORMA«’ES: Registered blueprint namespace handler for http://cxf.apache.org/policy
+abr 05, 2025 3:50:49 PM org.apache.cxf.bus.blueprint.NamespaceHandlerRegisterer register
+INFORMA«’ES: Registered blueprint namespace handler for http://www.w3.org/ns/ws-policy
+abr 05, 2025 3:50:49 PM org.apache.cxf.bus.blueprint.NamespaceHandlerRegisterer register
+INFORMA«’ES: Registered blueprint namespace handler for http://www.w3.org/2006/07/ws-policy
+abr 05, 2025 3:50:49 PM org.apache.cxf.bus.blueprint.NamespaceHandlerRegisterer register
+INFORMA«’ES: Registered blueprint namespace handler for http://schemas.xmlsoap.org/ws/2004/09/policy
+abr 05, 2025 3:50:49 PM org.apache.cxf.bus.blueprint.NamespaceHandlerRegisterer register
+INFORMA«’ES: Registered blueprint namespace handler for http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd
+abr 05, 2025 3:50:49 PM org.apache.cxf.bus.blueprint.NamespaceHandlerRegisterer register
+INFORMA«’ES: Registered blueprint namespace handler for http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd
+abr 05, 2025 3:50:49 PM org.apache.cxf.bus.blueprint.NamespaceHandlerRegisterer register
+INFORMA«’ES: Registered blueprint namespace handler for http://www.w3.org/2000/09/xmldsig#
+abr 05, 2025 3:50:49 PM org.apache.cxf.bus.blueprint.NamespaceHandlerRegisterer register
+INFORMA«’ES: Registered blueprint namespace handler for http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702
+abr 05, 2025 3:50:49 PM org.apache.cxf.bus.osgi.CXFExtensionBundleListener addExtensions
+INFORMA«’ES: Adding the extensions from bundle org.apache.cxf.cxf-rt-ws-addr (237) [org.apache.cxf.ws.addressing.policy.AddressingAssertionBuilder, org.apache.cxf.ws.addressing.policy.UsingAddressingAssertionBuilder, org.apache.cxf.ws.addressing.policy.AddressingPolicyInterceptorProvider, org.apache.cxf.ws.addressing.impl.AddressingWSDLExtensionLoader, org.apache.cxf.ws.addressing.WSAddressingFeature$WSAddressingFeatureApplier, org.apache.cxf.ws.addressing.MAPAggregator$MAPAggregatorLoader]
+abr 05, 2025 3:50:49 PM org.apache.cxf.bus.blueprint.NamespaceHandlerRegisterer register
+INFORMA«’ES: Registered blueprint namespace handler for http://cxf.apache.org/ws/addressing
+abr 05, 2025 3:50:49 PM org.apache.cxf.bus.osgi.CXFExtensionBundleListener addExtensions
+INFORMA«’ES: Adding the extensions from bundle org.apache.cxf.cxf-rt-ws-security (239) [org.apache.cxf.ws.security.policy.WSSecurityPolicyLoader, org.apache.cxf.ws.security.cache.CacheCleanupListener]
+abr 05, 2025 3:50:49 PM org.apache.cxf.bus.osgi.CXFExtensionBundleListener addExtensions
+INFORMA«’ES: Adding the extensions from bundle org.apache.cxf.cxf-rt-ws-rm (241) [org.apache.cxf.ws.rm.RMManager, org.apache.cxf.ws.rm.policy.RMPolicyInterceptorProvider, org.apache.cxf.ws.rm.policy.RM10AssertionBuilder, org.apache.cxf.ws.rm.policy.RM12AssertionBuilder, org.apache.cxf.ws.rm.policy.WSRMP12PolicyLoader, org.apache.cxf.ws.rm.policy.MC11PolicyLoader, org.apache.cxf.ws.rm.policy.RSPPolicyLoader]
+abr 05, 2025 3:50:49 PM org.apache.cxf.bus.blueprint.NamespaceHandlerRegisterer register
+INFORMA«’ES: Registered blueprint namespace handler for http://cxf.apache.org/ws/rm/manager
+abr 05, 2025 3:50:49 PM org.apache.cxf.bus.blueprint.NamespaceHandlerRegisterer register
+INFORMA«’ES: Registered blueprint namespace handler for http://schemas.xmlsoap.org/ws/2005/02/rm/policy
+abr 05, 2025 3:50:49 PM org.apache.cxf.bus.osgi.CXFExtensionBundleListener addExtensions
+INFORMA«’ES: Adding the extensions from bundle org.apache.cxf.cxf-rt-javascript (242) [org.apache.cxf.javascript.JavascriptServerListener]
+abr 05, 2025 3:50:49 PM org.pentaho.caching.impl.PentahoCacheManagerFactory$RegistrationHandler$1 onSuccess
+INFORMA«’ES: New Caching Service registered
+SLF4J: Class path contains multiple SLF4J bindings.
+SLF4J: Found binding in [jar:file:/C:/data-integration/launcher/../lib/slf4j-log4j12-1.7.7.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: Found binding in [jar:file:/C:/data-integration/plugins/pentaho-big-data-plugin/lib/slf4j-log4j12-1.7.7.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: See http://www.slf4j.org/codes.html#multiple_bindings for an explanation.
+SLF4J: Actual binding is of type [org.slf4j.impl.Log4jLoggerFactory]
+abr 05, 2025 3:50:51 PM org.apache.cxf.endpoint.ServerImpl initDestination
+INFORMA«’ES: Setting the server's publish address to be /lineage
+abr 05, 2025 3:50:51 PM org.apache.cxf.endpoint.ServerImpl initDestination
+INFORMA«’ES: Setting the server's publish address to be /i18n
+[Weka] Skipping package distributedWekaBase because it is not compatible with Weka 3.8.0
+[Weka] Skipping package distributedWekaSpark2Dev because it is not compatible with Weka 3.8.0
+[Weka] Skipping package RPlugin because it is not compatible with Weka 3.8.0
+[Weka] Skipping package wekaDeeplearning4j because it is not compatible with Weka 3.8.0
+2025-04-05 15:50:52 weka.gui.GenericObjectEditor registerEditors
+INFO: ---Registering Weka Editors---
+2025-04-05 15:50:52 weka.gui.GenericObjectEditor registerEditor
+WARNING: Problem registering ShowGlobalInfoToolTip/true: java.lang.ClassNotFoundException: ShowGlobalInfoToolTip
+abr 05, 2025 3:50:52 PM org.apache.cxf.endpoint.ServerImpl initDestination
+INFORMA«’ES: Setting the server's publish address to be /marketplace
+2025-04-05 15:50:52 weka.experiment.DatabaseUtils initialize
+WARNING: Trying to add database driver (JDBC): jdbc.idbDriver - Warning, not in CLASSPATH?
+2025-04-05 15:50:52 weka.gui.beans.BeansProperties loadProperties
+INFO: [KnowledgeFlow] Loading properties and plugins...
+2025-04-05 15:50:52 weka.gui.beans.KnowledgeFlowApp init
+INFO: [KnowledgeFlow] Initializing KF...
+2025-04-05 15:50:55 weka.gui.GenericObjectEditor registerEditors
+INFO: ---Registering Weka Editors---
+Could not find user-specific install location for R in registry either.
+Could not find user-specific install location for R in registry either.
+2025-04-05 15:50:57 weka.experiment.DatabaseUtils initialize
+WARNING: Trying to add database driver (JDBC): jdbc.idbDriver - Warning, not in CLASSPATH?
+Could not find user-specific install location for R in registry either.
+2025-04-05 15:50:57 weka.gui.beans.BeansProperties loadProperties
+INFO: [KnowledgeFlow] Loading properties and plugins...
+2025-04-05 15:50:57 weka.gui.beans.KnowledgeFlowApp init
+INFO: [KnowledgeFlow] Initializing KF...
+2025/04/05 15:50:57 - Pan - Start of run.
+2025/04/05 15:50:57 - Carte - Installing timer to purge stale objects after 1440 minutes.
+2025/04/05 15:50:57 - atualiza_info - Expedindo in?cio para transforma??o [atualiza_info]
+2025/04/05 15:50:58 - Microsoft Excel input.0 - Finished processing (I=3605, O=0, R=0, W=3605, U=0, E=0)
+2025/04/05 15:50:58 - Dummy (do nothing).0 - Finished processing (I=0, O=0, R=3605, W=3605, U=0, E=0)
+2025/04/05 15:50:58 - Pan - Finished!
+2025/04/05 15:50:58 - Pan - Start=2025/04/05 15:50:57.535, Stop=2025/04/05 15:50:58.861
+2025/04/05 15:50:58 - Pan - Processing ended after 1 seconds.
+2025/04/05 15:50:58 - atualiza_info -  
+2025/04/05 15:50:58 - atualiza_info - Processo Microsoft Excel input.0 fnializado com sucesso, processadas 3605 linhas. ( 3605 linhas/s)
+2025/04/05 15:50:58 - atualiza_info - Processo Dummy (do nothing).0 fnializado com sucesso, processadas 3605 linhas. ( 3605 linhas/s)
+2025-04-05 15:58:38 - Agendamento cumpre condi√ß√µes para execu√ß√£o: C:/Apache-hop/config/projects/default/atualiza_informacoes.hwf
+2025-04-05 15:58:38 - Processo iniciado (PID: 20604)
+2025-04-05 15:58:38 - Agendamento cumpre condi√ß√µes para execu√ß√£o: C:/data-integration/etl/atualiza_informacoes.kjb
+2025-04-05 15:58:38 - Processo iniciado (PID: 19100)
+2025-04-05 15:58:38 - Agendamento cumpre condi√ß√µes para execu√ß√£o: C:/data-integration/etl/atualiza_info.ktr
+2025-04-05 15:58:38 - Processo iniciado (PID: 7768)
+2025-04-05 15:58:38 - [PENTAHO] Iniciando execu√ß√£o do arquivo: C:\data-integration\etl\atualiza_info.ktr
+s.kjb
+2025-04-05 15:58:38 - [HOP] Executando: C:\Apache-hop\hop-run.bat -j default -r local -f C:\Apache-hop\config\projects\default\atualiza_informacoes.hwf
+2025-04-05 15:58:38 - [PENTAHO] Comando completo: C:\data-integration\Pan.bat /file:"C:\data-integration\etl\atualiza_info.ktr"
+2025-04-05 15:58:38 - [PENTAHO] Comando completo: C:\data-integration\Kitchen.bat /file:"C:\data-integration\etl\atualiza_informacoes.kjb"
+2025-04-05 15:58:38 - [HOP] Diret√≥rio: C:\Apache-hop
+2025-04-05 15:58:38 - [PENTAHO] Diret√≥rio de trabalho: C:\data-integration
+2025-04-05 15:58:38 - [PENTAHO] Diret√≥rio de trabalho: C:\data-integration
+2025-04-05 15:58:38 - [PENTAHO] Vari√°veis de ambiente configuradas
+2025-04-05 15:58:38 - [PENTAHO] Vari√°veis de ambiente configuradas
+DEBUG: Using PENTAHO_JAVA_HOME
+DEBUG: _PENTAHO_JAVA_HOME=C:\Program Files\Java\jdk1.8.0_201
+DEBUG: _PENTAHO_JAVA=C:\Program Files\Java\jdk1.8.0_201\bin\java.exe
+
+C:\data-integration>"C:\Program Files\Java\jdk1.8.0_201\bin\java.exe"  -Xms1024m -Xmx2048m "-Dhttps.protocols=TLSv1,TLSv1.1,TLSv1.2" "-Djava.library.path=libswt\win64" "-DKETTLE_HOME=C:\data-integration" "-DKETTLE_REPOSITORY=" "-DKETTLE_USER=" "-DKETTLE_PASSWORD=" "-DKETTLE_PLUGIN_PACKAGES=" "-DKETTLE_LOG_SIZE_LIMIT=" "-DKETTLE_JNDI_ROOT=C:\data-integration\simple-jndi" "-Duser.timezone=GMT-3" -jar launcher\launcher.jar -lib ..\libswt\win64  -main org.pentaho.di.pan.Pan -initialDir "C:\data-integration"\ /file:"C:\data-integration\etl\atualiza_info.ktr" 
+15:58:40,971 INFO  [KarafBoot] Checking to see if org.pentaho.clean.karaf.cache is enabled
+15:58:51,275 INFO  [KarafInstance] 
+*******************************************************************************
+*** Karaf Instance Number: 2 at C:\data-integration\.\system\karaf\caches\p ***
+***   an\data-1                                                             ***
+*** FastBin Provider Port:52902                                             ***
+*** Karaf Port:8803                                                         ***
+*** OSGI Service Port:9052                                                  ***
+*******************************************************************************
+abr 05, 2025 3:58:51 PM org.apache.karaf.main.Main$KarafLockCallback lockAquired
+INFORMA«’ES: Lock acquired. Setting startlevel to 100
+Updating configuration from org.ops4j.pax.web.cfg
+Updating configuration from org.apache.karaf.shell.cfg
+Updating configuration from org.apache.aries.rsa.provider.fastbin.cfg
+2025-04-05 15:58:54.958:INFO:oejs.Server:jetty-8.1.15.v20140411
+2025-04-05 15:58:54.990:INFO:oejs.AbstractConnector:Started NIOSocketConnectorWrapper@0.0.0.0:9052
+abr 05, 2025 3:58:55 PM org.apache.cxf.bus.blueprint.NamespaceHandlerRegisterer register
+INFORMA«’ES: Registered blueprint namespace handler for http://cxf.apache.org/blueprint/core
+abr 05, 2025 3:58:55 PM org.apache.cxf.bus.blueprint.NamespaceHandlerRegisterer register
+INFORMA«’ES: Registered blueprint namespace handler for http://cxf.apache.org/configuration/beans
+abr 05, 2025 3:58:55 PM org.apache.cxf.bus.blueprint.NamespaceHandlerRegisterer register
+INFORMA«’ES: Registered blueprint namespace handler for http://cxf.apache.org/configuration/parameterized-types
+abr 05, 2025 3:58:55 PM org.apache.cxf.bus.blueprint.NamespaceHandlerRegisterer register
+INFORMA«’ES: Registered blueprint namespace handler for http://cxf.apache.org/configuration/security
+abr 05, 2025 3:58:55 PM org.apache.cxf.bus.blueprint.NamespaceHandlerRegisterer register
+INFORMA«’ES: Registered blueprint namespace handler for http://schemas.xmlsoap.org/wsdl/
+abr 05, 2025 3:58:55 PM org.apache.cxf.bus.blueprint.NamespaceHandlerRegisterer register
+INFORMA«’ES: Registered blueprint namespace handler for http://www.w3.org/2005/08/addressing
+abr 05, 2025 3:58:55 PM org.apache.cxf.bus.blueprint.NamespaceHandlerRegisterer register
+INFORMA«’ES: Registered blueprint namespace handler for http://schemas.xmlsoap.org/ws/2004/08/addressing
+abr 05, 2025 3:58:55 PM org.apache.cxf.bus.osgi.CXFExtensionBundleListener addExtensions
+INFORMA«’ES: Adding the extensions from bundle org.apache.cxf.cxf-rt-management (195) [org.apache.cxf.management.InstrumentationManager]
+abr 05, 2025 3:58:55 PM org.apache.cxf.bus.osgi.CXFExtensionBundleListener addExtensions
+INFORMA«’ES: Adding the extensions from bundle org.apache.cxf.cxf-rt-wsdl (198) [org.apache.cxf.wsdl.WSDLManager]
+abr 05, 2025 3:58:55 PM org.apache.cxf.bus.osgi.CXFExtensionBundleListener addExtensions
+INFORMA«’ES: Adding the extensions from bundle org.apache.cxf.cxf-rt-bindings-xml (200) [org.apache.cxf.binding.xml.XMLBindingFactory, org.apache.cxf.binding.xml.wsdl11.XMLWSDLExtensionLoader]
+abr 05, 2025 3:58:55 PM org.apache.cxf.bus.osgi.CXFExtensionBundleListener addExtensions
+INFORMA«’ES: Adding the extensions from bundle org.apache.cxf.cxf-rt-bindings-soap (201) [org.apache.cxf.binding.soap.SoapBindingFactory, org.apache.cxf.binding.soap.SoapTransportFactory]
+abr 05, 2025 3:58:55 PM org.apache.cxf.bus.blueprint.NamespaceHandlerRegisterer register
+INFORMA«’ES: Registered blueprint namespace handler for http://cxf.apache.org/blueprint/bindings/soap
+abr 05, 2025 3:58:55 PM org.apache.cxf.bus.osgi.CXFExtensionBundleListener addExtensions
+INFORMA«’ES: Adding the extensions from bundle org.apache.cxf.cxf-rt-transports-http (202) [org.apache.cxf.transport.http.HTTPTransportFactory, org.apache.cxf.transport.http.HTTPWSDLExtensionLoader, org.apache.cxf.transport.http.policy.HTTPClientAssertionBuilder, org.apache.cxf.transport.http.policy.HTTPServerAssertionBuilder, org.apache.cxf.transport.http.policy.NoOpPolicyInterceptorProvider]
+abr 05, 2025 3:58:55 PM org.apache.cxf.bus.osgi.CXFExtensionBundleListener addExtensions
+INFORMA«’ES: Adding the extensions from bundle org.apache.cxf.cxf-rt-ws-policy (220) [org.apache.cxf.ws.policy.PolicyEngine, org.apache.cxf.policy.PolicyDataEngine, org.apache.cxf.ws.policy.AssertionBuilderRegistry, org.apache.cxf.ws.policy.PolicyInterceptorProviderRegistry, org.apache.cxf.ws.policy.PolicyBuilder, org.apache.cxf.ws.policy.PolicyAnnotationListener, org.apache.cxf.ws.policy.attachment.ServiceModelPolicyProvider, org.apache.cxf.ws.policy.attachment.external.DomainExpressionBuilderRegistry, org.apache.cxf.ws.policy.attachment.external.EndpointReferenceDomainExpressionBuilder, org.apache.cxf.ws.policy.attachment.external.URIDomainExpressionBuilder, org.apache.cxf.ws.policy.attachment.wsdl11.Wsdl11AttachmentPolicyProvider, org.apache.cxf.ws.policy.mtom.MTOMAssertionBuilder, org.apache.cxf.ws.policy.mtom.MTOMPolicyInterceptorProvider]
+abr 05, 2025 3:58:55 PM org.apache.cxf.bus.blueprint.NamespaceHandlerRegisterer register
+INFORMA«’ES: Registered blueprint namespace handler for http://cxf.apache.org/transports/http/configuration
+abr 05, 2025 3:58:55 PM org.apache.cxf.bus.blueprint.NamespaceHandlerRegisterer register
+INFORMA«’ES: Registered blueprint namespace handler for http://cxf.apache.org/blueprint/simple
+abr 05, 2025 3:58:55 PM org.apache.cxf.bus.osgi.CXFExtensionBundleListener addExtensions
+INFORMA«’ES: Adding the extensions from bundle org.apache.cxf.cxf-rt-frontend-jaxws (204) [org.apache.cxf.jaxws.context.WebServiceContextResourceResolver]
+abr 05, 2025 3:58:55 PM org.apache.cxf.bus.blueprint.NamespaceHandlerRegisterer register
+INFORMA«’ES: Registered blueprint namespace handler for http://cxf.apache.org/blueprint/jaxws
+abr 05, 2025 3:58:55 PM org.apache.cxf.bus.blueprint.NamespaceHandlerRegisterer register
+INFORMA«’ES: Registered blueprint namespace handler for http://cxf.apache.org/blueprint/jaxrs
+abr 05, 2025 3:58:55 PM org.apache.cxf.bus.blueprint.NamespaceHandlerRegisterer register
+INFORMA«’ES: Registered blueprint namespace handler for http://cxf.apache.org/blueprint/jaxrs-client
+abr 05, 2025 3:58:55 PM org.apache.cxf.bus.blueprint.NamespaceHandlerRegisterer register
+INFORMA«’ES: Registered blueprint namespace handler for http://cxf.apache.org/binding/coloc
+abr 05, 2025 3:58:55 PM org.apache.cxf.bus.osgi.CXFExtensionBundleListener addExtensions
+INFORMA«’ES: Adding the extensions from bundle org.apache.cxf.cxf-rt-transports-local (216) [org.apache.cxf.transport.local.LocalTransportFactory]
+abr 05, 2025 3:58:55 PM org.apache.cxf.bus.osgi.CXFExtensionBundleListener addExtensions
+INFORMA«’ES: Adding the extensions from bundle org.apache.cxf.cxf-rt-bindings-object (217) [org.apache.cxf.binding.object.ObjectBindingFactory]
+abr 05, 2025 3:58:55 PM org.apache.cxf.bus.blueprint.NamespaceHandlerRegisterer register
+INFORMA«’ES: Registered blueprint namespace handler for http://cxf.apache.org/blueprint/binding/object
+abr 05, 2025 3:58:55 PM org.apache.cxf.bus.blueprint.NamespaceHandlerRegisterer register
+INFORMA«’ES: Registered blueprint namespace handler for http://cxf.apache.org/policy
+abr 05, 2025 3:58:55 PM org.apache.cxf.bus.blueprint.NamespaceHandlerRegisterer register
+INFORMA«’ES: Registered blueprint namespace handler for http://www.w3.org/ns/ws-policy
+abr 05, 2025 3:58:55 PM org.apache.cxf.bus.blueprint.NamespaceHandlerRegisterer register
+INFORMA«’ES: Registered blueprint namespace handler for http://www.w3.org/2006/07/ws-policy
+abr 05, 2025 3:58:55 PM org.apache.cxf.bus.blueprint.NamespaceHandlerRegisterer register
+INFORMA«’ES: Registered blueprint namespace handler for http://schemas.xmlsoap.org/ws/2004/09/policy
+abr 05, 2025 3:58:55 PM org.apache.cxf.bus.blueprint.NamespaceHandlerRegisterer register
+INFORMA«’ES: Registered blueprint namespace handler for http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd
+abr 05, 2025 3:58:55 PM org.apache.cxf.bus.blueprint.NamespaceHandlerRegisterer register
+INFORMA«’ES: Registered blueprint namespace handler for http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd
+abr 05, 2025 3:58:55 PM org.apache.cxf.bus.blueprint.NamespaceHandlerRegisterer register
+INFORMA«’ES: Registered blueprint namespace handler for http://www.w3.org/2000/09/xmldsig#
+abr 05, 2025 3:58:55 PM org.apache.cxf.bus.blueprint.NamespaceHandlerRegisterer register
+INFORMA«’ES: Registered blueprint namespace handler for http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702
+abr 05, 2025 3:58:55 PM org.apache.cxf.bus.osgi.CXFExtensionBundleListener addExtensions
+INFORMA«’ES: Adding the extensions from bundle org.apache.cxf.cxf-rt-ws-addr (237) [org.apache.cxf.ws.addressing.policy.AddressingAssertionBuilder, org.apache.cxf.ws.addressing.policy.UsingAddressingAssertionBuilder, org.apache.cxf.ws.addressing.policy.AddressingPolicyInterceptorProvider, org.apache.cxf.ws.addressing.impl.AddressingWSDLExtensionLoader, org.apache.cxf.ws.addressing.WSAddressingFeature$WSAddressingFeatureApplier, org.apache.cxf.ws.addressing.MAPAggregator$MAPAggregatorLoader]
+abr 05, 2025 3:58:55 PM org.apache.cxf.bus.blueprint.NamespaceHandlerRegisterer register
+INFORMA«’ES: Registered blueprint namespace handler for http://cxf.apache.org/ws/addressing
+abr 05, 2025 3:58:55 PM org.apache.cxf.bus.osgi.CXFExtensionBundleListener addExtensions
+INFORMA«’ES: Adding the extensions from bundle org.apache.cxf.cxf-rt-ws-security (239) [org.apache.cxf.ws.security.policy.WSSecurityPolicyLoader, org.apache.cxf.ws.security.cache.CacheCleanupListener]
+abr 05, 2025 3:58:55 PM org.apache.cxf.bus.osgi.CXFExtensionBundleListener addExtensions
+INFORMA«’ES: Adding the extensions from bundle org.apache.cxf.cxf-rt-ws-rm (241) [org.apache.cxf.ws.rm.RMManager, org.apache.cxf.ws.rm.policy.RMPolicyInterceptorProvider, org.apache.cxf.ws.rm.policy.RM10AssertionBuilder, org.apache.cxf.ws.rm.policy.RM12AssertionBuilder, org.apache.cxf.ws.rm.policy.WSRMP12PolicyLoader, org.apache.cxf.ws.rm.policy.MC11PolicyLoader, org.apache.cxf.ws.rm.policy.RSPPolicyLoader]
+abr 05, 2025 3:58:55 PM org.apache.cxf.bus.blueprint.NamespaceHandlerRegisterer register
+INFORMA«’ES: Registered blueprint namespace handler for http://cxf.apache.org/ws/rm/manager
+abr 05, 2025 3:58:55 PM org.apache.cxf.bus.blueprint.NamespaceHandlerRegisterer register
+INFORMA«’ES: Registered blueprint namespace handler for http://schemas.xmlsoap.org/ws/2005/02/rm/policy
+abr 05, 2025 3:58:55 PM org.apache.cxf.bus.osgi.CXFExtensionBundleListener addExtensions
+INFORMA«’ES: Adding the extensions from bundle org.apache.cxf.cxf-rt-javascript (242) [org.apache.cxf.javascript.JavascriptServerListener]
+abr 05, 2025 3:58:55 PM org.pentaho.caching.impl.PentahoCacheManagerFactory$RegistrationHandler$1 onSuccess
+INFORMA«’ES: New Caching Service registered
+SLF4J: Class path contains multiple SLF4J bindings.
+SLF4J: Found binding in [jar:file:/C:/data-integration/launcher/../lib/slf4j-log4j12-1.7.7.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: Found binding in [jar:file:/C:/data-integration/plugins/pentaho-big-data-plugin/lib/slf4j-log4j12-1.7.7.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: See http://www.slf4j.org/codes.html#multiple_bindings for an explanation.
+SLF4J: Actual binding is of type [org.slf4j.impl.Log4jLoggerFactory]
+abr 05, 2025 3:58:57 PM org.apache.cxf.endpoint.ServerImpl initDestination
+INFORMA«’ES: Setting the server's publish address to be /lineage
+abr 05, 2025 3:58:57 PM org.apache.cxf.endpoint.ServerImpl initDestination
+INFORMA«’ES: Setting the server's publish address to be /i18n
+[Weka] Skipping package distributedWekaBase because it is not compatible with Weka 3.8.0
+[Weka] Skipping package distributedWekaSpark2Dev because it is not compatible with Weka 3.8.0
+[Weka] Skipping package RPlugin because it is not compatible with Weka 3.8.0
+[Weka] Skipping package wekaDeeplearning4j because it is not compatible with Weka 3.8.0
+2025-04-05 15:58:58 weka.gui.GenericObjectEditor registerEditors
+INFO: ---Registering Weka Editors---
+2025-04-05 15:58:58 weka.gui.GenericObjectEditor registerEditor
+WARNING: Problem registering ShowGlobalInfoToolTip/true: java.lang.ClassNotFoundException: ShowGlobalInfoToolTip
+2025-04-05 15:58:58 weka.experiment.DatabaseUtils initialize
+WARNING: Trying to add database driver (JDBC): jdbc.idbDriver - Warning, not in CLASSPATH?
+2025-04-05 15:58:58 weka.gui.beans.BeansProperties loadProperties
+INFO: [KnowledgeFlow] Loading properties and plugins...
+2025-04-05 15:58:58 weka.gui.beans.KnowledgeFlowApp init
+INFO: [KnowledgeFlow] Initializing KF...
+abr 05, 2025 3:58:58 PM org.apache.cxf.endpoint.ServerImpl initDestination
+INFORMA«’ES: Setting the server's publish address to be /marketplace
+2025-04-05 15:59:01 weka.gui.GenericObjectEditor registerEditors
+INFO: ---Registering Weka Editors---
+Could not find user-specific install location for R in registry either.
+Could not find user-specific install location for R in registry either.
+2025-04-05 15:59:02 weka.experiment.DatabaseUtils initialize
+WARNING: Trying to add database driver (JDBC): jdbc.idbDriver - Warning, not in CLASSPATH?
+Could not find user-specific install location for R in registry either.
+2025-04-05 15:59:02 weka.gui.beans.BeansProperties loadProperties
+INFO: [KnowledgeFlow] Loading properties and plugins...
+2025-04-05 15:59:02 weka.gui.beans.KnowledgeFlowApp init
+INFO: [KnowledgeFlow] Initializing KF...
+2025/04/05 15:59:02 - Pan - Start of run.
+2025/04/05 15:59:02 - Carte - Installing timer to purge stale objects after 1440 minutes.
+2025/04/05 15:59:02 - atualiza_info - Expedindo in?cio para transforma??o [atualiza_info]
+2025/04/05 15:59:03 - Microsoft Excel input.0 - Finished processing (I=3605, O=0, R=0, W=3605, U=0, E=0)
+2025/04/05 15:59:03 - Dummy (do nothing).0 - Finished processing (I=0, O=0, R=3605, W=3605, U=0, E=0)
+2025/04/05 15:59:03 - Pan - Finished!
+2025/04/05 15:59:03 - Pan - Start=2025/04/05 15:59:02.559, Stop=2025/04/05 15:59:03.614
+2025/04/05 15:59:03 - Pan - Processing ended after 1 seconds.
+2025/04/05 15:59:03 - atualiza_info -  
+2025/04/05 15:59:03 - atualiza_info - Processo Microsoft Excel input.0 fnializado com sucesso, processadas 3605 linhas. ( 3605 linhas/s)
+2025/04/05 15:59:03 - atualiza_info - Processo Dummy (do nothing).0 fnializado com sucesso, processadas 3605 linhas. ( 3605 linhas/s)
+2025-04-05 16:06:42 - Agendamento cumpre condi√ß√µes para execu√ß√£o: C:/Apache-hop/config/projects/default/atualiza_informacoes.hwf
+2025-04-05 16:06:42 - Processo iniciado (PID: 8916)
+2025-04-05 16:06:42 - [HOP] Executando: C:\Apache-hop\hop-run.bat -j default -r local -f C:\Apache-hop\config\projects\default\atualiza_informacoes.hwf
+2025-04-05 16:06:42 - [HOP] Diret√≥rio: C:\Apache-hop
+===[Environment Settings - hop-run.bat]===================================
+
+Java identified as "C:\Program Files\Java\jre17.0.14\bin\java"
+
+HOP_OPTIONS="-Xmx2048m" -DHOP_AUDIT_FOLDER=.\audit -DHOP_PLATFORM_OS=Windows -DHOP_PLATFORM_RUNTIME=Run -DHOP_AUTO_CREATE_CONFIG=Y --add-opens java.xml/jdk.xml.internal=ALL-UNNAMED --add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.lang.invoke=ALL-UNNAMED --add-opens java.base/java.lang.reflect=ALL-UNNAMED --add-opens java.base/java.io=ALL-UNNAMED --add-opens java.base/java.net=ALL-UNNAMED --add-opens java.base/java.nio=ALL-UNNAMED --add-opens java.base/java.util=ALL-UNNAMED --add-opens java.base/java.util.concurrent=ALL-UNNAMED --add-opens java.base/java.util.concurrent.atomic=ALL-UNNAMED --add-opens java.base/sun.nio.ch=ALL-UNNAMED --add-opens java.base/sun.nio.cs=ALL-UNNAMED --add-opens java.base/sun.security.action=ALL-UNNAMED --add-opens java.base/sun.util.calendar=ALL-UNNAMED --add-opens java.security.jgss/sun.security.krb5=ALL-UNNAMED --add-exports java.base/sun.nio.ch=ALL-UNNAMED
+
+
+Consolidated parameters to pass to HopRun are
+-j default -r local -f C:\Apache-hop\config\projects\default\atualiza_informacoes.hwf
+
+Command to start HopRun will be:
+"C:\Program Files\Java\jre17.0.14\bin\java" -classpath lib\core\*;lib\beam\*;lib\swt\win64\* -Djava.library.path=lib\core;lib\beam "-Xmx2048m" -DHOP_AUDIT_FOLDER=.\audit -DHOP_PLATFORM_OS=Windows -DHOP_PLATFORM_RUNTIME=Run -DHOP_AUTO_CREATE_CONFIG=Y --add-opens java.xml/jdk.xml.internal=ALL-UNNAMED --add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.lang.invoke=ALL-UNNAMED --add-opens java.base/java.lang.reflect=ALL-UNNAMED --add-opens java.base/java.io=ALL-UNNAMED --add-opens java.base/java.net=ALL-UNNAMED --add-opens java.base/java.nio=ALL-UNNAMED --add-opens java.base/java.util=ALL-UNNAMED --add-opens java.base/java.util.concurrent=ALL-UNNAMED --add-opens java.base/java.util.concurrent.atomic=ALL-UNNAMED --add-opens java.base/sun.nio.ch=ALL-UNNAMED --add-opens java.base/sun.nio.cs=ALL-UNNAMED --add-opens java.base/sun.security.action=ALL-UNNAMED --add-opens java.base/sun.util.calendar=ALL-UNNAMED --add-opens java.security.jgss/sun.security.krb5=ALL-UNNAMED --add-exports java.base/sun.nio.ch=ALL-UNNAMED org.apache.hop.run.HopRun -j default -r local -f C:\Apache-hop\config\projects\default\atualiza_informacoes.hwf
+
+===[Starting HopRun]=========================================================
+2025/04/05 16:06:46 - HopRun - Enabling project 'default'
+2025/04/05 16:06:46 - HopRun - Starting workflow: C:\Apache-hop\config\projects\default\atualiza_informacoes.hwf
+2025/04/05 16:06:46 - atualiza_informacoes - Start of workflow execution
+2025/04/05 16:06:46 - atualiza_informacoes - Starting action [Success]
+2025/04/05 16:06:46 - atualiza_informacoes - Finished action [Success] (result=[true])
+2025/04/05 16:06:46 - atualiza_informacoes - Workflow execution finished
+2025/04/05 16:06:46 - atualiza_informacoes - Workflow duration : 0.26 seconds [  0.260" ]
+HopRun exit.
+2025-04-05 16:06:46 - [HOP] Executado com sucesso
+2025-04-05 16:09:24 - Recebido comando para parar o servi√ßo
+2025-04-05 16:09:24 - Loop principal finalizado
+2025-04-05 16:09:57 - Verificando ambiente...
+2025-04-05 16:09:57 - Diret√≥rio do servi√ßo: C:\Apache-hop\Agendador_hop
+2025-04-05 16:09:57 - Python: 3.8.0 (tags/v3.8.0:fa919fd, Oct 14 2019, 19:37:50) [MSC v.1916 64 bit (AMD64)]
+2025-04-05 16:09:57 - Servi√ßo iniciado. Vers√£o: 2025-04-05 16:09
+2025-04-05 16:09:57 - Iniciando loop principal de verifica√ß√£o
+2025-04-05 16:11:58 - Agendamento cumpre condi√ß√µes para execu√ß√£o: C:/Apache-hop/config/projects/default/atualiza_informacoes.hwf
+2025-04-05 16:11:58 - Processo iniciado (PID: 12200)
+2025-04-05 16:11:58 - [HOP] Executando: C:\Apache-hop\hop-run.bat -j default -r local -f C:\Apache-hop\config\projects\default\atualiza_informacoes.hwf
+2025-04-05 16:11:58 - [HOP] Diret√≥rio: C:\Apache-hop
+===[Environment Settings - hop-run.bat]===================================
+
+Java identified as "C:\Program Files\Java\jre17.0.14\bin\java"
+
+HOP_OPTIONS="-Xmx2048m" -DHOP_AUDIT_FOLDER=.\audit -DHOP_PLATFORM_OS=Windows -DHOP_PLATFORM_RUNTIME=Run -DHOP_AUTO_CREATE_CONFIG=Y --add-opens java.xml/jdk.xml.internal=ALL-UNNAMED --add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.lang.invoke=ALL-UNNAMED --add-opens java.base/java.lang.reflect=ALL-UNNAMED --add-opens java.base/java.io=ALL-UNNAMED --add-opens java.base/java.net=ALL-UNNAMED --add-opens java.base/java.nio=ALL-UNNAMED --add-opens java.base/java.util=ALL-UNNAMED --add-opens java.base/java.util.concurrent=ALL-UNNAMED --add-opens java.base/java.util.concurrent.atomic=ALL-UNNAMED --add-opens java.base/sun.nio.ch=ALL-UNNAMED --add-opens java.base/sun.nio.cs=ALL-UNNAMED --add-opens java.base/sun.security.action=ALL-UNNAMED --add-opens java.base/sun.util.calendar=ALL-UNNAMED --add-opens java.security.jgss/sun.security.krb5=ALL-UNNAMED --add-exports java.base/sun.nio.ch=ALL-UNNAMED
+
+
+Consolidated parameters to pass to HopRun are
+-j default -r local -f C:\Apache-hop\config\projects\default\atualiza_informacoes.hwf
+
+Command to start HopRun will be:
+"C:\Program Files\Java\jre17.0.14\bin\java" -classpath lib\core\*;lib\beam\*;lib\swt\win64\* -Djava.library.path=lib\core;lib\beam "-Xmx2048m" -DHOP_AUDIT_FOLDER=.\audit -DHOP_PLATFORM_OS=Windows -DHOP_PLATFORM_RUNTIME=Run -DHOP_AUTO_CREATE_CONFIG=Y --add-opens java.xml/jdk.xml.internal=ALL-UNNAMED --add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.lang.invoke=ALL-UNNAMED --add-opens java.base/java.lang.reflect=ALL-UNNAMED --add-opens java.base/java.io=ALL-UNNAMED --add-opens java.base/java.net=ALL-UNNAMED --add-opens java.base/java.nio=ALL-UNNAMED --add-opens java.base/java.util=ALL-UNNAMED --add-opens java.base/java.util.concurrent=ALL-UNNAMED --add-opens java.base/java.util.concurrent.atomic=ALL-UNNAMED --add-opens java.base/sun.nio.ch=ALL-UNNAMED --add-opens java.base/sun.nio.cs=ALL-UNNAMED --add-opens java.base/sun.security.action=ALL-UNNAMED --add-opens java.base/sun.util.calendar=ALL-UNNAMED --add-opens java.security.jgss/sun.security.krb5=ALL-UNNAMED --add-exports java.base/sun.nio.ch=ALL-UNNAMED org.apache.hop.run.HopRun -j default -r local -f C:\Apache-hop\config\projects\default\atualiza_informacoes.hwf
+
+===[Starting HopRun]=========================================================
+2025/04/05 16:12:01 - HopRun - Enabling project 'default'
+2025/04/05 16:12:02 - HopRun - Starting workflow: C:\Apache-hop\config\projects\default\atualiza_informacoes.hwf
+2025/04/05 16:12:02 - atualiza_informacoes - Start of workflow execution
+2025/04/05 16:12:02 - atualiza_informacoes - Starting action [Success]
+2025/04/05 16:12:02 - atualiza_informacoes - Finished action [Success] (result=[true])
+2025/04/05 16:12:02 - atualiza_informacoes - Workflow execution finished
+2025/04/05 16:12:02 - atualiza_informacoes - Workflow duration : 0.254 seconds [  0.254" ]
+HopRun exit.
+2025-04-05 16:19:01 - Agendamento cumpre condi√ß√µes para execu√ß√£o: C:/Apache-hop/config/projects/default/atualiza_informacoes.hwf
+2025-04-05 16:19:01 - Processo iniciado (PID: 25176)
+2025-04-05 16:19:01 - [HOP] Executando: C:\Apache-hop\hop-run.bat -j default -r local -f C:\Apache-hop\config\projects\default\atualiza_informacoes.hwf
+2025-04-05 16:19:01 - [HOP] Diret√≥rio: C:\Apache-hop
+===[Environment Settings - hop-run.bat]===================================
+
+Java identified as "C:\Program Files\Java\jre17.0.14\bin\java"
+
+HOP_OPTIONS="-Xmx2048m" -DHOP_AUDIT_FOLDER=.\audit -DHOP_PLATFORM_OS=Windows -DHOP_PLATFORM_RUNTIME=Run -DHOP_AUTO_CREATE_CONFIG=Y --add-opens java.xml/jdk.xml.internal=ALL-UNNAMED --add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.lang.invoke=ALL-UNNAMED --add-opens java.base/java.lang.reflect=ALL-UNNAMED --add-opens java.base/java.io=ALL-UNNAMED --add-opens java.base/java.net=ALL-UNNAMED --add-opens java.base/java.nio=ALL-UNNAMED --add-opens java.base/java.util=ALL-UNNAMED --add-opens java.base/java.util.concurrent=ALL-UNNAMED --add-opens java.base/java.util.concurrent.atomic=ALL-UNNAMED --add-opens java.base/sun.nio.ch=ALL-UNNAMED --add-opens java.base/sun.nio.cs=ALL-UNNAMED --add-opens java.base/sun.security.action=ALL-UNNAMED --add-opens java.base/sun.util.calendar=ALL-UNNAMED --add-opens java.security.jgss/sun.security.krb5=ALL-UNNAMED --add-exports java.base/sun.nio.ch=ALL-UNNAMED
+
+
+Consolidated parameters to pass to HopRun are
+-j default -r local -f C:\Apache-hop\config\projects\default\atualiza_informacoes.hwf
+
+Command to start HopRun will be:
+"C:\Program Files\Java\jre17.0.14\bin\java" -classpath lib\core\*;lib\beam\*;lib\swt\win64\* -Djava.library.path=lib\core;lib\beam "-Xmx2048m" -DHOP_AUDIT_FOLDER=.\audit -DHOP_PLATFORM_OS=Windows -DHOP_PLATFORM_RUNTIME=Run -DHOP_AUTO_CREATE_CONFIG=Y --add-opens java.xml/jdk.xml.internal=ALL-UNNAMED --add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.lang.invoke=ALL-UNNAMED --add-opens java.base/java.lang.reflect=ALL-UNNAMED --add-opens java.base/java.io=ALL-UNNAMED --add-opens java.base/java.net=ALL-UNNAMED --add-opens java.base/java.nio=ALL-UNNAMED --add-opens java.base/java.util=ALL-UNNAMED --add-opens java.base/java.util.concurrent=ALL-UNNAMED --add-opens java.base/java.util.concurrent.atomic=ALL-UNNAMED --add-opens java.base/sun.nio.ch=ALL-UNNAMED --add-opens java.base/sun.nio.cs=ALL-UNNAMED --add-opens java.base/sun.security.action=ALL-UNNAMED --add-opens java.base/sun.util.calendar=ALL-UNNAMED --add-opens java.security.jgss/sun.security.krb5=ALL-UNNAMED --add-exports java.base/sun.nio.ch=ALL-UNNAMED org.apache.hop.run.HopRun -j default -r local -f C:\Apache-hop\config\projects\default\atualiza_informacoes.hwf
+
+===[Starting HopRun]=========================================================
+2025/04/05 16:19:05 - HopRun - Enabling project 'default'
+2025/04/05 16:19:05 - HopRun - Starting workflow: C:\Apache-hop\config\projects\default\atualiza_informacoes.hwf
+2025/04/05 16:19:06 - atualiza_informacoes - Start of workflow execution
+2025/04/05 16:19:06 - atualiza_informacoes - Starting action [Mail]
+2025/04/05 16:19:06 - atualiza_informacoes - Starting action [Success]
+2025/04/05 16:19:06 - atualiza_informacoes - Finished action [Success] (result=[true])
+2025/04/05 16:19:06 - atualiza_informacoes - Finished action [Mail] (result=[true])
+2025/04/05 16:19:06 - atualiza_informacoes - Workflow execution finished
+2025/04/05 16:19:06 - atualiza_informacoes - Workflow duration : 0.639 seconds [  0.639" ]
+HopRun exit.
+2025-04-05 16:35:09 - Agendamento cumpre condi√ß√µes para execu√ß√£o: C:/Apache-hop/config/projects/default/atualiza_informacoes.hwf
+2025-04-05 16:35:09 - Processo iniciado (PID: 18828)
+2025-04-05 16:35:09 - Agendamento cumpre condi√ß√µes para execu√ß√£o: C:/data-integration/etl/atualiza_informacoes.kjb
+2025-04-05 16:35:09 - Processo iniciado (PID: 10592)
+2025-04-05 16:35:09 - Agendamento cumpre condi√ß√µes para execu√ß√£o: C:/data-integration/etl/atualiza_info.ktr
+2025-04-05 16:35:09 - Processo iniciado (PID: 4564)
+2025-04-05 16:35:09 - [PENTAHO] Iniciando execu√ß√£o do arquivo: C:\data-integration\etl\atualiza_informacoes.kjb
+cts\default\atualiza_informacoes.hwf
+2025-04-05 16:35:09 - [PENTAHO] Iniciando execu√ß√£o do arquivo: C:\data-integration\etl\atualiza_info.ktr
+2025-04-05 16:35:09 - [HOP] Diret√≥rio: C:\Apache-hop
+2025-04-05 16:35:09 - [PENTAHO] Comando completo: C:\data-integration\Kitchen.bat /file:"C:\data-integration\etl\atualiza_informacoes.kjb"
+2025-04-05 16:35:09 - [PENTAHO] Comando completo: C:\data-integration\Pan.bat /file:"C:\data-integration\etl\atualiza_info.ktr"
+===[Environment Settings - hop-run.bat]===================================
+
+Java identified as "C:\Program Files\Java\jre17.0.14\bin\java"
+
+HOP_OPTIONS="-Xmx2048m" -DHOP_AUDIT_FOLDER=.\audit -DHOP_PLATFORM_OS=Windows -DHOP_PLATFORM_RUNTIME=Run -DHOP_AUTO_CREATE_CONFIG=Y --add-opens java.DEBUG: Using PENTAHO_JAVA_HOME
+DEBUG: _PENTAHO_JAVA_HOME=C:\Program Files\Java\jdk1.8.0_201
+DEBUG: _PENTAHO_JAVA=C:\Program Files\Java\jdk1.8.0_201\bin\java.exe
+
+C:\data-integration>"C:\Program Files\Java\jdk1.8.0_201\bin\java.exe"  -Xms1024m -Xmx2048m "-Dhttps.protocols=TLSv1,TLSv1.1,TLSv1.2" "-Djava.library.path=libswt\win64" "-DKETTLE_HOME=C:\data-integration" "-DKETTLE_REPOSITORY=" "-DKETTLE_USER=" "-DKETTLE_PASSWORD=" "-DKETTLE_PLUGIN_PACKAGES=" "-DKETTLE_LOG_SIZE_LIMIT=" "-DKETTLE_JNDI_ROOT=C:\data-integration\simple-jndi" "-Duser.timezone=GMT-3" -jar launcher\launcher.jar -lib ..\libswt\win64  -main org.pentaho.di.kitchen.Kitchen -initialDir "C:\data-integration"\ /file:"C:\data-integration\etl\atualiza_info16:35:13,486 INFO  [KarafBoot] Checking to see if org.pentaho.clean.karaf.cache is enabled
+16:35:23,741 INFO  [KarafInstance] 
+*******************************************************************************
+*** Karaf Instance Number: 3 at C:\data-integration\.\system\karaf\caches\p ***
+***   an\data-1                                                             ***
+*** FastBin Provider Port:52903                                             ***
+*** Karaf Port:8804                                                         ***
+*** OSGI Service Port:9053                                                  ***
+*******************************************************************************
+abr 05, 2025 4:35:24 PM org.apache.karaf.main.Main$KarafLockCallback lockAquired
+INFORMA«’ES: Lock acquired. Setting startlevel to 100
+Updating configuration from org.ops4j.pax.web.cfg
+Updating configuration from org.apache.karaf.shell.cfg
+Updating configuration from org.apache.aries.rsa.provider.fastbin.cfg
+2025-04-05 16:35:27.594:INFO:oejs.Server:jetty-8.1.15.v20140411
+2025-04-05 16:35:27.628:INFO:oejs.AbstractConnector:Started NIOSocketConnectorWrapper@0.0.0.0:9053
+abr 05, 2025 4:35:28 PM org.apache.cxf.bus.blueprint.NamespaceHandlerRegisterer register
+INFORMA«’ES: Registered blueprint namespace handler for http://cxf.apache.org/blueprint/core
+abr 05, 2025 4:35:28 PM org.apache.cxf.bus.blueprint.NamespaceHandlerRegisterer register
+INFORMA«’ES: Registered blueprint namespace handler for http://cxf.apache.org/configuration/beans
+abr 05, 2025 4:35:28 PM org.apache.cxf.bus.blueprint.NamespaceHandlerRegisterer register
+INFORMA«’ES: Registered blueprint namespace handler for http://cxf.apache.org/configuration/parameterized-types
+abr 05, 2025 4:35:28 PM org.apache.cxf.bus.blueprint.NamespaceHandlerRegisterer register
+INFORMA«’ES: Registered blueprint namespace handler for http://cxf.apache.org/configuration/security
+abr 05, 2025 4:35:28 PM org.apache.cxf.bus.blueprint.NamespaceHandlerRegisterer register
+INFORMA«’ES: Registered blueprint namespace handler for http://schemas.xmlsoap.org/wsdl/
+abr 05, 2025 4:35:28 PM org.apache.cxf.bus.blueprint.NamespaceHandlerRegisterer register
+INFORMA«’ES: Registered blueprint namespace handler for http://www.w3.org/2005/08/addressing
+abr 05, 2025 4:35:28 PM org.apache.cxf.bus.blueprint.NamespaceHandlerRegisterer register
+INFORMA«’ES: Registered blueprint namespace handler for http://schemas.xmlsoap.org/ws/2004/08/addressing
+abr 05, 2025 4:35:28 PM org.apache.cxf.bus.osgi.CXFExtensionBundleListener addExtensions
+INFORMA«’ES: Adding the extensions from bundle org.apache.cxf.cxf-rt-management (195) [org.apache.cxf.management.InstrumentationManager]
+abr 05, 2025 4:35:28 PM org.apache.cxf.bus.osgi.CXFExtensionBundleListener addExtensions
+INFORMA«’ES: Adding the extensions from bundle org.apache.cxf.cxf-rt-wsdl (198) [org.apache.cxf.wsdl.WSDLManager]
+abr 05, 2025 4:35:28 PM org.apache.cxf.bus.osgi.CXFExtensionBundleListener addExtensions
+INFORMA«’ES: Adding the extensions from bundle org.apache.cxf.cxf-rt-bindings-xml (200) [org.apache.cxf.binding.xml.XMLBindingFactory, org.apache.cxf.binding.xml.wsdl11.XMLWSDLExtensionLoader]
+abr 05, 2025 4:35:28 PM org.apache.cxf.bus.osgi.CXFExtensionBundleListener addExtensions
+INFORMA«’ES: Adding the extensions from bundle org.apache.cxf.cxf-rt-bindings-soap (201) [org.apache.cxf.binding.soap.SoapBindingFactory, org.apache.cxf.binding.soap.SoapTransportFactory]
+abr 05, 2025 4:35:28 PM org.apache.cxf.bus.blueprint.NamespaceHandlerRegisterer register
+INFORMA«’ES: Registered blueprint namespace handler for http://cxf.apache.org/blueprint/bindings/soap
+abr 05, 2025 4:35:28 PM org.apache.cxf.bus.osgi.CXFExtensionBundleListener addExtensions
+INFORMA«’ES: Adding the extensions from bundle org.apache.cxf.cxf-rt-transports-http (202) [org.apache.cxf.transport.http.HTTPTransportFactory, org.apache.cxf.transport.http.HTTPWSDLExtensionLoader, org.apache.cxf.transport.http.policy.HTTPClientAssertionBuilder, org.apache.cxf.transport.http.policy.HTTPServerAssertionBuilder, org.apache.cxf.transport.http.policy.NoOpPolicyInterceptorProvider]
+abr 05, 2025 4:35:28 PM org.apache.cxf.bus.osgi.CXFExtensionBundleListener addExtensions
+INFORMA«’ES: Adding the extensions from bundle org.apache.cxf.cxf-rt-ws-policy (220) [org.apache.cxf.ws.policy.PolicyEngine, org.apache.cxf.policy.PolicyDataEngine, org.apache.cxf.ws.policy.AssertionBuilderRegistry, org.apache.cxf.ws.policy.PolicyInterceptorProviderRegistry, org.apache.cxf.ws.policy.PolicyBuilder, org.apache.cxf.ws.policy.PolicyAnnotationListener, org.apache.cxf.ws.policy.attachment.ServiceModelPolicyProvider, org.apache.cxf.ws.policy.attachment.external.DomainExpressionBuilderRegistry, org.apache.cxf.ws.policy.attachment.external.EndpointReferenceDomainExpressionBuilder, org.apache.cxf.ws.policy.attachment.external.URIDomainExpressionBuilder, org.apache.cxf.ws.policy.attachment.wsdl11.Wsdl11AttachmentPolicyProvider, org.apache.cxf.ws.policy.mtom.MTOMAssertionBuilder, org.apache.cxf.ws.policy.mtom.MTOMPolicyInterceptorProvider]
+abr 05, 2025 4:35:28 PM org.apache.cxf.bus.blueprint.NamespaceHandlerRegisterer register
+INFORMA«’ES: Registered blueprint namespace handler for http://cxf.apache.org/transports/http/configuration
+abr 05, 2025 4:35:28 PM org.apache.cxf.bus.blueprint.NamespaceHandlerRegisterer register
+INFORMA«’ES: Registered blueprint namespace handler for http://cxf.apache.org/blueprint/simple
+abr 05, 2025 4:35:28 PM org.apache.cxf.bus.osgi.CXFExtensionBundleListener addExtensions
+INFORMA«’ES: Adding the extensions from bundle org.apache.cxf.cxf-rt-frontend-jaxws (204) [org.apache.cxf.jaxws.context.WebServiceContextResourceResolver]
+abr 05, 2025 4:35:28 PM org.apache.cxf.bus.blueprint.NamespaceHandlerRegisterer register
+INFORMA«’ES: Registered blueprint namespace handler for http://cxf.apache.org/blueprint/jaxws
+abr 05, 2025 4:35:28 PM org.apache.cxf.bus.blueprint.NamespaceHandlerRegisterer register
+INFORMA«’ES: Registered blueprint namespace handler for http://cxf.apache.org/blueprint/jaxrs
+abr 05, 2025 4:35:28 PM org.apache.cxf.bus.blueprint.NamespaceHandlerRegisterer register
+INFORMA«’ES: Registered blueprint namespace handler for http://cxf.apache.org/blueprint/jaxrs-client
+abr 05, 2025 4:35:28 PM org.apache.cxf.bus.blueprint.NamespaceHandlerRegisterer register
+INFORMA«’ES: Registered blueprint namespace handler for http://cxf.apache.org/binding/coloc
+abr 05, 2025 4:35:28 PM org.apache.cxf.bus.osgi.CXFExtensionBundleListener addExtensions
+INFORMA«’ES: Adding the extensions from bundle org.apache.cxf.cxf-rt-transports-local (216) [org.apache.cxf.transport.local.LocalTransportFactory]
+abr 05, 2025 4:35:28 PM org.apache.cxf.bus.osgi.CXFExtensionBundleListener addExtensions
+INFORMA«’ES: Adding the extensions from bundle org.apache.cxf.cxf-rt-bindings-object (217) [org.apache.cxf.binding.object.ObjectBindingFactory]
+abr 05, 2025 4:35:28 PM org.apache.cxf.bus.blueprint.NamespaceHandlerRegisterer register
+INFORMA«’ES: Registered blueprint namespace handler for http://cxf.apache.org/blueprint/binding/object
+abr 05, 2025 4:35:28 PM org.apache.cxf.bus.blueprint.NamespaceHandlerRegisterer register
+INFORMA«’ES: Registered blueprint namespace handler for http://cxf.apache.org/policy
+abr 05, 2025 4:35:28 PM org.apache.cxf.bus.blueprint.NamespaceHandlerRegisterer register
+INFORMA«’ES: Registered blueprint namespace handler for http://www.w3.org/ns/ws-policy
+abr 05, 2025 4:35:28 PM org.apache.cxf.bus.blueprint.NamespaceHandlerRegisterer register
+INFORMA«’ES: Registered blueprint namespace handler for http://www.w3.org/2006/07/ws-policy
+abr 05, 2025 4:35:28 PM org.apache.cxf.bus.blueprint.NamespaceHandlerRegisterer register
+INFORMA«’ES: Registered blueprint namespace handler for http://schemas.xmlsoap.org/ws/2004/09/policy
+abr 05, 2025 4:35:28 PM org.apache.cxf.bus.blueprint.NamespaceHandlerRegisterer register
+INFORMA«’ES: Registered blueprint namespace handler for http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd
+abr 05, 2025 4:35:28 PM org.apache.cxf.bus.blueprint.NamespaceHandlerRegisterer register
+INFORMA«’ES: Registered blueprint namespace handler for http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd
+abr 05, 2025 4:35:28 PM org.apache.cxf.bus.blueprint.NamespaceHandlerRegisterer register
+INFORMA«’ES: Registered blueprint namespace handler for http://www.w3.org/2000/09/xmldsig#
+abr 05, 2025 4:35:28 PM org.apache.cxf.bus.blueprint.NamespaceHandlerRegisterer register
+INFORMA«’ES: Registered blueprint namespace handler for http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702
+abr 05, 2025 4:35:28 PM org.apache.cxf.bus.osgi.CXFExtensionBundleListener addExtensions
+INFORMA«’ES: Adding the extensions from bundle org.apache.cxf.cxf-rt-ws-addr (237) [org.apache.cxf.ws.addressing.policy.AddressingAssertionBuilder, org.apache.cxf.ws.addressing.policy.UsingAddressingAssertionBuilder, org.apache.cxf.ws.addressing.policy.AddressingPolicyInterceptorProvider, org.apache.cxf.ws.addressing.impl.AddressingWSDLExtensionLoader, org.apache.cxf.ws.addressing.WSAddressingFeature$WSAddressingFeatureApplier, org.apache.cxf.ws.addressing.MAPAggregator$MAPAggregatorLoader]
+abr 05, 2025 4:35:28 PM org.apache.cxf.bus.blueprint.NamespaceHandlerRegisterer register
+INFORMA«’ES: Registered blueprint namespace handler for http://cxf.apache.org/ws/addressing
+abr 05, 2025 4:35:28 PM org.apache.cxf.bus.osgi.CXFExtensionBundleListener addExtensions
+INFORMA«’ES: Adding the extensions from bundle org.apache.cxf.cxf-rt-ws-security (239) [org.apache.cxf.ws.security.policy.WSSecurityPolicyLoader, org.apache.cxf.ws.security.cache.CacheCleanupListener]
+abr 05, 2025 4:35:28 PM org.apache.cxf.bus.osgi.CXFExtensionBundleListener addExtensions
+INFORMA«’ES: Adding the extensions from bundle org.apache.cxf.cxf-rt-ws-rm (241) [org.apache.cxf.ws.rm.RMManager, org.apache.cxf.ws.rm.policy.RMPolicyInterceptorProvider, org.apache.cxf.ws.rm.policy.RM10AssertionBuilder, org.apache.cxf.ws.rm.policy.RM12AssertionBuilder, org.apache.cxf.ws.rm.policy.WSRMP12PolicyLoader, org.apache.cxf.ws.rm.policy.MC11PolicyLoader, org.apache.cxf.ws.rm.policy.RSPPolicyLoader]
+abr 05, 2025 4:35:28 PM org.apache.cxf.bus.blueprint.NamespaceHandlerRegisterer register
+INFORMA«’ES: Registered blueprint namespace handler for http://cxf.apache.org/ws/rm/manager
+abr 05, 2025 4:35:28 PM org.apache.cxf.bus.blueprint.NamespaceHandlerRegisterer register
+INFORMA«’ES: Registered blueprint namespace handler for http://schemas.xmlsoap.org/ws/2005/02/rm/policy
+abr 05, 2025 4:35:28 PM org.apache.cxf.bus.osgi.CXFExtensionBundleListener addExtensions
+INFORMA«’ES: Adding the extensions from bundle org.apache.cxf.cxf-rt-javascript (242) [org.apache.cxf.javascript.JavascriptServerListener]
+abr 05, 2025 4:35:28 PM org.pentaho.caching.impl.PentahoCacheManagerFactory$RegistrationHandler$1 onSuccess
+INFORMA«’ES: New Caching Service registered
+SLF4J: Class path contains multiple SLF4J bindings.
+SLF4J: Found binding in [jar:file:/C:/data-integration/launcher/../lib/slf4j-log4j12-1.7.7.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: Found binding in [jar:file:/C:/data-integration/plugins/pentaho-big-data-plugin/lib/slf4j-log4j12-1.7.7.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: See http://www.slf4j.org/codes.html#multiple_bindings for an explanation.
+SLF4J: Actual binding is of type [org.slf4j.impl.Log4jLoggerFactory]
+2025-04-05 16:35:29 weka.gui.GenericObjectEditor registerEditors
+INFO: ---Registering Weka Editors---
+abr 05, 2025 4:35:30 PM org.apache.cxf.endpoint.ServerImpl initDestination
+INFORMA«’ES: Setting the server's publish address to be /lineage
+abr 05, 2025 4:35:30 PM org.apache.cxf.endpoint.ServerImpl initDestination
+INFORMA«’ES: Setting the server's publish address to be /i18n
+Could not find user-specific install location for R in registry either.
+Could not find user-specific install location for R in registry either.
+abr 05, 2025 4:35:31 PM org.apache.cxf.endpoint.ServerImpl initDestination
+INFORMA«’ES: Setting the server's publish address to be /marketplace
+2025-04-05 16:35:31 weka.experiment.DatabaseUtils initialize
+WARNING: Trying to add database driver (JDBC): jdbc.idbDriver - Warning, not in CLASSPATH?
+Could not find user-specific install location for R in registry either.
+2025-04-05 16:35:31 weka.gui.beans.BeansProperties loadProperties
+INFO: [KnowledgeFlow] Loading properties and plugins...
+2025-04-05 16:35:31 weka.gui.beans.KnowledgeFlowApp init
+INFO: [KnowledgeFlow] Initializing KF...
+[Weka] Skipping package distributedWekaBase because it is not compatible with Weka 3.8.0
+[Weka] Skipping package distributedWekaSpark2Dev because it is not compatible with Weka 3.8.0
+[Weka] Skipping package RPlugin because it is not compatible with Weka 3.8.0
+[Weka] Skipping package wekaDeeplearning4j because it is not compatible with Weka 3.8.0
+2025-04-05 16:35:32 weka.gui.GenericObjectEditor registerEditors
+INFO: ---Registering Weka Editors---
+2025-04-05 16:35:32 weka.gui.GenericObjectEditor registerEditor
+WARNING: Problem registering ShowGlobalInfoToolTip/true: java.lang.ClassNotFoundException: ShowGlobalInfoToolTip
+2025-04-05 16:35:32 weka.experiment.DatabaseUtils initialize
+WARNING: Trying to add database driver (JDBC): jdbc.idbDriver - Warning, not in CLASSPATH?
+2025-04-05 16:35:32 weka.gui.beans.BeansProperties loadProperties
+INFO: [KnowledgeFlow] Loading properties and plugins...
+2025-04-05 16:35:32 weka.gui.beans.KnowledgeFlowApp init
+INFO: [KnowledgeFlow] Initializing KF...
+2025/04/05 16:35:33 - Pan - Start of run.
+2025/04/05 16:35:33 - Carte - Installing timer to purge stale objects after 1440 minutes.
+2025/04/05 16:35:33 - atualiza_info - Expedindo in?cio para transforma??o [atualiza_info]
+2025/04/05 16:35:34 - Microsoft Excel input.0 - Finished processing (I=3605, O=0, R=0, W=3605, U=0, E=0)
+2025/04/05 16:35:34 - Write to log.0 - Finished processing (I=0, O=0, R=3605, W=3605, U=0, E=0)
+2025/04/05 16:35:34 - Pan - Finished!
+2025/04/05 16:35:34 - Pan - Start=2025/04/05 16:35:33.053, Stop=2025/04/05 16:35:34.280
+2025/04/05 16:35:34 - Pan - Processing ended after 1 seconds.
+2025/04/05 16:35:34 - atualiza_info -  
+2025/04/05 16:35:34 - atualiza_info - Processo Microsoft Excel input.0 fnializado com sucesso, processadas 3605 linhas. ( 3605 linhas/s)
+2025/04/05 16:35:34 - atualiza_info - Processo Write to log.0 fnializado com sucesso, processadas 3605 linhas. ( 3605 linhas/s)
+2025-04-05 16:48:15 - Agendamento cumpre condi√ß√µes para execu√ß√£o: C:/Apache-hop/config/projects/default/atualiza_informacoes.hwf
+2025-04-05 16:48:15 - Processo iniciado (PID: 1436)
+2025-04-05 16:48:15 - Agendamento cumpre condi√ß√µes para execu√ß√£o: C:/Apache-hop/config/projects/default/atualiza_informacoes.hpl
+2025-04-05 16:48:15 - Processo iniciado (PID: 21228)
+2025-04-05 16:48:15 - [HOP] Executando: C:\Apache-hop\hop-run.bat -j default -r local -f C:\Apache-hop\config\projects\default\atualiza_informacoes.hwf
+2025-04-05 16:48:15 - [HOP] Executando: C:\Apache-hop\hop-run.bat -j default -r local -f C:\Apache-hop\config\projects\default\atualiza_informacoes.hpl
+2025-04-05 16:48:15 - [HOP] Diret√≥rio: C:\Apache-hop
+2025-04-05 16:48:15 - [HOP] Diret√≥rio: C:\Apache-hop
+===[Environment Settings - hop-run.bat]===================================
+
+Java identified as "C:\Program Files\Java\jre17.0.14\bin\java"
+
+HOP_OPTIONS="-Xmx2048m" -DHOP_AUDIT_FOLDER=.\audit -DHOP_PLATFORM_OS=Windows -DHOP_PLATFORM_RUNTIME=Run -DHOP_AUTO_CREATE_CONFIG=Y --add-opens java.xml/jdk.xml.internal=ALL-UNNAMED --add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.lang.invoke=ALL-UNNAMED --add-opens java.base/java.lang.reflect=ALL-UNNAMED --add-opens java.base/java.io=ALL-UNNAMED --add-opens java.base/java.net=ALL-UNNAMED --add-opens java.base/java.nio=ALL-UNNAMED --add-opens java.base/java.util=ALL-UNNAMED --add-opens java.base/java.util.concurrent=ALL-UNNAMED --add-opens java.base/java.util.concurrent.atomic=ALL-UNNAMED --add-opens java.base/sun.nio.ch=ALL-UNNAMED --add-opens java.base/sun.nio.cs=ALL-UNNAMED --add-opens java.base/sun.security.action=ALL-UNNAMED --add-opens java.base/sun.util.calendar=ALL-UNNAMED --add-opens java.security.jgss/sun.security.krb5=ALL-UNNAMED --add-exports java.base/sun.nio.ch=ALL-UNNAMED
+
+
+Consolidated parameters to pass to HopRun are
+-j default -r local -f C:\Apache-hop\config\projects\default\atualiza_informacoes.hwf
+
+Command to start HopRun will be:
+"C:\Program Files\Java\jre17.0.14\bin\java" -classpath lib\core\*;lib\beam\*;lib\swt\win64\* -Djava.library.path=lib\core;lib\beam "-Xmx2048m" -DHOP_AUDIT_FOLDER=.\audit -DHOP_PLATFORM_OS=Windows -DHOP_PLATFORM_RUNTIME=Run -DHOP_AUTO_CREATE_CONFIG=Y --add-opens java.xml/jdk.xml.internal=ALL-UNNAMED --add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.lang.invoke=ALL-UNNAMED --add-opens java.base/java.lang.reflect=ALL-UNNAMED --add-opens java.base/java.io=ALL-UNNAMED --add-opens java.base/java.net=ALL-UNNAMED --add-opens java.base/java.nio=ALL-UNNAMED --add-opens java.base/java.util=ALL-UNNAMED --add-opens java.base/java.util.concurrent=ALL-UNNAMED --add-opens java.base/java.util.concurrent.atomic=ALL-UNNAMED --add-opens java.base/sun.nio.ch=ALL-UNNAMED --add-opens java.base/sun.nio.cs=ALL-UNNAMED --add-opens java.base/sun.security.action=ALL-UNNAMED --add-opens java.base/sun.util.calendar=ALL-UNNAMED --add-opens java.security.jgss/sun.security.krb5=ALL-UNNAMED --add-exports java.base/sun.nio.ch=ALL-UNNAMED org.apache.hop.run.HopRun -j default -r local -f C:\Apache-hop\config\projects\default\atualiza_informacoes.hwf
+
+===[Starting HopRun]=========================================================
+2025/04/05 16:48:20 - HopRun - Enabling project 'default'
+2025/04/05 16:48:20 - HopRun - Starting workflow: C:\Apache-hop\config\projects\default\atualiza_informacoes.hwf
+2025/04/05 16:48:21 - atualiza_informacoes - Start of workflow execution
+2025/04/05 16:48:21 - atualiza_informacoes - Starting action [Mail]
+2025/04/05 16:48:22 - atualiza_informacoes - Starting action [Success]
+2025/04/05 16:48:22025/04/05 16:48:22 - Write to log.0 - 
+2025/04/05 16:48:22 - Write to log.0 - ------------> Linenr 1------------------------------
+2025/04/05 16:48:22 - Write to log.0 - Are Motivo = Comercial
+2025/04/05 16:48:22 - Write to log.0 - Motivo de devoluÁ„o = 06 - COMERCIAL/ERRO DE PEDIDO
+2025/04/05 16:48:22 - Write to log.0 - 
+2025/04/05 16:48:22 - Write to log.0 - ====================
+2025/04/05 16:48:22 - Write to log.0 - 
+2025/04/05 16:48:22 - Write to log.0 - ------------> Linenr 2------------------------------
+2025/04/05 16:48:22 - Write to log.0 - Are Motivo = Comercial
+2025/04/05 16:48:22 - Write to log.0 - Motivo de devoluÁ„o = 07 - COMERCIAL/CLIENTE SEM ESPA«O
+2025/04/05 16:48:22 - Write to log.0 - 
+2025/04/05 16:48:22 - Write to log.0 - ====================
+2025/04/05 16:48:22 - Microsoft Excel input.0 - Finished processing (I=26, O=0, R=0, W=26, U=0, E=0)
+2025/04/05 16:48:22 - Write to log.0 - 
+2025/04/05 16:48:22 - Write to log.0 - ------------> Linenr 3------------------------------
+2025/04/05 16:48:22 - Write to log.0 - Are Motivo = Comercial
+2025/04/05 16:48:22 - Write to log.0 - Motivo de devoluÁ„o = 09 - COMERCIAL/ESTABELECIMENTO FECHADO
+2025/04/05 16:48:22 - Write to log.0 - 
+2025/04/05 16:48:22 - Write to log.0 - ====================
+2025/04/05 16:48:22 - Write to log.0 - 
+2025/04/05 16:48:22 - Write to log.0 - ------------> Linenr 4------------------------------
+2025/04/05 16:48:22 - Write to log.0 - Are Motivo = Comercial
+2025/04/05 16:48:22 - Write to log.0 - Motivo de devoluÁ„o = 17 - COMERCIAL/PEDIDO NAO SOLICITADO PELO CLIENTE
+2025/04/05 16:48:22 - Write to log.0 - 
+2025/04/05 16:48:22 - Write to log.0 - ====================
+2025/04/05 16:48:22 - Write to log.0 - 
+2025/04/05 16:48:22 - Write to log.0 - ------------> Linenr 5------------------------------
+2025/04/05 16:48:22 - Write to log.0 - Are Motivo = Comercial
+2025/04/05 16:48:22 - Write to log.0 - Motivo de devoluÁ„o = 23 - COMERCIAL/CLIENTE BLOQUEADO NA UF
+2025/04/05 16:48:22 - Write to log.0 - 
+2025/04/05 16:48:22 - Write to log.0 - ====================
+2025/04/05 16:48:22 - Write to log.0 - 
+2025/04/05 16:48:22 - Write to log.0 - ------------> Linenr 6------------------------------
+2025/04/05 16:48:22 - Write to log.0 - Are Motivo = Comercial
+2025/04/05 16:48:22 - Write to log.0 - Motivo de devoluÁ„o = 24 - COMERCIAL/CLIENTE COM PROBLEMA NO SISTEMA
+2025/04/05 16:48:22 - Write to log.0 - 
+2025/04/05 16:48:22 - Write to log.0 - ====================
+2025/04/05 16:48:22 - Write to log.0 - 
+2025/04/05 16:48:22 - Write to log.0 - ------------> Linenr 7------------------------------
+2025/04/05 16:48:22 - Write to log.0 - Are Motivo = Comercial
+2025/04/05 16:48:22 - Write to log.0 - Motivo de devoluÁ„o = 25 - COMERCIAL/CLIENTE COMPROU DE OUTRO FORNECEDOR
+2025/04/05 16:48:22 - Write to log.0 - 
+2025/04/05 16:48:22 - Write to log.0 - ====================
+2025/04/05 16:48:22 - Write to log.0 - 
+2025/04/05 16:48:22 - Write to log.0 - ------------> Linenr 8------------------------------
+2025/04/05 16:48:22 - Write to log.0 - Are Motivo = Comercial
+2025/04/05 16:48:22 - Write to log.0 - Motivo de devoluÁ„o = 26 - COMERCIAL/CONTRATUAL/TROCAS
+2025/04/05 16:48:22 - Write to log.0 - 
+2025/04/05 16:48:22 - Write to log.0 - ====================
+2025/04/05 16:48:22 - Write to log.0 - 
+2025/04/05 16:48:22 - Write to log.0 - ------------> Linenr 9------------------------------
+2025/04/05 16:48:22 - Write to log.0 - Are Motivo = Contabilidade
+2025/04/05 16:48:22 - Write to log.0 - Motivo de devoluÁ„o = 10 - ERRO FATURAMENTO
+2025/04/05 16:48:22 - Write to log.0 - 
+2025/04/05 16:48:22 - Write to log.0 - ====================
+2025/04/05 16:48:22 - Write to log.0 - 
+2025/04/05 16:48:22 - Write to log.0 - ------------> Linenr 10------------------------------
+2025/04/05 16:48:22 - Write to log.0 - Are Motivo = Contabilidade
+2025/04/05 16:48:22 - Write to log.0 - Motivo de devoluÁ„o = 13 - IMPOSTO
+2025/04/05 16:48:22 - Write to log.0 - 
+2025/04/05 16:48:22 - Write to log.0 - ====================
+2025/04/05 16:48:22 - Write to log.0 - 
+2025/04/05 16:48:22 - Write to log.0 - ------------> Linenr 11------------------------------
+2025/04/05 16:48:22 - Write to log.0 - Are Motivo = Credito e CobranÁa
+2025/04/05 16:48:22 - Write to log.0 - Motivo de devoluÁ„o = 16 - ERRO NO CADASTRO
+2025/04/05 16:48:22 - Write to log.0 - 
+2025/04/05 16:48:22 - Write to log.0 - ====================
+2025/04/05 16:48:22 - Write to log.0 - 
+2025/04/05 16:48:22 - Write to log.0 - ------------> Linenr 12------------------------------
+2025/04/05 16:48:22 - Write to log.0 - Are Motivo = Industrial
+2025/04/05 16:48:22 - Write to log.0 - Motivo de devoluÁ„o = 03 - QUALIDADE/INVERS√O DE MERCADORIA
+2025/04/05 16:48:22 - Write to log.0 - 
+2025/04/05 16:48:22 - Write to log.0 - ====================
+2025/04/05 16:48:22 - Write to log.0 - 
+2025/04/05 16:48:22 - Write to log.0 - ------------> Linenr 13------------------------------
+2025/04/05 16:48:22 - Write to log.0 - Are Motivo = Industrial
+2025/04/05 16:48:22 - Write to log.0 - Motivo de devoluÁ„o = 08 - QUALIDADE/QUEBRA DE PESO
+2025/04/05 16:48:22 - Write to log.0 - 
+2025/04/05 16:48:22 - Write to log.0 - ====================
+2025/04/05 16:48:22 - Write to log.0 - 
+2025/04/05 16:48:22 - Write to log.0 - ------------> Linenr 14------------------------------
+2025/04/05 16:48:22 - Write to log.0 - Are Motivo = Industrial
+2025/04/05 16:48:22 - Write to log.0 - Motivo de devoluÁ„o = 12 - EXPEDI«√O/ERRO DE CARREGAMENTO
+2025/04/05 16:48:22 - Write to log.0 - 
+2025/04/05 16:48:22 - Write to log.0 - ====================
+2025/04/05 16:48:22 - Write to log.0 - 
+2025/04/05 16:48:22 - Write to log.0 - ------------> Linenr 15------------------------------
+2025/04/05 16:48:22 - Write to log.0 - Are Motivo = Industrial
+2025/04/05 16:48:22 - Write to log.0 - Motivo de devoluÁ„o = 15 - QUALIDADE/AUSENCIA DE VACUO
+2025/04/05 16:48:22 - Write to log.0 - 
+2025/04/05 16:48:22 - Write to log.0 - ====================
+2025/04/05 16:48:22 - Write to log.0 - 
+2025/04/05 16:48:22 - Write to log.0 - ------------> Linenr 16------------------------------
+2025/04/05 16:48:22 - Write to log.0 - Are Motivo = Industrial
+2025/04/05 16:48:22 - Write to log.0 - Motivo de devoluÁ„o = 01 - EXPEDI«O/ATRASO CARREGAMENTO
+2025/04/05 16:48:22 - Write to log.0 - 
+2025/04/05 16:48:22 - Write to log.0 - ====================
+2025/04/05 16:48:22 - Write to log.0 - 
+2025/04/05 16:48:22 - Write to log.0 - ------------> Linenr 17------------------------------
+2025/04/05 16:48:22 - Write to log.0 - Are Motivo = Industrial
+2025/04/05 16:48:22 - Write to log.0 - Motivo de devoluÁ„o = 21 - QUALIDADE/DATA CRÕTICA
+2025/04/05 16:48:22 - Write to log.0 - 
+2025/04/05 16:48:22 - Write to log.0 - ====================
+2025/04/05 16:48:22 - Write to log.0 - 
+2025/04/05 16:48:22 - Write to log.0 - ------------> Linenr 18------------------------------
+2025/04/05 16:48:22 - Write to log.0 - Are Motivo = Logistica
+2025/04/05 16:48:22 - Write to log.0 - Motivo de devoluÁ„o = 02 - TRANSPORTE/ATRASO NA ENTREGA
+2025/04/05 16:48:22 - Write to log.0 - 
+2025/04/05 16:48:22 - Write to log.0 - ====================
+2025/04/05 16:48:22 - Write to log.0 - 
+2025/04/05 16:48:22 - Write to log.0 - ------------> Linenr 19------------------------------
+2025/04/05 16:48:22 - Write to log.0 - Are Motivo = Logistica
+2025/04/05 16:48:22 - Write to log.0 - Motivo de devoluÁ„o = 04 - QUALIDADE/TEMPERATURA
+2025/04/05 16:48:22 - Write to log.0 - 
+2025/04/05 16:48:22 - Write to log.0 - ====================
+2025/04/05 16:48:22 - Write to log.0 - 
+2025/04/05 16:48:22 - Write to log.0 - ------------> Linenr 20------------------------------
+2025/04/05 16:48:22 - Write to log.0 - Are Motivo = Logistica
+2025/04/05 16:48:22 - Write to log.0 - Motivo de devoluÁ„o = 05 - TRANSPORTE/FALTA DE MERCADORIA
+2025/04/05 16:48:22 - Write to log.0 - 
+2025/04/05 16:48:22 - Write to log.0 - ====================
+2025/04/05 16:48:22 - Write to log.0 - 
+2025/04/05 16:48:22 - Write to log.0 - ------------> Linenr 21------------------------------
+2025/04/05 16:48:22 - Write to log.0 - Are Motivo = Logistica
+2025/04/05 16:48:22 - Write to log.0 - Motivo de devoluÁ„o = 14 - TRANSPORTE/TEMPERATURA
+2025/04/05 16:48:22 - Write to log.0 - 
+2025/04/05 16:48:22 - Write to log.0 - ====================
+2025/04/05 16:48:22 - Write to log.0 - 
+2025/04/05 16:48:22 - Write to log.0 - ------------> Linenr 22------------------------------
+2025/04/05 16:48:22 - Write to log.0 - Are Motivo = Logistica
+2025/04/05 16:48:22 - Write to log.0 - Motivo de devoluÁ„o = 11 - TRANSPORTE/ERRO NA ENTREGA
+2025/04/05 16:48:22 - Write to log.0 - 
+2025/04/05 16:48:22 - Write to log.0 - ====================
+2025/04/05 16:48:22 - Write to log.0 - 
+2025/04/05 16:48:22 - Write to log.0 - ------------> Linenr 23------------------------------
+2025/04/05 16:48:22 - Write to log.0 - Are Motivo = Logistica
+2025/04/05 16:48:22 - Write to log.0 - Motivo de devoluÁ„o = 20 - TRANSPORTE/AVARIA
+2025/04/05 16:48:22 - Write to log.0 - 
+2025/04/05 16:48:22 - Write to log.0 - ====================
+2025/04/05 16:48:22 - Write to log.0 - 
+2025/04/05 16:48:22 - Write to log.0 - ------------> Linenr 24------------------------------
+2025/04/05 16:48:22 - Write to log.0 - Are Motivo = Logistica
+2025/04/05 16:48:22 - Write to log.0 - Motivo de devoluÁ„o = 22 - TRANSPORTE/ERRO DE MONITORAMENTO
+2025/04/05 16:48:22 - Write to log.0 - 
+2025/04/05 16:48:22 - Write to log.0 - ====================
+2025/04/05 16:48:22 - Write to log.0 - 
+2025/04/05 16:48:22 - Write to log.0 - ------------> Linenr 25------------------------------
+2025/04/05 16:48:22 - Write to log.0 - Are Motivo = Outros
+2025/04/05 16:48:22 - Write to log.0 - Motivo de devoluÁ„o = 18 - ROUBO/FURTO/ACIDENTE
+2025/04/05 16:48:22 - Write to log.0 - 
+2025/04/05 16:48:22 - Write to log.0 - ====================
+2025/04/05 16:48:22 - Write to log.0 - 
+2025/04/05 16:48:22 - Write to log.0 - ------------> Linenr 26------------------------------
+2025/04/05 16:48:22 - Write to log.0 - Are Motivo = Outros
+2025/04/05 16:48:22 - Write to log.0 - Motivo de devoluÁ„o = 19 - ACIDENTE
+2025/04/05 16:48:22 - Write to log.0 - 
+2025/04/05 16:48:22 - Write to log.0 - ====================
+2025/04/05 16:48:22 - Write to log.0 - Finished processing (I=0, O=0, R=26, W=26, U=0, E=0)
+2025/04/05 16:48:22 - atualiza_informacoes - Pipeline duration : 1.546 seconds [  1.546" ]
+HopRun exit.
+2025/04/05 16:48:22 - atualiza_informacoes - Execution finished on a local pipeline engine with run configuration 'local'
+2025-04-05 16:56:19 - Agendamento cumpre condi√ß√µes para execu√ß√£o: C:/Apache-hop/config/projects/default/atualiza_informacoes.hwf
+2025-04-05 16:56:19 - Processo iniciado (PID: 6720)
+2025-04-05 16:56:19 - [HOP] Executando: C:\Apache-hop\hop-run.bat -j default -r local -f C:\Apache-hop\config\projects\default\atualiza_informacoes.hwf
+2025-04-05 16:56:19 - [HOP] Diret√≥rio: C:\Apache-hop
+===[Environment Settings - hop-run.bat]===================================
+
+Java identified as "C:\Program Files\Java\jre17.0.14\bin\java"
+
+HOP_OPTIONS="-Xmx2048m" -DHOP_AUDIT_FOLDER=.\audit -DHOP_PLATFORM_OS=Windows -DHOP_PLATFORM_RUNTIME=Run -DHOP_AUTO_CREATE_CONFIG=Y --add-opens java.xml/jdk.xml.internal=ALL-UNNAMED --add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.lang.invoke=ALL-UNNAMED --add-opens java.base/java.lang.reflect=ALL-UNNAMED --add-opens java.base/java.io=ALL-UNNAMED --add-opens java.base/java.net=ALL-UNNAMED --add-opens java.base/java.nio=ALL-UNNAMED --add-opens java.base/java.util=ALL-UNNAMED --add-opens java.base/java.util.concurrent=ALL-UNNAMED --add-opens java.base/java.util.concurrent.atomic=ALL-UNNAMED --add-opens java.base/sun.nio.ch=ALL-UNNAMED --add-opens java.base/sun.nio.cs=ALL-UNNAMED --add-opens java.base/sun.security.action=ALL-UNNAMED --add-opens java.base/sun.util.calendar=ALL-UNNAMED --add-opens java.security.jgss/sun.security.krb5=ALL-UNNAMED --add-exports java.base/sun.nio.ch=ALL-UNNAMED
+
+
+Consolidated parameters to pass to HopRun are
+-j default -r local -f C:\Apache-hop\config\projects\default\atualiza_informacoes.hwf
+
+Command to start HopRun will be:
+"C:\Program Files\Java\jre17.0.14\bin\java" -classpath lib\core\*;lib\beam\*;lib\swt\win64\* -Djava.library.path=lib\core;lib\beam "-Xmx2048m" -DHOP_AUDIT_FOLDER=.\audit -DHOP_PLATFORM_OS=Windows -DHOP_PLATFORM_RUNTIME=Run -DHOP_AUTO_CREATE_CONFIG=Y --add-opens java.xml/jdk.xml.internal=ALL-UNNAMED --add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.lang.invoke=ALL-UNNAMED --add-opens java.base/java.lang.reflect=ALL-UNNAMED --add-opens java.base/java.io=ALL-UNNAMED --add-opens java.base/java.net=ALL-UNNAMED --add-opens java.base/java.nio=ALL-UNNAMED --add-opens java.base/java.util=ALL-UNNAMED --add-opens java.base/java.util.concurrent=ALL-UNNAMED --add-opens java.base/java.util.concurrent.atomic=ALL-UNNAMED --add-opens java.base/sun.nio.ch=ALL-UNNAMED --add-opens java.base/sun.nio.cs=ALL-UNNAMED --add-opens java.base/sun.security.action=ALL-UNNAMED --add-opens java.base/sun.util.calendar=ALL-UNNAMED --add-opens java.security.jgss/sun.security.krb5=ALL-UNNAMED --add-exports java.base/sun.nio.ch=ALL-UNNAMED org.apache.hop.run.HopRun -j default -r local -f C:\Apache-hop\config\projects\default\atualiza_informacoes.hwf
+
+===[Starting HopRun]=========================================================
+2025/04/05 16:56:23 - HopRun - Enabling project 'default'
+2025/04/05 16:56:23 - HopRun - Starting workflow: C:\Apache-hop\config\projects\default\atualiza_informacoes.hwf
+2025/04/05 16:56:23 - atualiza_informacoes - Start of workflow execution
+2025/04/05 16:56:23 - atualiza_informacoes - Starting action [Mail]
+2025/04/05 16:56:24 - atualiza_informacoes - Starting action [Success]
+2025/04/05 16:56:24 - atualiza_informacoes - Finished action [Success] (result=[true])
+2025/04/05 16:56:24 - atualiza_informacoes - Finished action [Mail] (result=[true])
+2025/04/05 16:56:24 - atualiza_informacoes - Workflow execution finished
+2025/04/05 16:56:24 - atualiza_informacoes - Workflow duration : 0.658 seconds [  0.658" ]
+HopRun exit.
+2025-04-05 17:05:24 - Agendamento cumpre condi√ß√µes para execu√ß√£o: C:/Apache-hop/config/projects/default/atualiza_informacoes.hwf
+2025-04-05 17:05:24 - Processo iniciado (PID: 25836)
+2025-04-05 17:05:24 - [HOP] Executando: C:\Apache-hop\hop-run.bat -j default -r local -f C:\Apache-hop\config\projects\default\atualiza_informacoes.hwf
+2025-04-05 17:05:24 - [HOP] Diret√≥rio: C:\Apache-hop
+===[Environment Settings - hop-run.bat]===================================
+
+Java identified as "C:\Program Files\Java\jre17.0.14\bin\java"
+
+HOP_OPTIONS="-Xmx2048m" -DHOP_AUDIT_FOLDER=.\audit -DHOP_PLATFORM_OS=Windows -DHOP_PLATFORM_RUNTIME=Run -DHOP_AUTO_CREATE_CONFIG=Y --add-opens java.xml/jdk.xml.internal=ALL-UNNAMED --add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.lang.invoke=ALL-UNNAMED --add-opens java.base/java.lang.reflect=ALL-UNNAMED --add-opens java.base/java.io=ALL-UNNAMED --add-opens java.base/java.net=ALL-UNNAMED --add-opens java.base/java.nio=ALL-UNNAMED --add-opens java.base/java.util=ALL-UNNAMED --add-opens java.base/java.util.concurrent=ALL-UNNAMED --add-opens java.base/java.util.concurrent.atomic=ALL-UNNAMED --add-opens java.base/sun.nio.ch=ALL-UNNAMED --add-opens java.base/sun.nio.cs=ALL-UNNAMED --add-opens java.base/sun.security.action=ALL-UNNAMED --add-opens java.base/sun.util.calendar=ALL-UNNAMED --add-opens java.security.jgss/sun.security.krb5=ALL-UNNAMED --add-exports java.base/sun.nio.ch=ALL-UNNAMED
+
+
+Consolidated parameters to pass to HopRun are
+-j default -r local -f C:\Apache-hop\config\projects\default\atualiza_informacoes.hwf
+
+Command to start HopRun will be:
+"C:\Program Files\Java\jre17.0.14\bin\java" -classpath lib\core\*;lib\beam\*;lib\swt\win64\* -Djava.library.path=lib\core;lib\beam "-Xmx2048m" -DHOP_AUDIT_FOLDER=.\audit -DHOP_PLATFORM_OS=Windows -DHOP_PLATFORM_RUNTIME=Run -DHOP_AUTO_CREATE_CONFIG=Y --add-opens java.xml/jdk.xml.internal=ALL-UNNAMED --add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.lang.invoke=ALL-UNNAMED --add-opens java.base/java.lang.reflect=ALL-UNNAMED --add-opens java.base/java.io=ALL-UNNAMED --add-opens java.base/java.net=ALL-UNNAMED --add-opens java.base/java.nio=ALL-UNNAMED --add-opens java.base/java.util=ALL-UNNAMED --add-opens java.base/java.util.concurrent=ALL-UNNAMED --add-opens java.base/java.util.concurrent.atomic=ALL-UNNAMED --add-opens java.base/sun.nio.ch=ALL-UNNAMED --add-opens java.base/sun.nio.cs=ALL-UNNAMED --add-opens java.base/sun.security.action=ALL-UNNAMED --add-opens java.base/sun.util.calendar=ALL-UNNAMED --add-opens java.security.jgss/sun.security.krb5=ALL-UNNAMED --add-exports java.base/sun.nio.ch=ALL-UNNAMED org.apache.hop.run.HopRun -j default -r local -f C:\Apache-hop\config\projects\default\atualiza_informacoes.hwf
+
+===[Starting HopRun]=========================================================
+2025/04/05 17:05:28 - HopRun - Enabling project 'default'
+2025/04/05 17:05:28 - HopRun - Starting workflow: C:\Apache-hop\config\projects\default\atualiza_informacoes.hwf
+2025/04/05 17:05:28 - atualiza_informacoes - Start of workflow execution
+2025/04/05 17:05:28 - atualiza_informacoes - Starting action [Mail]
+2025/04/05 17:05:28 - atualiza_informacoes - Starting action [Success]
+2025/04/05 17:05:28 - atualiza_informacoes - Finished action [Success] (result=[true])
+2025/04/05 17:05:28 - atualiza_informacoes - Finished action [Mail] (result=[true])
+2025/04/05 17:05:28 - atualiza_informacoes - Workflow execution finished
+2025/04/05 17:05:28 - atualiza_informacoes - Workflow duration : 0.626 seconds [  0.626" ]
+HopRun exit.
+2025-04-05 17:06:24 - Agendamento cumpre condi√ß√µes para execu√ß√£o: C:/Apache-hop/config/projects/default/atualiza_informacoes.hwf
+2025-04-05 17:06:24 - Processo iniciado (PID: 6308)
+2025-04-05 17:06:24 - [HOP] Executando: C:\Apache-hop\hop-run.bat -j default -r local -f C:\Apache-hop\config\projects\default\atualiza_informacoes.hwf
+2025-04-05 17:06:24 - [HOP] Diret√≥rio: C:\Apache-hop
+===[Environment Settings - hop-run.bat]===================================
+
+Java identified as "C:\Program Files\Java\jre17.0.14\bin\java"
+
+HOP_OPTIONS="-Xmx2048m" -DHOP_AUDIT_FOLDER=.\audit -DHOP_PLATFORM_OS=Windows -DHOP_PLATFORM_RUNTIME=Run -DHOP_AUTO_CREATE_CONFIG=Y --add-opens java.xml/jdk.xml.internal=ALL-UNNAMED --add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.lang.invoke=ALL-UNNAMED --add-opens java.base/java.lang.reflect=ALL-UNNAMED --add-opens java.base/java.io=ALL-UNNAMED --add-opens java.base/java.net=ALL-UNNAMED --add-opens java.base/java.nio=ALL-UNNAMED --add-opens java.base/java.util=ALL-UNNAMED --add-opens java.base/java.util.concurrent=ALL-UNNAMED --add-opens java.base/java.util.concurrent.atomic=ALL-UNNAMED --add-opens java.base/sun.nio.ch=ALL-UNNAMED --add-opens java.base/sun.nio.cs=ALL-UNNAMED --add-opens java.base/sun.security.action=ALL-UNNAMED --add-opens java.base/sun.util.calendar=ALL-UNNAMED --add-opens java.security.jgss/sun.security.krb5=ALL-UNNAMED --add-exports java.base/sun.nio.ch=ALL-UNNAMED
+
+
+Consolidated parameters to pass to HopRun are
+-j default -r local -f C:\Apache-hop\config\projects\default\atualiza_informacoes.hwf
+
+Command to start HopRun will be:
+"C:\Program Files\Java\jre17.0.14\bin\java" -classpath lib\core\*;lib\beam\*;lib\swt\win64\* -Djava.library.path=lib\core;lib\beam "-Xmx2048m" -DHOP_AUDIT_FOLDER=.\audit -DHOP_PLATFORM_OS=Windows -DHOP_PLATFORM_RUNTIME=Run -DHOP_AUTO_CREATE_CONFIG=Y --add-opens java.xml/jdk.xml.internal=ALL-UNNAMED --add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.lang.invoke=ALL-UNNAMED --add-opens java.base/java.lang.reflect=ALL-UNNAMED --add-opens java.base/java.io=ALL-UNNAMED --add-opens java.base/java.net=ALL-UNNAMED --add-opens java.base/java.nio=ALL-UNNAMED --add-opens java.base/java.util=ALL-UNNAMED --add-opens java.base/java.util.concurrent=ALL-UNNAMED --add-opens java.base/java.util.concurrent.atomic=ALL-UNNAMED --add-opens java.base/sun.nio.ch=ALL-UNNAMED --add-opens java.base/sun.nio.cs=ALL-UNNAMED --add-opens java.base/sun.security.action=ALL-UNNAMED --add-opens java.base/sun.util.calendar=ALL-UNNAMED --add-opens java.security.jgss/sun.security.krb5=ALL-UNNAMED --add-exports java.base/sun.nio.ch=ALL-UNNAMED org.apache.hop.run.HopRun -j default -r local -f C:\Apache-hop\config\projects\default\atualiza_informacoes.hwf
+
+===[Starting HopRun]=========================================================
+2025/04/05 17:06:28 - HopRun - Enabling project 'default'
+2025/04/05 17:06:28 - HopRun - Starting workflow: C:\Apache-hop\config\projects\default\atualiza_informacoes.hwf
+2025/04/05 17:06:28 - atualiza_informacoes - Start of workflow execution
+2025/04/05 17:06:28 - atualiza_informacoes - Starting action [Mail]
+2025/04/05 17:06:29 - atualiza_informacoes - Starting action [Success]
+2025/04/05 17:06:29 - atualiza_informacoes - Finished action [Success] (result=[true])
+2025/04/05 17:06:29 - atualiza_informacoes - Finished action [Mail] (result=[true])
+2025/04/05 17:06:29 - atualiza_informacoes - Workflow execution finished
+2025/04/05 17:06:29 - atualiza_informacoes - Workflow duration : 0.674 seconds [  0.674" ]
+HopRun exit.
+2025-04-05 17:07:25 - Agendamento cumpre condi√ß√µes para execu√ß√£o: C:/Apache-hop/config/projects/default/atualiza_informacoes.hwf
+2025-04-05 17:07:25 - Processo iniciado (PID: 13888)
+2025-04-05 17:07:25 - [HOP] Executando: C:\Apache-hop\hop-run.bat -j default -r local -f C:\Apache-hop\config\projects\default\atualiza_informacoes.hwf
+2025-04-05 17:07:25 - [HOP] Diret√≥rio: C:\Apache-hop
+===[Environment Settings - hop-run.bat]===================================
+
+Java identified as "C:\Program Files\Java\jre17.0.14\bin\java"
+
+HOP_OPTIONS="-Xmx2048m" -DHOP_AUDIT_FOLDER=.\audit -DHOP_PLATFORM_OS=Windows -DHOP_PLATFORM_RUNTIME=Run -DHOP_AUTO_CREATE_CONFIG=Y --add-opens java.xml/jdk.xml.internal=ALL-UNNAMED --add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.lang.invoke=ALL-UNNAMED --add-opens java.base/java.lang.reflect=ALL-UNNAMED --add-opens java.base/java.io=ALL-UNNAMED --add-opens java.base/java.net=ALL-UNNAMED --add-opens java.base/java.nio=ALL-UNNAMED --add-opens java.base/java.util=ALL-UNNAMED --add-opens java.base/java.util.concurrent=ALL-UNNAMED --add-opens java.base/java.util.concurrent.atomic=ALL-UNNAMED --add-opens java.base/sun.nio.ch=ALL-UNNAMED --add-opens java.base/sun.nio.cs=ALL-UNNAMED --add-opens java.base/sun.security.action=ALL-UNNAMED --add-opens java.base/sun.util.calendar=ALL-UNNAMED --add-opens java.security.jgss/sun.security.krb5=ALL-UNNAMED --add-exports java.base/sun.nio.ch=ALL-UNNAMED
+
+
+Consolidated parameters to pass to HopRun are
+-j default -r local -f C:\Apache-hop\config\projects\default\atualiza_informacoes.hwf
+
+Command to start HopRun will be:
+"C:\Program Files\Java\jre17.0.14\bin\java" -classpath lib\core\*;lib\beam\*;lib\swt\win64\* -Djava.library.path=lib\core;lib\beam "-Xmx2048m" -DHOP_AUDIT_FOLDER=.\audit -DHOP_PLATFORM_OS=Windows -DHOP_PLATFORM_RUNTIME=Run -DHOP_AUTO_CREATE_CONFIG=Y --add-opens java.xml/jdk.xml.internal=ALL-UNNAMED --add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.lang.invoke=ALL-UNNAMED --add-opens java.base/java.lang.reflect=ALL-UNNAMED --add-opens java.base/java.io=ALL-UNNAMED --add-opens java.base/java.net=ALL-UNNAMED --add-opens java.base/java.nio=ALL-UNNAMED --add-opens java.base/java.util=ALL-UNNAMED --add-opens java.base/java.util.concurrent=ALL-UNNAMED --add-opens java.base/java.util.concurrent.atomic=ALL-UNNAMED --add-opens java.base/sun.nio.ch=ALL-UNNAMED --add-opens java.base/sun.nio.cs=ALL-UNNAMED --add-opens java.base/sun.security.action=ALL-UNNAMED --add-opens java.base/sun.util.calendar=ALL-UNNAMED --add-opens java.security.jgss/sun.security.krb5=ALL-UNNAMED --add-exports java.base/sun.nio.ch=ALL-UNNAMED org.apache.hop.run.HopRun -j default -r local -f C:\Apache-hop\config\projects\default\atualiza_informacoes.hwf
+
+===[Starting HopRun]=========================================================
+2025/04/05 17:07:29 - HopRun - Enabling project 'default'
+2025/04/05 17:07:29 - HopRun - Starting workflow: C:\Apache-hop\config\projects\default\atualiza_informacoes.hwf
+2025/04/05 17:07:29 - atualiza_informacoes - Start of workflow execution
+2025/04/05 17:07:29 - atualiza_informacoes - Starting action [Mail]
+2025/04/05 17:07:29 - atualiza_informacoes - Starting action [Success]
+2025/04/05 17:07:29 - atualiza_informacoes - Finished action [Success] (result=[true])
+2025/04/05 17:07:29 - atualiza_informacoes - Finished action [Mail] (result=[true])
+2025/04/05 17:07:29 - atualiza_informacoes - Workflow execution finished
+2025/04/05 17:07:29 - atualiza_informacoes - Workflow duration : 0.705 seconds [  0.705" ]
+HopRun exit.
+2025-04-05 17:43:03 - Recebido comando para parar o servi√ßo
+2025-04-05 17:43:04 - Loop principal finalizado
+2025-04-05 17:43:17 - Verificando ambiente...
+2025-04-05 17:43:17 - Diret√≥rio do servi√ßo: C:\Apache-hop\Agendador_hop
+2025-04-05 17:43:17 - Python: 3.8.0 (tags/v3.8.0:fa919fd, Oct 14 2019, 19:37:50) [MSC v.1916 64 bit (AMD64)]
+2025-04-05 17:43:17 - Servi√ßo iniciado. Vers√£o: 2025-04-05 17:43
+2025-04-05 17:43:17 - Iniciando loop principal de verifica√ß√£o
+2025-04-05 17:48:20 - Agendamento cumpre condi√ß√µes para execu√ß√£o: C:/Apache-hop/config/projects/default/atualiza_informacoes.hwf
+2025-04-05 17:48:20 - Processo iniciado (PID: 6376)
+2025-04-05 17:48:20 - [HOP] Executando: C:\Apache-hop\hop-run.bat -j default -r local -f C:\Apache-hop\config\projects\default\atualiza_informacoes.hwf
+2025-04-05 17:48:20 - [HOP] Diret√≥rio: C:\Apache-hop
+===[Environment Settings - hop-run.bat]===================================
+
+Java identified as "C:\Program Files\Java\jre17.0.14\bin\java"
+
+HOP_OPTIONS="-Xmx2048m" -DHOP_AUDIT_FOLDER=.\audit -DHOP_PLATFORM_OS=Windows -DHOP_PLATFORM_RUNTIME=Run -DHOP_AUTO_CREATE_CONFIG=Y --add-opens java.xml/jdk.xml.internal=ALL-UNNAMED --add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.lang.invoke=ALL-UNNAMED --add-opens java.base/java.lang.reflect=ALL-UNNAMED --add-opens java.base/java.io=ALL-UNNAMED --add-opens java.base/java.net=ALL-UNNAMED --add-opens java.base/java.nio=ALL-UNNAMED --add-opens java.base/java.util=ALL-UNNAMED --add-opens java.base/java.util.concurrent=ALL-UNNAMED --add-opens java.base/java.util.concurrent.atomic=ALL-UNNAMED --add-opens java.base/sun.nio.ch=ALL-UNNAMED --add-opens java.base/sun.nio.cs=ALL-UNNAMED --add-opens java.base/sun.security.action=ALL-UNNAMED --add-opens java.base/sun.util.calendar=ALL-UNNAMED --add-opens java.security.jgss/sun.security.krb5=ALL-UNNAMED --add-exports java.base/sun.nio.ch=ALL-UNNAMED
+
+
+Consolidated parameters to pass to HopRun are
+-j default -r local -f C:\Apache-hop\config\projects\default\atualiza_informacoes.hwf
+
+Command to start HopRun will be:
+"C:\Program Files\Java\jre17.0.14\bin\java" -classpath lib\core\*;lib\beam\*;lib\swt\win64\* -Djava.library.path=lib\core;lib\beam "-Xmx2048m" -DHOP_AUDIT_FOLDER=.\audit -DHOP_PLATFORM_OS=Windows -DHOP_PLATFORM_RUNTIME=Run -DHOP_AUTO_CREATE_CONFIG=Y --add-opens java.xml/jdk.xml.internal=ALL-UNNAMED --add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.lang.invoke=ALL-UNNAMED --add-opens java.base/java.lang.reflect=ALL-UNNAMED --add-opens java.base/java.io=ALL-UNNAMED --add-opens java.base/java.net=ALL-UNNAMED --add-opens java.base/java.nio=ALL-UNNAMED --add-opens java.base/java.util=ALL-UNNAMED --add-opens java.base/java.util.concurrent=ALL-UNNAMED --add-opens java.base/java.util.concurrent.atomic=ALL-UNNAMED --add-opens java.base/sun.nio.ch=ALL-UNNAMED --add-opens java.base/sun.nio.cs=ALL-UNNAMED --add-opens java.base/sun.security.action=ALL-UNNAMED --add-opens java.base/sun.util.calendar=ALL-UNNAMED --add-opens java.security.jgss/sun.security.krb5=ALL-UNNAMED --add-exports java.base/sun.nio.ch=ALL-UNNAMED org.apache.hop.run.HopRun -j default -r local -f C:\Apache-hop\config\projects\default\atualiza_informacoes.hwf
+
+===[Starting HopRun]=========================================================
+2025/04/05 17:48:24 - HopRun - Enabling project 'default'
+2025/04/05 17:48:24 - HopRun - Starting workflow: C:\Apache-hop\config\projects\default\atualiza_informacoes.hwf
+2025/04/05 17:48:24 - atualiza_informacoes - Start of workflow execution
+2025/04/05 17:48:24 - atualiza_informacoes - Starting action [Mail]
+2025/04/05 17:48:25 - atualiza_informacoes - Starting action [Success]
+2025/04/05 17:48:25 - atualiza_informacoes - Finished action [Success] (result=[true])
+2025/04/05 17:48:25 - atualiza_informacoes - Finished action [Mail] (result=[true])
+2025/04/05 17:48:25 - atualiza_informacoes - Workflow execution finished
+2025/04/05 17:48:25 - atualiza_informacoes - Workflow duration : 0.699 seconds [  0.699" ]
+HopRun exit.
+2025-04-05 17:53:22 - Agendamento cumpre condi√ß√µes para execu√ß√£o: C:/Apache-hop/config/projects/default/atualiza_informacoes.hwf
+2025-04-05 17:53:22 - Processo iniciado (PID: 26616)
+2025-04-05 17:53:22 - [HOP] Executando: C:\Apache-hop\hop-run.bat -j default -r local -f C:\Apache-hop\config\projects\default\atualiza_informacoes.hwf
+2025-04-05 17:53:22 - [HOP] Diret√≥rio: C:\Apache-hop
+===[Environment Settings - hop-run.bat]===================================
+
+Java identified as "C:\Program Files\Java\jre17.0.14\bin\java"
+
+HOP_OPTIONS="-Xmx2048m" -DHOP_AUDIT_FOLDER=.\audit -DHOP_PLATFORM_OS=Windows -DHOP_PLATFORM_RUNTIME=Run -DHOP_AUTO_CREATE_CONFIG=Y --add-opens java.xml/jdk.xml.internal=ALL-UNNAMED --add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.lang.invoke=ALL-UNNAMED --add-opens java.base/java.lang.reflect=ALL-UNNAMED --add-opens java.base/java.io=ALL-UNNAMED --add-opens java.base/java.net=ALL-UNNAMED --add-opens java.base/java.nio=ALL-UNNAMED --add-opens java.base/java.util=ALL-UNNAMED --add-opens java.base/java.util.concurrent=ALL-UNNAMED --add-opens java.base/java.util.concurrent.atomic=ALL-UNNAMED --add-opens java.base/sun.nio.ch=ALL-UNNAMED --add-opens java.base/sun.nio.cs=ALL-UNNAMED --add-opens java.base/sun.security.action=ALL-UNNAMED --add-opens java.base/sun.util.calendar=ALL-UNNAMED --add-opens java.security.jgss/sun.security.krb5=ALL-UNNAMED --add-exports java.base/sun.nio.ch=ALL-UNNAMED
+
+
+Consolidated parameters to pass to HopRun are
+-j default -r local -f C:\Apache-hop\config\projects\default\atualiza_informacoes.hwf
+
+Command to start HopRun will be:
+"C:\Program Files\Java\jre17.0.14\bin\java" -classpath lib\core\*;lib\beam\*;lib\swt\win64\* -Djava.library.path=lib\core;lib\beam "-Xmx2048m" -DHOP_AUDIT_FOLDER=.\audit -DHOP_PLATFORM_OS=Windows -DHOP_PLATFORM_RUNTIME=Run -DHOP_AUTO_CREATE_CONFIG=Y --add-opens java.xml/jdk.xml.internal=ALL-UNNAMED --add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.lang.invoke=ALL-UNNAMED --add-opens java.base/java.lang.reflect=ALL-UNNAMED --add-opens java.base/java.io=ALL-UNNAMED --add-opens java.base/java.net=ALL-UNNAMED --add-opens java.base/java.nio=ALL-UNNAMED --add-opens java.base/java.util=ALL-UNNAMED --add-opens java.base/java.util.concurrent=ALL-UNNAMED --add-opens java.base/java.util.concurrent.atomic=ALL-UNNAMED --add-opens java.base/sun.nio.ch=ALL-UNNAMED --add-opens java.base/sun.nio.cs=ALL-UNNAMED --add-opens java.base/sun.security.action=ALL-UNNAMED --add-opens java.base/sun.util.calendar=ALL-UNNAMED --add-opens java.security.jgss/sun.security.krb5=ALL-UNNAMED --add-exports java.base/sun.nio.ch=ALL-UNNAMED org.apache.hop.run.HopRun -j default -r local -f C:\Apache-hop\config\projects\default\atualiza_informacoes.hwf
+
+===[Starting HopRun]=========================================================
+2025/04/05 17:53:26 - HopRun - Enabling project 'default'
+2025/04/05 17:53:26 - HopRun - Starting workflow: C:\Apache-hop\config\projects\default\atualiza_informacoes.hwf
+2025/04/05 17:53:26 - atualiza_informacoes - Start of workflow execution
+2025/04/05 17:53:26 - atualiza_informacoes - Starting action [Mail]
+2025/04/05 17:53:27 - atualiza_informacoes - Starting action [Success]
+2025/04/05 17:53:27 - atualiza_informacoes - Finished action [Success] (result=[true])
+2025/04/05 17:53:27 - atualiza_informacoes - Finished action [Mail] (result=[true])
+2025/04/05 17:53:27 - atualiza_informacoes - Workflow execution finished
+2025/04/05 17:53:27 - atualiza_informacoes - Workflow duration : 0.635 seconds [  0.635" ]
+HopRun exit.
+2025-04-05 17:56:24 - Agendamento cumpre condi√ß√µes para execu√ß√£o: C:/Apache-hop/config/projects/default/atualiza_informacoes.hwf
+2025-04-05 17:56:24 - Processo iniciado (PID: 7432)
+2025-04-05 17:56:24 - [HOP] Executando: C:\Apache-hop\hop-run.bat -j default -r local -f C:\Apache-hop\config\projects\default\atualiza_informacoes.hwf
+2025-04-05 17:56:24 - [HOP] Diret√≥rio: C:\Apache-hop
+===[Environment Settings - hop-run.bat]===================================
+
+Java identified as "C:\Program Files\Java\jre17.0.14\bin\java"
+
+HOP_OPTIONS="-Xmx2048m" -DHOP_AUDIT_FOLDER=.\audit -DHOP_PLATFORM_OS=Windows -DHOP_PLATFORM_RUNTIME=Run -DHOP_AUTO_CREATE_CONFIG=Y --add-opens java.xml/jdk.xml.internal=ALL-UNNAMED --add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.lang.invoke=ALL-UNNAMED --add-opens java.base/java.lang.reflect=ALL-UNNAMED --add-opens java.base/java.io=ALL-UNNAMED --add-opens java.base/java.net=ALL-UNNAMED --add-opens java.base/java.nio=ALL-UNNAMED --add-opens java.base/java.util=ALL-UNNAMED --add-opens java.base/java.util.concurrent=ALL-UNNAMED --add-opens java.base/java.util.concurrent.atomic=ALL-UNNAMED --add-opens java.base/sun.nio.ch=ALL-UNNAMED --add-opens java.base/sun.nio.cs=ALL-UNNAMED --add-opens java.base/sun.security.action=ALL-UNNAMED --add-opens java.base/sun.util.calendar=ALL-UNNAMED --add-opens java.security.jgss/sun.security.krb5=ALL-UNNAMED --add-exports java.base/sun.nio.ch=ALL-UNNAMED
+
+
+Consolidated parameters to pass to HopRun are
+-j default -r local -f C:\Apache-hop\config\projects\default\atualiza_informacoes.hwf
+
+Command to start HopRun will be:
+"C:\Program Files\Java\jre17.0.14\bin\java" -classpath lib\core\*;lib\beam\*;lib\swt\win64\* -Djava.library.path=lib\core;lib\beam "-Xmx2048m" -DHOP_AUDIT_FOLDER=.\audit -DHOP_PLATFORM_OS=Windows -DHOP_PLATFORM_RUNTIME=Run -DHOP_AUTO_CREATE_CONFIG=Y --add-opens java.xml/jdk.xml.internal=ALL-UNNAMED --add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.lang.invoke=ALL-UNNAMED --add-opens java.base/java.lang.reflect=ALL-UNNAMED --add-opens java.base/java.io=ALL-UNNAMED --add-opens java.base/java.net=ALL-UNNAMED --add-opens java.base/java.nio=ALL-UNNAMED --add-opens java.base/java.util=ALL-UNNAMED --add-opens java.base/java.util.concurrent=ALL-UNNAMED --add-opens java.base/java.util.concurrent.atomic=ALL-UNNAMED --add-opens java.base/sun.nio.ch=ALL-UNNAMED --add-opens java.base/sun.nio.cs=ALL-UNNAMED --add-opens java.base/sun.security.action=ALL-UNNAMED --add-opens java.base/sun.util.calendar=ALL-UNNAMED --add-opens java.security.jgss/sun.security.krb5=ALL-UNNAMED --add-exports java.base/sun.nio.ch=ALL-UNNAMED org.apache.hop.run.HopRun -j default -r local -f C:\Apache-hop\config\projects\default\atualiza_informacoes.hwf
+
+===[Starting HopRun]=========================================================
+2025/04/05 17:56:28 - HopRun - Enabling project 'default'
+2025/04/05 17:56:28 - HopRun - Starting workflow: C:\Apache-hop\config\projects\default\atualiza_informacoes.hwf
+2025/04/05 17:56:28 - atualiza_informacoes - Start of workflow execution
+2025/04/05 17:56:28 - atualiza_informacoes - Starting action [Mail]
+2025/04/05 17:56:28 - atualiza_informacoes - Starting action [Success]
+2025/04/05 17:56:28 - atualiza_informacoes - Finished action [Success] (result=[true])
+2025/04/05 17:56:28 - atualiza_informacoes - Finished action [Mail] (result=[true])
+2025/04/05 17:56:28 - atualiza_informacoes - Workflow execution finished
+2025/04/05 17:56:28 - atualiza_informacoes - Workflow duration : 0.688 seconds [  0.688" ]
+HopRun exit.
+2025-04-05 17:58:25 - Agendamento cumpre condi√ß√µes para execu√ß√£o: C:/Apache-hop/config/projects/default/atualiza_informacoes.hwf
+2025-04-05 17:58:25 - Processo iniciado (PID: 21840)
+2025-04-05 17:58:25 - [HOP] Executando: C:\Apache-hop\hop-run.bat -j default -r local -f C:\Apache-hop\config\projects\default\atualiza_informacoes.hwf
+2025-04-05 17:58:25 - [HOP] Diret√≥rio: C:\Apache-hop
+===[Environment Settings - hop-run.bat]===================================
+
+Java identified as "C:\Program Files\Java\jre17.0.14\bin\java"
+
+HOP_OPTIONS="-Xmx2048m" -DHOP_AUDIT_FOLDER=.\audit -DHOP_PLATFORM_OS=Windows -DHOP_PLATFORM_RUNTIME=Run -DHOP_AUTO_CREATE_CONFIG=Y --add-opens java.xml/jdk.xml.internal=ALL-UNNAMED --add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.lang.invoke=ALL-UNNAMED --add-opens java.base/java.lang.reflect=ALL-UNNAMED --add-opens java.base/java.io=ALL-UNNAMED --add-opens java.base/java.net=ALL-UNNAMED --add-opens java.base/java.nio=ALL-UNNAMED --add-opens java.base/java.util=ALL-UNNAMED --add-opens java.base/java.util.concurrent=ALL-UNNAMED --add-opens java.base/java.util.concurrent.atomic=ALL-UNNAMED --add-opens java.base/sun.nio.ch=ALL-UNNAMED --add-opens java.base/sun.nio.cs=ALL-UNNAMED --add-opens java.base/sun.security.action=ALL-UNNAMED --add-opens java.base/sun.util.calendar=ALL-UNNAMED --add-opens java.security.jgss/sun.security.krb5=ALL-UNNAMED --add-exports java.base/sun.nio.ch=ALL-UNNAMED
+
+
+Consolidated parameters to pass to HopRun are
+-j default -r local -f C:\Apache-hop\config\projects\default\atualiza_informacoes.hwf
+
+Command to start HopRun will be:
+"C:\Program Files\Java\jre17.0.14\bin\java" -classpath lib\core\*;lib\beam\*;lib\swt\win64\* -Djava.library.path=lib\core;lib\beam "-Xmx2048m" -DHOP_AUDIT_FOLDER=.\audit -DHOP_PLATFORM_OS=Windows -DHOP_PLATFORM_RUNTIME=Run -DHOP_AUTO_CREATE_CONFIG=Y --add-opens java.xml/jdk.xml.internal=ALL-UNNAMED --add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.lang.invoke=ALL-UNNAMED --add-opens java.base/java.lang.reflect=ALL-UNNAMED --add-opens java.base/java.io=ALL-UNNAMED --add-opens java.base/java.net=ALL-UNNAMED --add-opens java.base/java.nio=ALL-UNNAMED --add-opens java.base/java.util=ALL-UNNAMED --add-opens java.base/java.util.concurrent=ALL-UNNAMED --add-opens java.base/java.util.concurrent.atomic=ALL-UNNAMED --add-opens java.base/sun.nio.ch=ALL-UNNAMED --add-opens java.base/sun.nio.cs=ALL-UNNAMED --add-opens java.base/sun.security.action=ALL-UNNAMED --add-opens java.base/sun.util.calendar=ALL-UNNAMED --add-opens java.security.jgss/sun.security.krb5=ALL-UNNAMED --add-exports java.base/sun.nio.ch=ALL-UNNAMED org.apache.hop.run.HopRun -j default -r local -f C:\Apache-hop\config\projects\default\atualiza_informacoes.hwf
+
+===[Starting HopRun]=========================================================
+2025/04/05 17:58:29 - HopRun - Enabling project 'default'
+2025/04/05 17:58:29 - HopRun - Starting workflow: C:\Apache-hop\config\projects\default\atualiza_informacoes.hwf
+2025/04/05 17:58:29 - atualiza_informacoes - Start of workflow execution
+2025/04/05 17:58:29 - atualiza_informacoes - Starting action [Mail]
+2025/04/05 17:58:30 - atualiza_informacoes - Starting action [Success]
+2025/04/05 17:58:30 - atualiza_informacoes - Finished action [Success] (result=[true])
+2025/04/05 17:58:30 - atualiza_informacoes - Finished action [Mail] (result=[true])
+2025/04/05 17:58:30 - atualiza_informacoes - Workflow execution finished
+2025/04/05 17:58:30 - atualiza_informacoes - Workflow duration : 0.721 seconds [  0.721" ]
+HopRun exit.
+2025-04-05 18:00:26 - Agendamento cumpre condi√ß√µes para execu√ß√£o: C:/Apache-hop/config/projects/default/atualiza_informacoes.hwf
+2025-04-05 18:00:26 - Processo iniciado (PID: 21604)
+2025-04-05 18:00:26 - [HOP] Executando: C:\Apache-hop\hop-run.bat -j default -r local -f C:\Apache-hop\config\projects\default\atualiza_informacoes.hwf
+2025-04-05 18:00:26 - [HOP] Diret√≥rio: C:\Apache-hop
+===[Environment Settings - hop-run.bat]===================================
+
+Java identified as "C:\Program Files\Java\jre17.0.14\bin\java"
+
+HOP_OPTIONS="-Xmx2048m" -DHOP_AUDIT_FOLDER=.\audit -DHOP_PLATFORM_OS=Windows -DHOP_PLATFORM_RUNTIME=Run -DHOP_AUTO_CREATE_CONFIG=Y --add-opens java.xml/jdk.xml.internal=ALL-UNNAMED --add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.lang.invoke=ALL-UNNAMED --add-opens java.base/java.lang.reflect=ALL-UNNAMED --add-opens java.base/java.io=ALL-UNNAMED --add-opens java.base/java.net=ALL-UNNAMED --add-opens java.base/java.nio=ALL-UNNAMED --add-opens java.base/java.util=ALL-UNNAMED --add-opens java.base/java.util.concurrent=ALL-UNNAMED --add-opens java.base/java.util.concurrent.atomic=ALL-UNNAMED --add-opens java.base/sun.nio.ch=ALL-UNNAMED --add-opens java.base/sun.nio.cs=ALL-UNNAMED --add-opens java.base/sun.security.action=ALL-UNNAMED --add-opens java.base/sun.util.calendar=ALL-UNNAMED --add-opens java.security.jgss/sun.security.krb5=ALL-UNNAMED --add-exports java.base/sun.nio.ch=ALL-UNNAMED
+
+
+Consolidated parameters to pass to HopRun are
+-j default -r local -f C:\Apache-hop\config\projects\default\atualiza_informacoes.hwf
+
+Command to start HopRun will be:
+"C:\Program Files\Java\jre17.0.14\bin\java" -classpath lib\core\*;lib\beam\*;lib\swt\win64\* -Djava.library.path=lib\core;lib\beam "-Xmx2048m" -DHOP_AUDIT_FOLDER=.\audit -DHOP_PLATFORM_OS=Windows -DHOP_PLATFORM_RUNTIME=Run -DHOP_AUTO_CREATE_CONFIG=Y --add-opens java.xml/jdk.xml.internal=ALL-UNNAMED --add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.lang.invoke=ALL-UNNAMED --add-opens java.base/java.lang.reflect=ALL-UNNAMED --add-opens java.base/java.io=ALL-UNNAMED --add-opens java.base/java.net=ALL-UNNAMED --add-opens java.base/java.nio=ALL-UNNAMED --add-opens java.base/java.util=ALL-UNNAMED --add-opens java.base/java.util.concurrent=ALL-UNNAMED --add-opens java.base/java.util.concurrent.atomic=ALL-UNNAMED --add-opens java.base/sun.nio.ch=ALL-UNNAMED --add-opens java.base/sun.nio.cs=ALL-UNNAMED --add-opens java.base/sun.security.action=ALL-UNNAMED --add-opens java.base/sun.util.calendar=ALL-UNNAMED --add-opens java.security.jgss/sun.security.krb5=ALL-UNNAMED --add-exports java.base/sun.nio.ch=ALL-UNNAMED org.apache.hop.run.HopRun -j default -r local -f C:\Apache-hop\config\projects\default\atualiza_informacoes.hwf
+
+===[Starting HopRun]=========================================================
+2025/04/05 18:00:30 - HopRun - Enabling project 'default'
+2025/04/05 18:00:30 - HopRun - Starting workflow: C:\Apache-hop\config\projects\default\atualiza_informacoes.hwf
+2025/04/05 18:00:30 - atualiza_informacoes - Start of workflow execution
+2025/04/05 18:00:30 - atualiza_informacoes - Starting action [Mail]
+2025/04/05 18:00:31 - atualiza_informacoes - Starting action [Success]
+2025/04/05 18:00:31 - atualiza_informacoes - Finished action [Success] (result=[true])
+2025/04/05 18:00:31 - atualiza_informacoes - Finished action [Mail] (result=[true])
+2025/04/05 18:00:31 - atualiza_informacoes - Workflow execution finished
+2025/04/05 18:00:31 - atualiza_informacoes - Workflow duration : 0.702 seconds [  0.702" ]
+HopRun exit.
+2025-04-05 18:02:27 - Agendamento cumpre condi√ß√µes para execu√ß√£o: C:/Apache-hop/config/projects/default/atualiza_informacoes.hwf
+2025-04-05 18:02:27 - Processo iniciado (PID: 18768)
+2025-04-05 18:02:27 - [HOP] Executando: C:\Apache-hop\hop-run.bat -j default -r local -f C:\Apache-hop\config\projects\default\atualiza_informacoes.hwf
+2025-04-05 18:02:27 - [HOP] Diret√≥rio: C:\Apache-hop
+===[Environment Settings - hop-run.bat]===================================
+
+Java identified as "C:\Program Files\Java\jre17.0.14\bin\java"
+
+HOP_OPTIONS="-Xmx2048m" -DHOP_AUDIT_FOLDER=.\audit -DHOP_PLATFORM_OS=Windows -DHOP_PLATFORM_RUNTIME=Run -DHOP_AUTO_CREATE_CONFIG=Y --add-opens java.xml/jdk.xml.internal=ALL-UNNAMED --add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.lang.invoke=ALL-UNNAMED --add-opens java.base/java.lang.reflect=ALL-UNNAMED --add-opens java.base/java.io=ALL-UNNAMED --add-opens java.base/java.net=ALL-UNNAMED --add-opens java.base/java.nio=ALL-UNNAMED --add-opens java.base/java.util=ALL-UNNAMED --add-opens java.base/java.util.concurrent=ALL-UNNAMED --add-opens java.base/java.util.concurrent.atomic=ALL-UNNAMED --add-opens java.base/sun.nio.ch=ALL-UNNAMED --add-opens java.base/sun.nio.cs=ALL-UNNAMED --add-opens java.base/sun.security.action=ALL-UNNAMED --add-opens java.base/sun.util.calendar=ALL-UNNAMED --add-opens java.security.jgss/sun.security.krb5=ALL-UNNAMED --add-exports java.base/sun.nio.ch=ALL-UNNAMED
+
+
+Consolidated parameters to pass to HopRun are
+-j default -r local -f C:\Apache-hop\config\projects\default\atualiza_informacoes.hwf
+
+Command to start HopRun will be:
+"C:\Program Files\Java\jre17.0.14\bin\java" -classpath lib\core\*;lib\beam\*;lib\swt\win64\* -Djava.library.path=lib\core;lib\beam "-Xmx2048m" -DHOP_AUDIT_FOLDER=.\audit -DHOP_PLATFORM_OS=Windows -DHOP_PLATFORM_RUNTIME=Run -DHOP_AUTO_CREATE_CONFIG=Y --add-opens java.xml/jdk.xml.internal=ALL-UNNAMED --add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.lang.invoke=ALL-UNNAMED --add-opens java.base/java.lang.reflect=ALL-UNNAMED --add-opens java.base/java.io=ALL-UNNAMED --add-opens java.base/java.net=ALL-UNNAMED --add-opens java.base/java.nio=ALL-UNNAMED --add-opens java.base/java.util=ALL-UNNAMED --add-opens java.base/java.util.concurrent=ALL-UNNAMED --add-opens java.base/java.util.concurrent.atomic=ALL-UNNAMED --add-opens java.base/sun.nio.ch=ALL-UNNAMED --add-opens java.base/sun.nio.cs=ALL-UNNAMED --add-opens java.base/sun.security.action=ALL-UNNAMED --add-opens java.base/sun.util.calendar=ALL-UNNAMED --add-opens java.security.jgss/sun.security.krb5=ALL-UNNAMED --add-exports java.base/sun.nio.ch=ALL-UNNAMED org.apache.hop.run.HopRun -j default -r local -f C:\Apache-hop\config\projects\default\atualiza_informacoes.hwf
+
+===[Starting HopRun]=========================================================
+2025/04/05 18:02:31 - HopRun - Enabling project 'default'
+2025/04/05 18:02:31 - HopRun - Starting workflow: C:\Apache-hop\config\projects\default\atualiza_informacoes.hwf
+2025/04/05 18:02:31 - atualiza_informacoes - Start of workflow execution
+2025/04/05 18:02:31 - atualiza_informacoes - Starting action [Mail]
+2025/04/05 18:02:31 - atualiza_informacoes - Starting action [Success]
+2025/04/05 18:02:31 - atualiza_informacoes - Finished action [Success] (result=[true])
+2025/04/05 18:02:31 - atualiza_informacoes - Finished action [Mail] (result=[true])
+2025/04/05 18:02:31 - atualiza_informacoes - Workflow execution finished
+2025/04/05 18:02:32 - atualiza_informacoes - Workflow duration : 0.688 seconds [  0.688" ]
+HopRun exit.
+2025-04-05 18:04:28 - Agendamento cumpre condi√ß√µes para execu√ß√£o: C:/Apache-hop/config/projects/default/atualiza_informacoes.hwf
+2025-04-05 18:04:28 - Processo iniciado (PID: 25324)
+2025-04-05 18:04:28 - [HOP] Executando: C:\Apache-hop\hop-run.bat -j default -r local -f C:\Apache-hop\config\projects\default\atualiza_informacoes.hwf
+2025-04-05 18:04:28 - [HOP] Diret√≥rio: C:\Apache-hop
+===[Environment Settings - hop-run.bat]===================================
+
+Java identified as "C:\Program Files\Java\jre17.0.14\bin\java"
+
+HOP_OPTIONS="-Xmx2048m" -DHOP_AUDIT_FOLDER=.\audit -DHOP_PLATFORM_OS=Windows -DHOP_PLATFORM_RUNTIME=Run -DHOP_AUTO_CREATE_CONFIG=Y --add-opens java.xml/jdk.xml.internal=ALL-UNNAMED --add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.lang.invoke=ALL-UNNAMED --add-opens java.base/java.lang.reflect=ALL-UNNAMED --add-opens java.base/java.io=ALL-UNNAMED --add-opens java.base/java.net=ALL-UNNAMED --add-opens java.base/java.nio=ALL-UNNAMED --add-opens java.base/java.util=ALL-UNNAMED --add-opens java.base/java.util.concurrent=ALL-UNNAMED --add-opens java.base/java.util.concurrent.atomic=ALL-UNNAMED --add-opens java.base/sun.nio.ch=ALL-UNNAMED --add-opens java.base/sun.nio.cs=ALL-UNNAMED --add-opens java.base/sun.security.action=ALL-UNNAMED --add-opens java.base/sun.util.calendar=ALL-UNNAMED --add-opens java.security.jgss/sun.security.krb5=ALL-UNNAMED --add-exports java.base/sun.nio.ch=ALL-UNNAMED
+
+
+Consolidated parameters to pass to HopRun are
+-j default -r local -f C:\Apache-hop\config\projects\default\atualiza_informacoes.hwf
+
+Command to start HopRun will be:
+"C:\Program Files\Java\jre17.0.14\bin\java" -classpath lib\core\*;lib\beam\*;lib\swt\win64\* -Djava.library.path=lib\core;lib\beam "-Xmx2048m" -DHOP_AUDIT_FOLDER=.\audit -DHOP_PLATFORM_OS=Windows -DHOP_PLATFORM_RUNTIME=Run -DHOP_AUTO_CREATE_CONFIG=Y --add-opens java.xml/jdk.xml.internal=ALL-UNNAMED --add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.lang.invoke=ALL-UNNAMED --add-opens java.base/java.lang.reflect=ALL-UNNAMED --add-opens java.base/java.io=ALL-UNNAMED --add-opens java.base/java.net=ALL-UNNAMED --add-opens java.base/java.nio=ALL-UNNAMED --add-opens java.base/java.util=ALL-UNNAMED --add-opens java.base/java.util.concurrent=ALL-UNNAMED --add-opens java.base/java.util.concurrent.atomic=ALL-UNNAMED --add-opens java.base/sun.nio.ch=ALL-UNNAMED --add-opens java.base/sun.nio.cs=ALL-UNNAMED --add-opens java.base/sun.security.action=ALL-UNNAMED --add-opens java.base/sun.util.calendar=ALL-UNNAMED --add-opens java.security.jgss/sun.security.krb5=ALL-UNNAMED --add-exports java.base/sun.nio.ch=ALL-UNNAMED org.apache.hop.run.HopRun -j default -r local -f C:\Apache-hop\config\projects\default\atualiza_informacoes.hwf
+
+===[Starting HopRun]=========================================================
+2025/04/05 18:04:32 - HopRun - Enabling project 'default'
+2025/04/05 18:04:32 - HopRun - Starting workflow: C:\Apache-hop\config\projects\default\atualiza_informacoes.hwf
+2025/04/05 18:04:32 - atualiza_informacoes - Start of workflow execution
+2025/04/05 18:04:32 - atualiza_informacoes - Starting action [Mail]
+2025/04/05 18:04:32 - atualiza_informacoes - Starting action [Success]
+2025/04/05 18:04:32 - atualiza_informacoes - Finished action [Success] (result=[true])
+2025/04/05 18:04:32 - atualiza_informacoes - Finished action [Mail] (result=[true])
+2025/04/05 18:04:32 - atualiza_informacoes - Workflow execution finished
+2025/04/05 18:04:32 - atualiza_informacoes - Workflow duration : 0.658 seconds [  0.658" ]
+HopRun exit.
+2025-04-05 19:08:08 - Recebido comando para parar o servi√ßo
+2025-04-05 19:08:08 - Loop principal finalizado
+2025-04-05 19:08:24 - Verificando ambiente...
+2025-04-05 19:08:24 - Diret√≥rio do servi√ßo: C:\Apache-hop\Agendador_hop
+2025-04-05 19:08:24 - Python: 3.8.0 (tags/v3.8.0:fa919fd, Oct 14 2019, 19:37:50) [MSC v.1916 64 bit (AMD64)]
+2025-04-05 19:08:24 - Servi√ßo iniciado. Vers√£o: 2025-04-05 19:08
+2025-04-05 19:08:24 - Iniciando loop principal de verifica√ß√£o
+2025-04-05 19:09:24 - Dias da semana | hoje s√°b | Agendado: ['sab']
+2025-04-05 19:10:25 - Dias da semana | hoje s√°b | Agendado: ['sab']
+2025-04-05 19:11:25 - Dias da semana | hoje s√°b | Agendado: ['sab']
+2025-04-05 19:12:25 - Dias da semana | hoje s√°b | Agendado: ['sab']
+2025-04-05 19:13:26 - Dias da semana | hoje s√°b | Agendado: ['sab']
+2025-04-05 19:14:14 - Recebido comando para parar o servi√ßo
+2025-04-05 19:14:14 - Loop principal finalizado
+2025-04-05 19:15:28 - Verificando ambiente...
+2025-04-05 19:15:28 - Diret√≥rio do servi√ßo: C:\Apache-hop\Agendador_hop
+2025-04-05 19:15:28 - Python: 3.8.0 (tags/v3.8.0:fa919fd, Oct 14 2019, 19:37:50) [MSC v.1916 64 bit (AMD64)]
+2025-04-05 19:15:28 - Servi√ßo iniciado. Vers√£o: 2025-04-05 19:15
+2025-04-05 19:15:28 - Iniciando loop principal de verifica√ß√£o
+2025-04-05 19:18:29 - Agendamento cumpre condi√ß√µes para execu√ß√£o: C:/Apache-hop/config/projects/default/atualiza_informacoes.hwf
+2025-04-05 19:18:29 - Processo iniciado (PID: 4228)
+2025-04-05 19:18:30 - [HOP] Executando: C:\Apache-hop\hop-run.bat -j default -r local -f C:\Apache-hop\config\projects\default\atualiza_informacoes.hwf
+2025-04-05 19:18:30 - [HOP] Diret√≥rio: C:\Apache-hop
+===[Environment Settings - hop-run.bat]===================================
+
+Java identified as "C:\Program Files\Java\jre17.0.14\bin\java"
+
+HOP_OPTIONS="-Xmx2048m" -DHOP_AUDIT_FOLDER=.\audit -DHOP_PLATFORM_OS=Windows -DHOP_PLATFORM_RUNTIME=Run -DHOP_AUTO_CREATE_CONFIG=Y --add-opens java.xml/jdk.xml.internal=ALL-UNNAMED --add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.lang.invoke=ALL-UNNAMED --add-opens java.base/java.lang.reflect=ALL-UNNAMED --add-opens java.base/java.io=ALL-UNNAMED --add-opens java.base/java.net=ALL-UNNAMED --add-opens java.base/java.nio=ALL-UNNAMED --add-opens java.base/java.util=ALL-UNNAMED --add-opens java.base/java.util.concurrent=ALL-UNNAMED --add-opens java.base/java.util.concurrent.atomic=ALL-UNNAMED --add-opens java.base/sun.nio.ch=ALL-UNNAMED --add-opens java.base/sun.nio.cs=ALL-UNNAMED --add-opens java.base/sun.security.action=ALL-UNNAMED --add-opens java.base/sun.util.calendar=ALL-UNNAMED --add-opens java.security.jgss/sun.security.krb5=ALL-UNNAMED --add-exports java.base/sun.nio.ch=ALL-UNNAMED
+
+
+Consolidated parameters to pass to HopRun are
+-j default -r local -f C:\Apache-hop\config\projects\default\atualiza_informacoes.hwf
+
+Command to start HopRun will be:
+"C:\Program Files\Java\jre17.0.14\bin\java" -classpath lib\core\*;lib\beam\*;lib\swt\win64\* -Djava.library.path=lib\core;lib\beam "-Xmx2048m" -DHOP_AUDIT_FOLDER=.\audit -DHOP_PLATFORM_OS=Windows -DHOP_PLATFORM_RUNTIME=Run -DHOP_AUTO_CREATE_CONFIG=Y --add-opens java.xml/jdk.xml.internal=ALL-UNNAMED --add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.lang.invoke=ALL-UNNAMED --add-opens java.base/java.lang.reflect=ALL-UNNAMED --add-opens java.base/java.io=ALL-UNNAMED --add-opens java.base/java.net=ALL-UNNAMED --add-opens java.base/java.nio=ALL-UNNAMED --add-opens java.base/java.util=ALL-UNNAMED --add-opens java.base/java.util.concurrent=ALL-UNNAMED --add-opens java.base/java.util.concurrent.atomic=ALL-UNNAMED --add-opens java.base/sun.nio.ch=ALL-UNNAMED --add-opens java.base/sun.nio.cs=ALL-UNNAMED --add-opens java.base/sun.security.action=ALL-UNNAMED --add-opens java.base/sun.util.calendar=ALL-UNNAMED --add-opens java.security.jgss/sun.security.krb5=ALL-UNNAMED --add-exports java.base/sun.nio.ch=ALL-UNNAMED org.apache.hop.run.HopRun -j default -r local -f C:\Apache-hop\config\projects\default\atualiza_informacoes.hwf
+
+===[Starting HopRun]=========================================================
+2025/04/05 19:18:33 - HopRun - Enabling project 'default'
+2025/04/05 19:18:34 - HopRun - Starting workflow: C:\Apache-hop\config\projects\default\atualiza_informacoes.hwf
+2025/04/05 19:18:34 - atualiza_informacoes - Start of workflow execution
+2025/04/05 19:18:34 - atualiza_informacoes - Starting action [Mail]
+2025/04/05 19:18:34 - atualiza_informacoes - Starting action [Success]
+2025/04/05 19:18:34 - atualiza_informacoes - Finished action [Success] (result=[true])
+2025/04/05 19:18:34 - atualiza_informacoes - Finished action [Mail] (result=[true])
+2025/04/05 19:18:34 - atualiza_informacoes - Workflow execution finished
+2025/04/05 19:18:34 - atualiza_informacoes - Workflow duration : 0.674 seconds [  0.674" ]
+HopRun exit.
+2025-04-05 19:20:30 - Agendamento cumpre condi√ß√µes para execu√ß√£o: C:/Apache-hop/config/projects/default/atualiza_informacoes.hwf
+2025-04-05 19:20:30 - Processo iniciado (PID: 13652)
+2025-04-05 19:20:31 - [HOP] Executando: C:\Apache-hop\hop-run.bat -j default -r local -f C:\Apache-hop\config\projects\default\atualiza_informacoes.hwf
+2025-04-05 19:20:31 - [HOP] Diret√≥rio: C:\Apache-hop
+===[Environment Settings - hop-run.bat]===================================
+
+Java identified as "C:\Program Files\Java\jre17.0.14\bin\java"
+
+HOP_OPTIONS="-Xmx2048m" -DHOP_AUDIT_FOLDER=.\audit -DHOP_PLATFORM_OS=Windows -DHOP_PLATFORM_RUNTIME=Run -DHOP_AUTO_CREATE_CONFIG=Y --add-opens java.xml/jdk.xml.internal=ALL-UNNAMED --add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.lang.invoke=ALL-UNNAMED --add-opens java.base/java.lang.reflect=ALL-UNNAMED --add-opens java.base/java.io=ALL-UNNAMED --add-opens java.base/java.net=ALL-UNNAMED --add-opens java.base/java.nio=ALL-UNNAMED --add-opens java.base/java.util=ALL-UNNAMED --add-opens java.base/java.util.concurrent=ALL-UNNAMED --add-opens java.base/java.util.concurrent.atomic=ALL-UNNAMED --add-opens java.base/sun.nio.ch=ALL-UNNAMED --add-opens java.base/sun.nio.cs=ALL-UNNAMED --add-opens java.base/sun.security.action=ALL-UNNAMED --add-opens java.base/sun.util.calendar=ALL-UNNAMED --add-opens java.security.jgss/sun.security.krb5=ALL-UNNAMED --add-exports java.base/sun.nio.ch=ALL-UNNAMED
+
+
+Consolidated parameters to pass to HopRun are
+-j default -r local -f C:\Apache-hop\config\projects\default\atualiza_informacoes.hwf
+
+Command to start HopRun will be:
+"C:\Program Files\Java\jre17.0.14\bin\java" -classpath lib\core\*;lib\beam\*;lib\swt\win64\* -Djava.library.path=lib\core;lib\beam "-Xmx2048m" -DHOP_AUDIT_FOLDER=.\audit -DHOP_PLATFORM_OS=Windows -DHOP_PLATFORM_RUNTIME=Run -DHOP_AUTO_CREATE_CONFIG=Y --add-opens java.xml/jdk.xml.internal=ALL-UNNAMED --add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.lang.invoke=ALL-UNNAMED --add-opens java.base/java.lang.reflect=ALL-UNNAMED --add-opens java.base/java.io=ALL-UNNAMED --add-opens java.base/java.net=ALL-UNNAMED --add-opens java.base/java.nio=ALL-UNNAMED --add-opens java.base/java.util=ALL-UNNAMED --add-opens java.base/java.util.concurrent=ALL-UNNAMED --add-opens java.base/java.util.concurrent.atomic=ALL-UNNAMED --add-opens java.base/sun.nio.ch=ALL-UNNAMED --add-opens java.base/sun.nio.cs=ALL-UNNAMED --add-opens java.base/sun.security.action=ALL-UNNAMED --add-opens java.base/sun.util.calendar=ALL-UNNAMED --add-opens java.security.jgss/sun.security.krb5=ALL-UNNAMED --add-exports java.base/sun.nio.ch=ALL-UNNAMED org.apache.hop.run.HopRun -j default -r local -f C:\Apache-hop\config\projects\default\atualiza_informacoes.hwf
+
+===[Starting HopRun]=========================================================
+2025/04/05 19:20:34 - HopRun - Enabling project 'default'
+2025/04/05 19:20:34 - HopRun - Starting workflow: C:\Apache-hop\config\projects\default\atualiza_informacoes.hwf
+2025/04/05 19:20:35 - atualiza_informacoes - Start of workflow execution
+2025/04/05 19:20:35 - atualiza_informacoes - Starting action [Mail]
+2025/04/05 19:20:35 - atualiza_informacoes - Starting action [Success]
+2025/04/05 19:20:35 - atualiza_informacoes - Finished action [Success] (result=[true])
+2025/04/05 19:20:35 - atualiza_informacoes - Finished action [Mail] (result=[true])
+2025/04/05 19:20:35 - atualiza_informacoes - Workflow execution finished
+2025/04/05 19:20:35 - atualiza_informacoes - Workflow duration : 0.709 seconds [  0.709" ]
+HopRun exit.
+2025-04-05 19:22:31 - Agendamento cumpre condi√ß√µes para execu√ß√£o: C:/Apache-hop/config/projects/default/atualiza_informacoes.hwf
+2025-04-05 19:22:31 - Processo iniciado (PID: 13780)
+2025-04-05 19:22:31 - [HOP] Executando: C:\Apache-hop\hop-run.bat -j default -r local -f C:\Apache-hop\config\projects\default\atualiza_informacoes.hwf
+2025-04-05 19:22:31 - [HOP] Diret√≥rio: C:\Apache-hop
+===[Environment Settings - hop-run.bat]===================================
+
+Java identified as "C:\Program Files\Java\jre17.0.14\bin\java"
+
+HOP_OPTIONS="-Xmx2048m" -DHOP_AUDIT_FOLDER=.\audit -DHOP_PLATFORM_OS=Windows -DHOP_PLATFORM_RUNTIME=Run -DHOP_AUTO_CREATE_CONFIG=Y --add-opens java.xml/jdk.xml.internal=ALL-UNNAMED --add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.lang.invoke=ALL-UNNAMED --add-opens java.base/java.lang.reflect=ALL-UNNAMED --add-opens java.base/java.io=ALL-UNNAMED --add-opens java.base/java.net=ALL-UNNAMED --add-opens java.base/java.nio=ALL-UNNAMED --add-opens java.base/java.util=ALL-UNNAMED --add-opens java.base/java.util.concurrent=ALL-UNNAMED --add-opens java.base/java.util.concurrent.atomic=ALL-UNNAMED --add-opens java.base/sun.nio.ch=ALL-UNNAMED --add-opens java.base/sun.nio.cs=ALL-UNNAMED --add-opens java.base/sun.security.action=ALL-UNNAMED --add-opens java.base/sun.util.calendar=ALL-UNNAMED --add-opens java.security.jgss/sun.security.krb5=ALL-UNNAMED --add-exports java.base/sun.nio.ch=ALL-UNNAMED
+
+
+Consolidated parameters to pass to HopRun are
+-j default -r local -f C:\Apache-hop\config\projects\default\atualiza_informacoes.hwf
+
+Command to start HopRun will be:
+"C:\Program Files\Java\jre17.0.14\bin\java" -classpath lib\core\*;lib\beam\*;lib\swt\win64\* -Djava.library.path=lib\core;lib\beam "-Xmx2048m" -DHOP_AUDIT_FOLDER=.\audit -DHOP_PLATFORM_OS=Windows -DHOP_PLATFORM_RUNTIME=Run -DHOP_AUTO_CREATE_CONFIG=Y --add-opens java.xml/jdk.xml.internal=ALL-UNNAMED --add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.lang.invoke=ALL-UNNAMED --add-opens java.base/java.lang.reflect=ALL-UNNAMED --add-opens java.base/java.io=ALL-UNNAMED --add-opens java.base/java.net=ALL-UNNAMED --add-opens java.base/java.nio=ALL-UNNAMED --add-opens java.base/java.util=ALL-UNNAMED --add-opens java.base/java.util.concurrent=ALL-UNNAMED --add-opens java.base/java.util.concurrent.atomic=ALL-UNNAMED --add-opens java.base/sun.nio.ch=ALL-UNNAMED --add-opens java.base/sun.nio.cs=ALL-UNNAMED --add-opens java.base/sun.security.action=ALL-UNNAMED --add-opens java.base/sun.util.calendar=ALL-UNNAMED --add-opens java.security.jgss/sun.security.krb5=ALL-UNNAMED --add-exports java.base/sun.nio.ch=ALL-UNNAMED org.apache.hop.run.HopRun -j default -r local -f C:\Apache-hop\config\projects\default\atualiza_informacoes.hwf
+
+===[Starting HopRun]=========================================================
+2025/04/05 19:22:35 - HopRun - Enabling project 'default'
+2025/04/05 19:22:35 - HopRun - Starting workflow: C:\Apache-hop\config\projects\default\atualiza_informacoes.hwf
+2025/04/05 19:22:36 - atualiza_informacoes - Start of workflow execution
+2025/04/05 19:22:36 - atualiza_informacoes - Starting action [Mail]
+2025/04/05 19:22:36 - atualiza_informacoes - Starting action [Success]
+2025/04/05 19:22:36 - atualiza_informacoes - Finished action [Success] (result=[true])
+2025/04/05 19:22:36 - atualiza_informacoes - Finished action [Mail] (result=[true])
+2025/04/05 19:22:36 - atualiza_informacoes - Workflow execution finished
+2025/04/05 19:22:36 - atualiza_informacoes - Workflow duration : 0.684 seconds [  0.684" ]
+HopRun exit.
+2025-04-05 19:24:32 - Agendamento cumpre condi√ß√µes para execu√ß√£o: C:/Apache-hop/config/projects/default/atualiza_informacoes.hwf
+2025-04-05 19:24:32 - Processo iniciado (PID: 880)
+2025-04-05 19:24:32 - [HOP] Executando: C:\Apache-hop\hop-run.bat -j default -r local -f C:\Apache-hop\config\projects\default\atualiza_informacoes.hwf
+2025-04-05 19:24:32 - [HOP] Diret√≥rio: C:\Apache-hop
+===[Environment Settings - hop-run.bat]===================================
+
+Java identified as "C:\Program Files\Java\jre17.0.14\bin\java"
+
+HOP_OPTIONS="-Xmx2048m" -DHOP_AUDIT_FOLDER=.\audit -DHOP_PLATFORM_OS=Windows -DHOP_PLATFORM_RUNTIME=Run -DHOP_AUTO_CREATE_CONFIG=Y --add-opens java.xml/jdk.xml.internal=ALL-UNNAMED --add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.lang.invoke=ALL-UNNAMED --add-opens java.base/java.lang.reflect=ALL-UNNAMED --add-opens java.base/java.io=ALL-UNNAMED --add-opens java.base/java.net=ALL-UNNAMED --add-opens java.base/java.nio=ALL-UNNAMED --add-opens java.base/java.util=ALL-UNNAMED --add-opens java.base/java.util.concurrent=ALL-UNNAMED --add-opens java.base/java.util.concurrent.atomic=ALL-UNNAMED --add-opens java.base/sun.nio.ch=ALL-UNNAMED --add-opens java.base/sun.nio.cs=ALL-UNNAMED --add-opens java.base/sun.security.action=ALL-UNNAMED --add-opens java.base/sun.util.calendar=ALL-UNNAMED --add-opens java.security.jgss/sun.security.krb5=ALL-UNNAMED --add-exports java.base/sun.nio.ch=ALL-UNNAMED
+
+
+Consolidated parameters to pass to HopRun are
+-j default -r local -f C:\Apache-hop\config\projects\default\atualiza_informacoes.hwf
+
+Command to start HopRun will be:
+"C:\Program Files\Java\jre17.0.14\bin\java" -classpath lib\core\*;lib\beam\*;lib\swt\win64\* -Djava.library.path=lib\core;lib\beam "-Xmx2048m" -DHOP_AUDIT_FOLDER=.\audit -DHOP_PLATFORM_OS=Windows -DHOP_PLATFORM_RUNTIME=Run -DHOP_AUTO_CREATE_CONFIG=Y --add-opens java.xml/jdk.xml.internal=ALL-UNNAMED --add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.lang.invoke=ALL-UNNAMED --add-opens java.base/java.lang.reflect=ALL-UNNAMED --add-opens java.base/java.io=ALL-UNNAMED --add-opens java.base/java.net=ALL-UNNAMED --add-opens java.base/java.nio=ALL-UNNAMED --add-opens java.base/java.util=ALL-UNNAMED --add-opens java.base/java.util.concurrent=ALL-UNNAMED --add-opens java.base/java.util.concurrent.atomic=ALL-UNNAMED --add-opens java.base/sun.nio.ch=ALL-UNNAMED --add-opens java.base/sun.nio.cs=ALL-UNNAMED --add-opens java.base/sun.security.action=ALL-UNNAMED --add-opens java.base/sun.util.calendar=ALL-UNNAMED --add-opens java.security.jgss/sun.security.krb5=ALL-UNNAMED --add-exports java.base/sun.nio.ch=ALL-UNNAMED org.apache.hop.run.HopRun -j default -r local -f C:\Apache-hop\config\projects\default\atualiza_informacoes.hwf
+
+===[Starting HopRun]=========================================================
+2025/04/05 19:24:36 - HopRun - Enabling project 'default'
+2025/04/05 19:24:36 - HopRun - Starting workflow: C:\Apache-hop\config\projects\default\atualiza_informacoes.hwf
+2025/04/05 19:24:36 - atualiza_informacoes - Start of workflow execution
+2025/04/05 19:24:37 - atualiza_informacoes - Starting action [Mail]
+2025/04/05 19:24:37 - atualiza_informacoes - Starting action [Success]
+2025/04/05 19:24:37 - atualiza_informacoes - Finished action [Success] (result=[true])
+2025/04/05 19:24:37 - atualiza_informacoes - Finished action [Mail] (result=[true])
+2025/04/05 19:24:37 - atualiza_informacoes - Workflow execution finished
+2025/04/05 19:24:37 - atualiza_informacoes - Workflow duration : 0.648 seconds [  0.648" ]
+HopRun exit.
+2025-04-05 20:32:51 - Recebido comando para parar o servi√ßo
+2025-04-05 20:32:51 - Loop principal finalizado
+2025-04-05 21:03:16 - Verificando ambiente...
+2025-04-05 21:03:16 - Diret√≥rio do servi√ßo: C:\AgendadorWorkflows
+2025-04-05 21:03:16 - Python: 3.8.0 (tags/v3.8.0:fa919fd, Oct 14 2019, 19:37:50) [MSC v.1916 64 bit (AMD64)]
+2025-04-05 21:03:16 - Servi√ßo iniciado. Vers√£o: 2025-04-05 21:03
+2025-04-05 21:03:16 - Iniciando loop principal de verifica√ß√£o
