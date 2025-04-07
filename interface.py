@@ -22,6 +22,10 @@ from PyQt6.QtGui import QRegularExpressionValidator, QIcon, QPixmap
 import sqlite3
 import sys
 import os
+from executaWorkflow import executar_etl
+import subprocess
+
+
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -210,6 +214,10 @@ class AgendadorGUI(QMainWindow):
         # Layout horizontal para botões Editar e Excluir
         botoes_layout = QHBoxLayout()
         
+        self.btn_executar = QPushButton("Executar agora")
+        self.btn_executar.clicked.connect(self.executa_workflow)
+        botoes_layout.addWidget(self.btn_executar)
+
         self.btn_editar = QPushButton("Editar")
         self.btn_editar.clicked.connect(self.editar_agendamento)
         botoes_layout.addWidget(self.btn_editar)
@@ -518,7 +526,30 @@ class AgendadorGUI(QMainWindow):
         self.limpar_campos()
         self.btn_cancelar.setVisible(False)
         self.btn_salvar.setText("Salvar Agendamento")
-
+    
+    def executa_workflow(self):
+        """Executa workflows ou pipelines selecionados"""
+        linha_selecionada = self.tabela.currentRow()
+        if linha_selecionada == -1:
+            QMessageBox.warning(self, "Seleção", "Por favor, selecione um agendamento que deseja executar.")
+            return
+        ferramenta_etl = self.tabela.item(linha_selecionada, 11).text()
+        projeto = self.tabela.item(linha_selecionada, 2).text()
+        arquivo = self.tabela.item(linha_selecionada, 1).text()
+        local = self.tabela.item(linha_selecionada, 3).text()
+        
+        resposta = QMessageBox.question(
+            self, "Confirmar Exclusão", 
+            f"Tem certeza que deseja executar o agendamento: '{arquivo}'?",
+            QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No
+        )
+        if resposta == QMessageBox.StandardButton.Yes:
+          if ferramenta_etl == 'PENTAHO':
+            subprocess.Popen([sys.executable, 'executaWorkflow.py', arquivo ]) 
+          else:
+            subprocess.Popen([sys.executable, 'executaWorkflow.py', arquivo , projeto , local])                
+          QMessageBox.information(self, "Sucesso", "Agendamento enviado para execução, acompanhe no monitoramento!")
+          
     def excluir_agendamento(self):
         """Exclui um agendamento selecionado"""
         linha_selecionada = self.tabela.currentRow()
@@ -528,10 +559,11 @@ class AgendadorGUI(QMainWindow):
 
         id_agendamento = int(self.tabela.item(linha_selecionada, 0).text())
         projeto = self.tabela.item(linha_selecionada, 2).text()
+        arquivo = self.tabela.item(linha_selecionada, 1).text()
 
         resposta = QMessageBox.question(
             self, "Confirmar Exclusão", 
-            f"Tem certeza que deseja excluir o agendamento do projeto '{projeto}'?",
+            f"Tem certeza que deseja excluir o agendamento do workflow: '{arquivo}'?",
             QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No
         )
 
