@@ -1,4 +1,4 @@
-# PyFlowT3
+# <img src="pyflowt3.png" alt="Logo PyFlowT3" width="200">
 
 **PyFlowT3** é um agendador de workflows desenvolvido em Python para execução de workflows e pipelines do **Pentaho** e **Apache Hop**.  
 Ele permite o agendamento, execução e monitoramento de workflows e pipelines de forma prática com interface gráfica e instalação das execuções nos serviços no Windows.
@@ -88,5 +88,5 @@ Em caso de dúvidas ou problemas, entre em contato com o desenvolvedor ou abra u
 
 ## PyflowT3
 
-![Pyflow](pyflowt3.png)
+<img src="pyflowt3.gif" alt="Logo PyFlowT3" width="800">
 
