@@ -1,7 +1,7 @@
 # PyFlowT3
 
-**PyFlowT3** é um agendador de workflows desenvolvido em Python para execução de fluxos do **Pentaho** e **Apache Hop**.  
-Ele permite o agendamento, execução e monitoramento de workflows e pipelines de forma prática com interface gráfica e suporte a serviços no Windows.
+**PyFlowT3** é um agendador de workflows desenvolvido em Python para execução de workflows e pipelines do **Pentaho** e **Apache Hop**.  
+Ele permite o agendamento, execução e monitoramento de workflows e pipelines de forma prática com interface gráfica e instalação das execuções nos serviços no Windows.
 
 ---
 
@@ -55,21 +55,21 @@ pip install PyQt6 pywin32 python-dotenv
 ## 🚀 Iniciar o Agendador
 Você pode iniciar o agendador de duas formas:
 
-* Executando o arquivo iniciaAgendador.bat
-* Criando um atalho chamado "Agendador Workflows PyFlowT3" na área de trabalho apontando para esse .bat
+* Executando o arquivo **iniciaAgendador.bat**
+* Criando um atalho chamado **"Agendador Workflows PyFlowT3"** na área de trabalho apontando para esse .bat
 (O ícone está na pasta do projeto)
 
 Nesta tela você poderá:
-    * Adicionar novos workflows ou pipelines
-    * Editar agendas existentes
-    * Forçar execuções manuais
+ * Adicionar novos workflows ou pipelines
+ * Editar agendas existentes
+ * Forçar execuções manuais
 
 ## 📊 Monitoramento
 
 Para monitorar as execuções:
 
-* Execute o arquivo iniciaMonitor.bat
-* Ou crie um atalho chamado "Monitoramento PyFlowT3" na área de trabalho
+* Execute o arquivo **IniciaMonitor.bat**
+* Ou crie um atalho chamado **"Monitoramento PyFlowT3"** na área de trabalho
 
 Na tela de monitoramento você verá:
 
@@ -79,5 +79,10 @@ Na tela de monitoramento você verá:
 
 ## 📁 Logs
 
-* Os logs são salvos na pasta logs, com um arquivo por dia
-* Verifique as permissões de escrita nessa pasta para garantir o funcionamento adequado
+* Os logs são salvos na pasta **logs**, com um arquivo por dia
+* Verifique as **permissões de escrita** nessa pasta para garantir o funcionamento adequado
+
+## 💬 Suporte
+
+Em caso de dúvidas ou problemas, entre em contato com o desenvolvedor ou abra uma issue no repositório.
+
