@@ -539,7 +539,7 @@ class AgendadorGUI(QMainWindow):
         local = self.tabela.item(linha_selecionada, 3).text()
         
         resposta = QMessageBox.question(
-            self, "Confirmar Exclusão", 
+            self, "Confirmar Execução", 
             f"Tem certeza que deseja executar o agendamento: '{arquivo}'?",
             QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No
         )
