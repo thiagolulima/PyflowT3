@@ -30,7 +30,7 @@ pip install PyQt6 pywin32 python-dotenv
 
 python-dotenv: Manipulação de arquivos .env com variáveis de ambiente
 
-## 📝 Configuração do .env
+### 📝 Configuração do .env
 
         # Configurações do banco de dados
         DB_PATH=agendador.db
