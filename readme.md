@@ -28,12 +28,8 @@ Execute no terminal:
 ```bash
 pip install PyQt6 pywin32 python-dotenv
 
-python-dotenv: Manipulação de arquivos .env com variáveis de ambiente
-
 ```
 ## 📝 Configure o arquivo .env
-
- Configuração do .env
 
         # Configurações do banco de dados
         DB_PATH=agendador.db
@@ -45,3 +41,43 @@ python-dotenv: Manipulação de arquivos .env com variáveis de ambiente
         PENTAHO_JOB="C:\data-integration\Kitchen.bat"
         PENTAHO_TRANSFORMATION="C:\data-integration\Pan.bat"    
 
+## 🧩 Instalação do Serviço (Windows)
+
+        python ServicoAgendadorWindows.py install
+
+## Comandos adicionais:
+    ## Remover serviço: 
+        python ServicoAgendadorWindows.py remove
+    ## Parar serviço:
+        python ServicoAgendadorWindows.py stop
+
+
+## 🚀 Iniciar o Agendador
+Você pode iniciar o agendador de duas formas:
+
+* Executando o arquivo iniciaAgendador.bat
+* Criando um atalho chamado "Agendador Workflows PyFlowT3" na área de trabalho apontando para esse .bat
+(O ícone está na pasta do projeto)
+
+Nesta tela você poderá:
+    * Adicionar novos workflows ou pipelines
+    * Editar agendas existentes
+    * Forçar execuções manuais
+
+## 📊 Monitoramento
+
+Para monitorar as execuções:
+
+* Execute o arquivo iniciaMonitor.bat
+* Ou crie um atalho chamado "Monitoramento PyFlowT3" na área de trabalho
+
+Na tela de monitoramento você verá:
+
+* Agendas ativas
+* Logs de execução por dia
+* Pesquisa e atualização de logs
+
+## 📁 Logs
+
+* Os logs são salvos na pasta logs, com um arquivo por dia
+* Verifique as permissões de escrita nessa pasta para garantir o funcionamento adequado
