@@ -16,13 +16,17 @@ import sys
 import sqlite3
 import datetime
 import os
+import subprocess
 from dotenv import load_dotenv
 
 from PyQt6.QtWidgets import (QApplication, QWidget, QVBoxLayout, QLabel, 
                             QPushButton, QTextEdit, QTableWidget, 
-                            QTableWidgetItem, QLineEdit, QDateEdit)
-from PyQt6.QtCore import QDate, Qt   
-from PyQt6.QtGui import QPixmap , QIcon
+                            QTableWidgetItem, QLineEdit, QDateEdit,QCheckBox,QMessageBox)
+from PyQt6.QtCore import QDate, Qt , QTimer
+from PyQt6.QtGui import QPixmap , QIcon ,QTextCursor
+from executaWorkflow import executar_etl
+from PyQt6.QtWidgets import QHBoxLayout
+hbox_atualizacao = QHBoxLayout()
 
 load_dotenv()
 
@@ -53,10 +57,26 @@ class AgendadorGUI(QWidget):
         self.tabela_agendamentos.setSortingEnabled(True)
         layout.addWidget(self.tabela_agendamentos)
         
+        # Botão de executar agora
+        self.btn_executar = QPushButton("Executar agora")
+        self.btn_executar.clicked.connect(self.executa_workflow)
+        hbox_atualizacao.addWidget(self.btn_executar)
+
         # Botão de Atualização
         self.btn_atualizar = QPushButton("Atualizar Dados")
         self.btn_atualizar.clicked.connect(self.atualizar_tudo)
-        layout.addWidget(self.btn_atualizar)
+        hbox_atualizacao.addWidget(self.btn_atualizar)
+
+        self.auto_update_logs = QCheckBox("Atualizar logs a cada 5s")
+        self.auto_update_logs.stateChanged.connect(self.toggle_auto_update_logs)
+        hbox_atualizacao.addWidget(self.auto_update_logs)
+
+        layout.addLayout(hbox_atualizacao)
+
+        # Timer para atualização automática
+        self.log_timer = QTimer()
+        self.log_timer.setInterval(5000)  # 5000ms = 5 segundos
+        self.log_timer.timeout.connect(self.carregar_logs)
         
         # Seção de Logs
         self.label_logs = QLabel("Logs do Dia:")
@@ -87,6 +107,11 @@ class AgendadorGUI(QWidget):
         self.setLayout(layout)
         self.atualizar_tudo()
 
+    def toggle_auto_update_logs(self, state):
+        if state == Qt.CheckState.Checked.value:
+            self.log_timer.start()
+        else:
+            self.log_timer.stop()
     def carregar_logo(self):
         """Carrega a logo da aplicação"""
         try:
@@ -126,7 +151,7 @@ class AgendadorGUI(QWidget):
             
             # Consulta mais segura com parâmetros
             cursor.execute("""
-                SELECT arquivo, horario, intervalo, dias_semana, dias_mes, hora_inicio, hora_fim 
+                SELECT id, arquivo, projeto, local_run, ultima_execucao,duracao_execucao,horario, intervalo, dias_semana, dias_mes, hora_inicio, hora_fim,ferramenta_etl 
                 FROM agendamentos where Status = 'Ativo'
                 ORDER BY horario
             """)
@@ -140,9 +165,9 @@ class AgendadorGUI(QWidget):
             
             # Configuração da tabela
             self.tabela_agendamentos.setRowCount(len(filtrados))
-            self.tabela_agendamentos.setColumnCount(7)
+            self.tabela_agendamentos.setColumnCount(13)
             self.tabela_agendamentos.setHorizontalHeaderLabels(
-                ["Arquivo", "Horário", "Intervalo", "Dias Semana", "Dias Mês", "Hora Início", "Hora Fim"])
+                ["ID","Arquivo", "Projeto" , "Local_run", "Última Execução","Duração","Horário", "Intervalo", "Dias Semana", "Dias Mês", "Hora Início", "Hora Fim","Execução"])
             
             # Preenchimento dos dados
             for i, row in enumerate(filtrados):
@@ -157,31 +182,56 @@ class AgendadorGUI(QWidget):
         except Exception as e:
             self.label_agendamentos.setText(f"Erro ao carregar agendamentos: {str(e)}")
     
-    def carregar_logs(self):
+    def carregar_logs(self): 
         try:
             data_selecionada = self.data_log.date().toString("ddMMyyyy")
             log_path = f"logs/agendador{data_selecionada}.log"
             
-            # Verificar se o arquivo existe
             if not os.path.exists(log_path):
-                self.texto_logs.setText(f"Arquivo de log não encontrado para {data_selecionada}")
+                self.texto_logs.setPlainText(f"Arquivo de log não encontrado para {data_selecionada}")
                 return
             
-            # Ler com o mesmo encoding usado na gravação
             with open(log_path, "r", encoding="utf-8", errors="replace") as file:
                 logs = file.readlines()
             
-            # Filtrar por termo de pesquisa
             termo_pesquisa = self.pesquisa_logs.text().strip().lower()
             logs_filtrados = [linha for linha in logs if termo_pesquisa in linha.lower()]
             
-            # Exibir resultados
-            self.texto_logs.setText("".join(logs_filtrados))
+            self.texto_logs.setPlainText("".join(logs_filtrados))
             
+            # Rolar para o final
+            self.texto_logs.moveCursor(QTextCursor.MoveOperation.End)
+
         except PermissionError:
-            self.texto_logs.setText(f"Sem permissão para ler o arquivo de log")
+            self.texto_logs.setPlainText("Sem permissão para ler o arquivo de log")
         except Exception as e:
-            self.texto_logs.setText(f"Erro ao carregar logs: {str(e)}")
+            self.texto_logs.setPlainText(f"Erro ao carregar logs: {str(e)}")
+
+    def executa_workflow(self):
+            """Executa workflows ou pipelines selecionados"""
+            linha_selecionada = self.tabela_agendamentos.currentRow()
+            if linha_selecionada == -1:
+                QMessageBox.warning(self, "Seleção", "Por favor, selecione um agendamento que deseja executar.")
+                return
+            ferramenta_etl = self.tabela_agendamentos.item(linha_selecionada, 12).text()
+            projeto = self.tabela_agendamentos.item(linha_selecionada, 2).text()
+            arquivo = self.tabela_agendamentos.item(linha_selecionada, 1).text()
+            local = self.tabela_agendamentos.item(linha_selecionada, 3).text()
+            id = self.tabela_agendamentos.item(linha_selecionada, 0).text()
+            
+            resposta = QMessageBox.question(
+                self, "Confirmar Execução", 
+                f"Tem certeza que deseja executar o agendamento: '{arquivo}'?",
+                QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No
+            )
+            if resposta == QMessageBox.StandardButton.Yes:
+                if ferramenta_etl == 'PENTAHO':
+                    subprocess.Popen([sys.executable, 'executaWorkflow.py', id, arquivo ]) 
+                elif ferramenta_etl == 'APACHE_HOP':
+                    subprocess.Popen([sys.executable, 'executaWorkflow.py', id, arquivo , projeto , local])     
+                else:
+                    subprocess.Popen([sys.executable, 'executaWorkflow.py',id, arquivo])             
+                #QMessageBox.information(self, "Sucesso", "Agendamento enviado para execução, acompanhe no monitoramento!")
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

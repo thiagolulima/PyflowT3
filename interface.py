@@ -75,18 +75,23 @@ class AgendadorGUI(QMainWindow):
         self.layout_grid.addWidget(self.btn_selecionar, 0, 2)
 
         # Linha 2: Arquivo + Input + Botão Selecionar
-        self.layout_grid.addWidget(QLabel("Ferramenta ETL:*"), 1, 0)
+        self.layout_grid.addWidget(QLabel("Execução:*"), 1, 0)
         self.entry_etl = QComboBox()
-        self.entry_etl.addItems(["APACHE_HOP", "PENTAHO"])
+        self.entry_etl.addItems(["APACHE_HOP", "PENTAHO", "TERMINAL"])
         self.layout_grid.addWidget(self.entry_etl, 1, 1)
 
+        # Conecta a função que atualiza a visibilidade
+        self.entry_etl.currentTextChanged.connect(self.atualizar_visibilidade_campos_hop)
+
         # Linha 3: Projeto
-        self.layout_grid.addWidget(QLabel("Projeto HOP:*"), 2, 0)
+        self.label_projeto = QLabel("Projeto HOP:*")
+        self.layout_grid.addWidget(self.label_projeto, 2, 0)
         self.entry_projeto = QLineEdit()
         self.layout_grid.addWidget(self.entry_projeto, 2, 1, 1, 2)
 
         # Linha 4: Local RUN HOP
-        self.layout_grid.addWidget(QLabel("Local RUN HOP:*"), 3, 0)
+        self.label_local = QLabel("Local RUN HOP:*")
+        self.layout_grid.addWidget(self.label_local, 3, 0)
         self.entry_local = QLineEdit()
         self.layout_grid.addWidget(self.entry_local, 3, 1, 1, 2)
 
@@ -175,7 +180,7 @@ class AgendadorGUI(QMainWindow):
         self.tabela.setHorizontalHeaderLabels([
             "ID", "Arquivo", "Projeto", "Local RUN HOP", "Horário", 
             "Intervalo", "Dias Semana", "Dias Mês", "Hora Início", 
-            "Hora Fim", "Status", "ETL"
+            "Hora Fim", "Status", "Execução"
         ])
         
         # Configurações de seleção (PyQt6)
@@ -200,7 +205,7 @@ class AgendadorGUI(QMainWindow):
         header.setSectionResizeMode(11, ResizeMode.ResizeToContents)  # ETL
         
         # Larguras mínimas recomendadas
-        self.tabela.setColumnWidth(1, 200)  # Arquivo
+        self.tabela.setColumnWidth(1, 265)  # Arquivo
         self.tabela.setColumnWidth(2, 150)  # Projeto
         self.tabela.setColumnWidth(3, 200)  # Local RUN HOP
         
@@ -329,9 +334,14 @@ class AgendadorGUI(QMainWindow):
                 SELECT id, arquivo, projeto, local_run, horario, intervalo, 
                        dias_semana, dias_mes, hora_inicio, hora_fim, status,ferramenta_etl
                 FROM agendamentos 
-                WHERE projeto LIKE ? OR arquivo LIKE ? OR local_run LIKE ?
+                WHERE projeto LIKE ? OR arquivo LIKE ? OR local_run LIKE ? OR horario LIKE ? 
+                      OR intervalo LIKE ? OR dias_semana LIKE ? OR dias_mes LIKE ? 
+                      OR hora_inicio LIKE ? OR hora_fim LIKE ? OR status LIKE ? OR ferramenta_etl LIKE ? 
             """
-            cursor.execute(query, (f'%{filtro}%', f'%{filtro}%', f'%{filtro}%'))
+            cursor.execute(query, (f'%{filtro}%', f'%{filtro}%',f'%{filtro}%' , f'%{filtro}%',
+                                   f'%{filtro}%', f'%{filtro}%',f'%{filtro}%' , f'%{filtro}%' ,
+                                   f'%{filtro}%', f'%{filtro}%',f'%{filtro}%'                    
+                                   ))
         else:
             query = """
                 SELECT id, arquivo, projeto, local_run, horario, intervalo, 
@@ -363,7 +373,7 @@ class AgendadorGUI(QMainWindow):
 
     def selecionar_arquivo(self):
         """Abre um diálogo para selecionar um arquivo"""
-        arquivo, _ = QFileDialog.getOpenFileName(self, "Selecionar Arquivo", "", "Workflows (*.hwf *.hpl *.ktr *.kjb );;Todos os arquivos (*.*)")
+        arquivo, _ = QFileDialog.getOpenFileName(self, "Selecionar Arquivo", "", "Workflows (*.hwf *.hpl *.ktr *.kjb *.bat *.ps1);;Todos os arquivos (*.*)")
         if arquivo:
             self.entry_arquivo.setText(arquivo)
 
@@ -384,10 +394,10 @@ class AgendadorGUI(QMainWindow):
 
     def validar_campos(self):
         """Valida os campos obrigatórios e formatos"""
-        if self.entry_etl.currentText() == 'PENTAHO':
+        if self.entry_etl.currentText() in ('PENTAHO', 'TERMINAL'):
             campos_obrigatorios = {
-            "Arquivo": self.entry_arquivo.text().strip()
-        }
+                "Arquivo": self.entry_arquivo.text().strip()
+            }
         else:
             campos_obrigatorios = {
                 "Arquivo": self.entry_arquivo.text().strip(),
@@ -424,6 +434,9 @@ class AgendadorGUI(QMainWindow):
         if self.entry_etl.currentText() == 'PENTAHO':
             projeto = 'PDI'
             local =   'PDI'
+        elif self.entry_etl.currentText() == 'TERMINAL':
+            projeto = 'CMD'
+            local =   'CMD'
         else:
             projeto = self.entry_projeto.text()
             local = self.entry_local.text()
@@ -537,6 +550,7 @@ class AgendadorGUI(QMainWindow):
         projeto = self.tabela.item(linha_selecionada, 2).text()
         arquivo = self.tabela.item(linha_selecionada, 1).text()
         local = self.tabela.item(linha_selecionada, 3).text()
+        id = self.tabela.item(linha_selecionada, 0).text()
         
         resposta = QMessageBox.question(
             self, "Confirmar Execução", 
@@ -545,9 +559,11 @@ class AgendadorGUI(QMainWindow):
         )
         if resposta == QMessageBox.StandardButton.Yes:
           if ferramenta_etl == 'PENTAHO':
-            subprocess.Popen([sys.executable, 'executaWorkflow.py', arquivo ]) 
+            subprocess.Popen([sys.executable, 'executaWorkflow.py', id, arquivo ]) 
+          elif ferramenta_etl == 'APACHE_HOP':
+            subprocess.Popen([sys.executable, 'executaWorkflow.py', id, arquivo , projeto , local])     
           else:
-            subprocess.Popen([sys.executable, 'executaWorkflow.py', arquivo , projeto , local])                
+            subprocess.Popen([sys.executable, 'executaWorkflow.py',id, arquivo])             
           QMessageBox.information(self, "Sucesso", "Agendamento enviado para execução, acompanhe no monitoramento!")
           
     def excluir_agendamento(self):
@@ -558,7 +574,6 @@ class AgendadorGUI(QMainWindow):
             return
 
         id_agendamento = int(self.tabela.item(linha_selecionada, 0).text())
-        projeto = self.tabela.item(linha_selecionada, 2).text()
         arquivo = self.tabela.item(linha_selecionada, 1).text()
 
         resposta = QMessageBox.question(
@@ -577,6 +592,12 @@ class AgendadorGUI(QMainWindow):
             QMessageBox.information(self, "Sucesso", "Agendamento excluído com sucesso!")
             self.listar_agendamentos()
 
+    def atualizar_visibilidade_campos_hop(self, texto_selecionado):
+        visivel = texto_selecionado == "APACHE_HOP"
+        self.label_projeto.setVisible(visivel)
+        self.entry_projeto.setVisible(visivel)
+        self.label_local.setVisible(visivel)
+        self.entry_local.setVisible(visivel)
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     window = AgendadorGUI()

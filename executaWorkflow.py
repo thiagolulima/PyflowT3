@@ -7,12 +7,17 @@ import sys
 import platform
 import time
 import datetime
+import sqlite3
+from notifications.notifier import notificar
 from dotenv import load_dotenv
 
 load_dotenv()
 # Configuração do diretório de trabalho
 SERVICE_DIR = os.path.dirname(os.path.abspath(__file__))
 os.chdir(SERVICE_DIR)
+
+#banco de dados
+DB_PATH = os.path.join(SERVICE_DIR, "agendador.db")
 
 # Configuração avançada de logging
 # Gera o nome do arquivo de log com a data atual
@@ -63,33 +68,46 @@ def determinar_sistema_operacional():
 
 config_os = determinar_sistema_operacional()
 
-def executar_etl(arquivo_path, projeto_hop=None, local_run_hop=None, timeout=1800):
+def executar_etl(id,arquivo_path, projeto_hop=None, local_run_hop=None, timeout=1800):
     """
-    Executa jobs/transformações do Pentaho PDI ou Apache Hop
-    
+    Executa jobs/transformações do Pentaho PDI, Apache Hop ou comandos genéricos de terminal
+
     Args:
-        arquivo_path (str): Caminho completo para o arquivo (.kjb, .hwf, .hpl)
+        arquivo_path (str): Caminho completo para o arquivo (.kjb, .ktr, .hwf, .hpl, .bat, .sh, etc)
         projeto_hop (str, optional): Nome do projeto Hop (apenas para Apache Hop)
-        local_run_hop (str, optional): Caminho do local_run (apenas para Apache Hop)
+        local_run_hop (str, optional): Nome do local_run (apenas para Apache Hop)
         timeout (int): Tempo máximo de execução em segundos
-    
+
     Returns:
         bool: True se executou com sucesso, False caso contrário
     """
     try:
         arquivo_path = os.path.abspath(os.path.normpath(arquivo_path))
         ext = os.path.splitext(arquivo_path)[1].lower()
-        
+
         if not os.path.exists(arquivo_path):
             logger.error(f"Arquivo não encontrado: {arquivo_path}")
+            notificar(f"Arquivo não encontrado: {arquivo_path}")
             return False
 
         logger.info(f"Iniciando execução do arquivo: {arquivo_path}")
 
-        if ext in ('.kjb','.ktr'):
-            return executar_job_pentaho(arquivo_path, timeout)
+        if ext in ('.kjb', '.ktr'):
+            return executar_job_pentaho(id,arquivo_path, timeout)
+
         elif ext in ('.hwf', '.hpl'):
-            return executar_hop(arquivo_path, projeto_hop, local_run_hop, timeout)
+            return executar_hop(id,arquivo_path, projeto_hop, local_run_hop, timeout)
+
+        elif ext in ('.bat', '.cmd', '.sh', '.ps1', '.py', ''):
+            return executar_comando_terminal(
+                id,
+                comando=arquivo_path,
+                cwd=os.path.dirname(arquivo_path),
+                nome_arquivo=arquivo_path,
+                ferramenta="TERMINAL",
+                timeout=timeout
+            )
+
         else:
             logger.error(f"Extensão de arquivo não suportada: {ext}")
             return False
@@ -97,14 +115,31 @@ def executar_etl(arquivo_path, projeto_hop=None, local_run_hop=None, timeout=180
     except Exception as e:
         logger.error(f"Erro na execução: {str(e)}", exc_info=True)
         return False
+    
+def atualizar_execucao_no_banco(id_agendamento, duracao_execucao, ultima_execucao):
+    """Atualiza a duração e data/hora da última execução do agendamento"""
+    try:
+        conn = sqlite3.connect(DB_PATH)
+        cursor = conn.cursor()
 
-def executar_job_pentaho(job_path, timeout):
-    """Executa um job do Pentaho PDI"""
+        cursor.execute("""
+            UPDATE agendamentos
+            SET duracao_execucao = ?, ultima_execucao = ?
+            WHERE id = ?
+        """, (duracao_execucao, ultima_execucao, id_agendamento))
+
+        conn.commit()
+        conn.close()
+    except Exception as e:
+        logger.error(f"[ERRO] Falha ao atualizar execução no banco: {str(e)}")
+
+def executar_job_pentaho(id, job_path, timeout):
+    """Executa um job ou transformação do Pentaho PDI e monitora erros"""
     try:
         kitchen_path = config_os['pentaho_kitchen']
         pan_path = config_os['pentaho_pan']
         pentaho_dir = os.path.dirname(kitchen_path)
-        
+
         logger.info(f"Executando job Pentaho: {job_path}")
 
         env = os.environ.copy()
@@ -114,54 +149,91 @@ def executar_job_pentaho(job_path, timeout):
             'KETTLE_JNDI_ROOT': os.path.join(pentaho_dir, 'simple-jndi')
         })
 
-        comando = f'"{kitchen_path}" /file:"{job_path}"'
         arquivo = os.path.abspath(os.path.normpath(job_path))
         extensao = Path(arquivo).suffix.lower()
-        
-        # Definir comando baseado no tipo de arquivo
+
         if extensao == '.ktr':
-            comando = f'{pan_path} /file:"{arquivo}"'
+            comando = f'"{pan_path}" /file:"{arquivo}"'
         else:
-            comando = f'{kitchen_path} /file:"{arquivo}"'
+            comando = f'"{kitchen_path}" /file:"{arquivo}"'
 
         logger.debug(f"Comando Pentaho: {comando}")
+        #notificar(f"Comando Pentaho: {comando}", canais=['telegram'])
 
         startupinfo = None
-        if config_os['shell']:  # Windows
+        if config_os['shell']:
             startupinfo = subprocess.STARTUPINFO()
             startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
 
+        linhas_erro = []
+
+        processo = subprocess.Popen(
+            comando,
+            cwd=pentaho_dir,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
+            stdin=subprocess.PIPE,
+            text=True,
+            encoding='utf-8',
+            errors='replace',
+            env=env,
+            startupinfo=startupinfo,
+            shell=config_os['shell']
+        )
+
+        start_time = time.time()
+
         with open(get_daily_log_path(), 'a', encoding='utf-8') as output_file:
-            processo = subprocess.Popen(
-                comando,
-                cwd=pentaho_dir,
-                stdout=output_file,
-                stderr=subprocess.STDOUT,
-                stdin=subprocess.PIPE,
-                text=True,
-                encoding='utf-8',
-                errors='replace',
-                env=env,
-                startupinfo=startupinfo,
-                shell=config_os['shell']
+            for linha in processo.stdout:
+                output_file.write(linha)
+                output_file.flush()
+
+                if "ERROR" in linha.upper():
+                    linhas_erro.append(linha.strip())
+
+        processo.wait(timeout=timeout)
+
+        end_time = time.time()
+        duracao = round((end_time - start_time) / 60, 2)  # em minutos
+        ultima_execucao = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        atualizar_execucao_no_banco(id, duracao, ultima_execucao)
+
+        if linhas_erro:
+            msg = (
+                f"[Pentaho] ⚠️ Erros detectados na execução do arquivo:\n"
+                f"📄 Arquivo: {os.path.basename(job_path)}\n\n"
+                f"🧾 Erros:\n" + "\n".join(linhas_erro[-5:])  # mostra os últimos 5 erros para evitar overflow
             )
+            logger.error(msg)
+            notificar(msg)
 
-            return monitorar_processo(processo, timeout)
+        if processo.returncode == 0 and not linhas_erro:
+            logger.info("[Pentaho] Execução concluída com sucesso")
+            return True
+        else:
+            logger.error(f"[Pentaho] Processo finalizado com código {processo.returncode}")
+            return False
 
-    except Exception as e:
-        logger.error(f"Erro na execução do Pentaho: {str(e)}", exc_info=True)
+    except subprocess.TimeoutExpired:
+        msg = "[Pentaho] Timeout excedido - processo finalizado à força"
+        logger.error(msg)
+        notificar(msg)
         return False
 
-def executar_hop(arquivo_hop, projeto, local_run, timeout):
-    """Executa um job/transformação do Apache Hop"""
+    except Exception as e:
+        logger.error(f"Erro inesperado na execução do Pentaho: {str(e)}", exc_info=True)
+        notificar(f"Erro inesperado na execução do Pentaho: {str(e)}")
+        return False
+
+def executar_hop(id, arquivo_hop, projeto, local_run, timeout):
+    """Executa um job/transformação do Apache Hop e monitora erros"""
     try:
         hop_run_path = config_os['hop_run']
         hop_dir = os.path.dirname(hop_run_path)
-        
+
         logger.info(f"Executando arquivo Hop: {arquivo_hop}")
         logger.info(f"Projeto: {projeto}, Local Run: {local_run}")
 
-        # Construir comando Hop
         comando = [
             hop_run_path,
             '--file', arquivo_hop,
@@ -172,23 +244,128 @@ def executar_hop(arquivo_hop, projeto, local_run, timeout):
 
         logger.debug(f"Comando Hop: {' '.join(comando)}")
 
-        with open(get_daily_log_path(), 'a', encoding='utf-8') as output_file:
-            processo = subprocess.Popen(
-                comando,
-                cwd=hop_dir,
-                stdout=output_file,
-                stderr=subprocess.STDOUT,
-                stdin=subprocess.PIPE,
-                text=True,
-                encoding='utf-8',
-                errors='replace',
-                shell=config_os['shell']
-            )
+        erro_detectado = False
+        linha_erro = ""
 
-            return monitorar_processo(processo, timeout)
+        processo = subprocess.Popen(
+            comando,
+            cwd=hop_dir,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
+            stdin=subprocess.PIPE,
+            text=True,
+            encoding='utf-8',
+            errors='replace',
+            shell=config_os['shell']
+        )
+
+        start_time = time.time()
+
+        with open(get_daily_log_path(), 'a', encoding='utf-8') as output_file:
+            for linha in processo.stdout:
+                output_file.write(linha)
+                output_file.flush()
+
+                if "ERROR" in linha.upper():
+                    erro_detectado = True
+                    linha_erro = linha.strip()
+
+        processo.wait(timeout=timeout)
+
+        end_time = time.time()
+        duracao = round((end_time - start_time) / 60, 2)  # em minutos
+        ultima_execucao = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        atualizar_execucao_no_banco(id, duracao, ultima_execucao)
+
+        if erro_detectado:
+            msg = (
+                f"[HOP] Erro detectado na execução do arquivo:\n"
+                f"📄 Arquivo: {os.path.basename(arquivo_hop)}\n"
+                f"🧾 Linha: {linha_erro}"
+            )
+            logger.error(msg)
+            notificar(msg)
+
+        if processo.returncode == 0 and not erro_detectado:
+            logger.info("[HOP] Execução concluída com sucesso")
+            return True
+        else:
+            logger.error(f"[HOP] Processo finalizado com código {processo.returncode}")
+            return False
+
+    except subprocess.TimeoutExpired:
+        msg = "[HOP] Timeout excedido - processo finalizado à força"
+        logger.error(msg)
+        notificar(msg)
+        return False
 
     except Exception as e:
-        logger.error(f"Erro na execução do Hop: {str(e)}", exc_info=True)
+        logger.error(f"Erro inesperado na execução do Hop: {str(e)}", exc_info=True)
+        notificar(f"Erro inesperado na execução do Hop: {str(e)}")
+        return False
+    
+def executar_comando_terminal(id,comando, cwd, nome_arquivo, ferramenta="TERMINAL", timeout=1800):
+    """Executa um comando genérico no terminal, monitora o log e envia notificações em caso de erro"""
+    try:
+        logger.info(f"[{ferramenta}] Executando comando: {' '.join(comando)}")
+        erro_detectado = False
+        linhas_erro = []
+
+        processo = subprocess.Popen(
+            comando,
+            cwd=cwd,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
+            stdin=subprocess.PIPE,
+            text=True,
+            encoding='utf-8',
+            errors='replace',
+            shell=config_os.get('shell', False)
+        )
+
+        start_time = time.time()
+
+        with open(get_daily_log_path(), 'a', encoding='utf-8') as output_file:
+            for linha in processo.stdout:
+                output_file.write(linha)
+                output_file.flush()
+
+                if any(p in linha.upper() for p in ["ERROR", "EXCEPTION", "FATAL"]):
+                    erro_detectado = True
+                    linhas_erro.append(linha.strip())
+
+        processo.wait(timeout=timeout)
+
+        end_time = time.time()
+        duracao = round((end_time - start_time) / 60, 2)  # em minutos
+        ultima_execucao = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        atualizar_execucao_no_banco(id, duracao, ultima_execucao)
+
+        if erro_detectado:
+            msg = (
+                f"[{ferramenta}] Erro detectado na execução do arquivo:\n"
+                f"📄 Arquivo: {os.path.basename(nome_arquivo)}\n"
+                f"🧾 Erros:\n" + '\n'.join(linhas_erro)
+            )
+            logger.error(msg)
+            notificar(msg)
+
+        if processo.returncode == 0 and not erro_detectado:
+            logger.info(f"[{ferramenta}] Execução concluída com sucesso")
+            return True
+        else:
+            logger.error(f"[{ferramenta}] Processo finalizado com código {processo.returncode}")
+            return False
+
+    except subprocess.TimeoutExpired:
+        msg = f"[{ferramenta}] Timeout excedido - processo finalizado à força"
+        logger.error(msg)
+        notificar(msg)
+        return False
+
+    except Exception as e:
+        logger.error(f"[{ferramenta}] Erro inesperado: {str(e)}", exc_info=True)
+        notificar(f"[{ferramenta}] Erro inesperado: {str(e)}")
         return False
 
 def monitorar_processo(processo, timeout):
@@ -203,6 +380,7 @@ def monitorar_processo(processo, timeout):
 
             if (time.time() - start_time) > timeout:
                 logger.error(f"Timeout de {timeout} segundos excedido")
+                notificar(f"Timeout de {timeout} segundos excedido")
                 processo.kill()
                 return False
 
@@ -214,6 +392,7 @@ def monitorar_processo(processo, timeout):
         return False
     except Exception as e:
         logger.error(f"Erro no monitoramento: {str(e)}")
+        notificar(f"Erro no monitoramento: {str(e)}")
         processo.kill()
         return False
 
@@ -224,15 +403,17 @@ if __name__ == '__main__':
     # Para Pentaho: python script.py caminho/arquivo.kjb
     # Para Hop: python script.py caminho/arquivo.hwf NomeProjeto /caminho/local_run
     
-    if len(sys.argv) < 2:
-        logger.error("Uso: python script.py <arquivo> [projeto_hop] [local_run_hop]")
+    if len(sys.argv) < 3:
+        logger.error("Uso: python script.py <id> <arquivo> [projeto_hop] [local_run_hop]")
         sys.exit(1)
-    
-    arquivo = sys.argv[1]
-    projeto = sys.argv[2] if len(sys.argv) > 2 else None
-    local_run = sys.argv[3] if len(sys.argv) > 3 else None
+
+    id_execucao = sys.argv[1]
+    arquivo = sys.argv[2]
+    projeto = sys.argv[3] if len(sys.argv) > 3 else None
+    local_run = sys.argv[4] if len(sys.argv) > 4 else None
     
     success = executar_etl(
+        id_execucao,
         arquivo_path=arquivo,
         projeto_hop=projeto,
         local_run_hop=local_run,
@@ -244,4 +425,5 @@ if __name__ == '__main__':
         sys.exit(0)
     else:
         logger.error("Falha na execução")
+        #notificar("Falha na execução")
         sys.exit(1)
