@@ -1,7 +1,10 @@
 # <img src="pyflowt3.png" alt="Logo PyFlowT3" width="200">
 
-**PyFlowT3** é um agendador de workflows desenvolvido em Python para execução de workflows e pipelines do **Pentaho** e **Apache Hop**.  
-Ele permite o agendamento, execução e monitoramento de workflows e pipelines de forma prática com interface gráfica e instalação das execuções nos serviços no Windows.
+# PyFlowT3
+
+**PyFlowT3** é um agendador de workflows desenvolvido em **Python** para execução, agendamento e monitoramento de **workflows e pipelines** do **Pentaho** e **Apache Hop**.
+
+Com uma interface gráfica intuitiva, o PyFlowT3 facilita a automação de processos ETL, além de permitir a instalação como serviço no **Windows**. Agora também é possível executar workflows diretamente via **terminal**, ideal para integrações e scripts automatizados.
 
 ---
 
@@ -18,7 +21,7 @@ Consulte o arquivo [LICENSE](LICENSE) para mais detalhes.
 
 ### ✅ Pré-requisitos
 
-- Python 3.8 instalado  
+- Python 3.8 ou superior instalado
 - Python configurado nas variáveis de ambiente do sistema
 
 ### 📦 Instale as dependências
@@ -26,7 +29,7 @@ Consulte o arquivo [LICENSE](LICENSE) para mais detalhes.
 Execute no terminal:
 
 ```bash
-pip install PyQt6 pywin32 python-dotenv
+pip install PyQt6 pywin32 python-dotenv python-telegram-dot
 
 ```
 ## 📝 Configure o arquivo .env
