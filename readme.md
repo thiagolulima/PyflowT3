@@ -19,17 +19,20 @@ Consulte o arquivo [LICENSE](LICENSE) para mais detalhes.
 
 ### ✅ Pré-requisitos
 
-- Python 3.8 ou superior instalado
+- Python 3.9 ou superior instalado
 - Python configurado nas variáveis de ambiente do sistema
 
 ### 📦 Instale as dependências
 
-Execute no terminal:
+Execute no terminal na raiz do projeto:
 
 ```bash
-pip install PyQt6 pywin32 python-dotenv python-telegram-bot
-
+ pip install -r requirements.txt
 ```
+```bash
+ ou execute o arquivo instalaDependencias.bat
+```
+  
 ## 📝 Renomeie o arquivo .env.example para .env
 
         # Configurações do banco de dados
@@ -69,7 +72,7 @@ pip install PyQt6 pywin32 python-dotenv python-telegram-bot
 
         python ServicoAgendadorWindows.py install
 
-## Comandos adicionais, para atualizar pare o serviço, atualize e inicie novamente:
+## Comandos adicionais:
     ## Iniciar serviço:
         python ServicoAgendadorWindows.py start
     ## Reiniciar serviço:

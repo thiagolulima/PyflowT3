@@ -1,5 +1,6 @@
 
 import os
+import asyncio
 from dotenv import load_dotenv
 from .telegram_notify import enviar_telegram
 from .email import enviar_email
