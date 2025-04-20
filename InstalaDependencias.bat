@@ -8,4 +8,4 @@ set "SCRIPT_DIR=%~dp0"
 start "" python -m pip install -r "%SCRIPT_DIR%requirements.txt"
 
 endlocal
-exit
+exit 
