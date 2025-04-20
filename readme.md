@@ -27,7 +27,7 @@ Consulte o arquivo [LICENSE](LICENSE) para mais detalhes.
 Execute no terminal:
 
 ```bash
-pip install PyQt6 pywin32 python-dotenv python-telegram-dot
+pip install PyQt6 pywin32 python-dotenv python-telegram-bot
 
 ```
 ## 📝 Renomeie o arquivo .env.example para .env
