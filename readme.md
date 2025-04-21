@@ -19,7 +19,7 @@ Consulte o arquivo [LICENSE](LICENSE) para mais detalhes.
 
 ### ✅ Pré-requisitos
 
-- Python 3.9 ou superior instalado
+- Python 3.8 ou superior instalado
 - Python configurado nas variáveis de ambiente do sistema
 
 ### 📦 Instale as dependências

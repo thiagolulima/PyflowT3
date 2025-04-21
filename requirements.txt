@@ -5,5 +5,4 @@ pywin32==308
 pywin32-ctypes==0.2.3
 python-dotenv==1.0.1
 python-telegram-bot==21.6
-requests
 httpx==0.27
