@@ -71,6 +71,7 @@ Execute no terminal na raiz do projeto:
 ## 🧩 Instalação do Serviço (Windows) 
 
         python ServicoAgendadorWindows.py install
+- **Atenção**: caso seu python estiver instalado a nivel de usuário, apos instalar o serviço em logon coloque a conta do usuário onde esta instalado.
 
 ## Comandos adicionais:
     ## Iniciar serviço:
