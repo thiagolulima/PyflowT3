@@ -154,6 +154,9 @@ class AgendadorGUI(QWidget):
 
             filtrados = [row for row in agendamentos if termo_pesquisa in " ".join(map(str, row)).lower()]
 
+            # 🔧 Desliga ordenação e limpa a tabela antes de preencher novamente
+            self.tabela_agendamentos.setSortingEnabled(False)
+            self.tabela_agendamentos.clearContents()
             self.tabela_agendamentos.setRowCount(len(filtrados))
             self.tabela_agendamentos.setColumnCount(13)
             self.tabela_agendamentos.setHorizontalHeaderLabels(
@@ -167,9 +170,11 @@ class AgendadorGUI(QWidget):
                     self.tabela_agendamentos.setItem(i, j, item)
 
             self.tabela_agendamentos.resizeColumnsToContents()
+            self.tabela_agendamentos.setSortingEnabled(True)  # 🔄 Reativa a ordenação
 
         except Exception as e:
             self.label_agendamentos.setText(f"Erro ao carregar agendamentos: {str(e)}")
+
 
     def carregar_logs(self):
         self.loading_bar.setText("Carregando logs...")
