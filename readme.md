@@ -24,7 +24,7 @@ Consulte o arquivo [LICENSE](LICENSE) para mais detalhes.
 
 ### 📦 Instale as dependências
 
-Execute no terminal na raiz do projeto:
+Execute no terminal na raiz do projeto como administrador:
 
 ```bash
  pip install -r requirements.txt
