@@ -178,34 +178,40 @@ def executar_pentaho(id, arquivo_kjb, timeout=3600):
         start_time = time.time()
         karaf_initialized = False
         karaf_timeout = 300  # 5 minutos para o Karaf
+        log_path = get_daily_log_path()
 
-        with open(get_daily_log_path(), "a", encoding='utf-8') as log_file:
-            while True:
-                output = processo.stdout.readline()
-                if output == '' and processo.poll() is not None:
-                    break
+        while True:
+            output = processo.stdout.readline()
+            if output == '' and processo.poll() is not None:
+                break
 
-                if output:
+            if output:
+                # Rotaciona o log se o dia mudou
+                novo_log_path = get_daily_log_path()
+                if novo_log_path != log_path:
+                    log_path = novo_log_path
+
+                with open(log_path, "a", encoding='utf-8') as log_file:
                     log_file.write(output)
                     log_file.flush()
 
-                    if "ERROR" in output.upper():
-                        linhas_erro.append(output.strip())
+                if "ERROR" in output.upper():
+                    linhas_erro.append(output.strip())
 
-                    if not karaf_initialized and "OSGI Service Port" in output:
-                        karaf_initialized = True
-                        log_event("[PENTAHO] Karaf inicializado com sucesso")
+                if not karaf_initialized and "OSGI Service Port" in output:
+                    karaf_initialized = True
+                    log_event("[PENTAHO] Karaf inicializado com sucesso")
 
-                    if not karaf_initialized and (time.time() - start_time) > karaf_timeout:
-                        raise subprocess.TimeoutExpired(comando, karaf_timeout)
+                if not karaf_initialized and (time.time() - start_time) > karaf_timeout:
+                    raise subprocess.TimeoutExpired(comando, karaf_timeout)
 
-                    if (time.time() - start_time) > timeout:
-                        raise subprocess.TimeoutExpired(comando, timeout)
+                if (time.time() - start_time) > timeout:
+                    raise subprocess.TimeoutExpired(comando, timeout)
 
         return_code = processo.wait()
 
         end_time = time.time()
-        duracao = round((end_time - start_time) / 60, 2)  # em minutos
+        duracao = round((end_time - start_time) / 60, 2)
         ultima_execucao = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
         atualizar_execucao_no_banco(id, duracao, ultima_execucao)
@@ -214,7 +220,7 @@ def executar_pentaho(id, arquivo_kjb, timeout=3600):
             msg = (
                 f"[Pentaho] ⚠️ Erros detectados na execução do arquivo:\n"
                 f"📄 Arquivo: {os.path.basename(arquivo)}\n\n"
-                f"🧾 Erros:\n" + "\n".join(linhas_erro[-5:])  # últimos 5 erros
+                f"🧾 Erros:\n" + "\n".join(linhas_erro[-5:])
             )
             log_event(msg)
             notificar(msg)
@@ -247,7 +253,7 @@ def executar_pentaho(id, arquivo_kjb, timeout=3600):
         notificar(f"[PyFlowT3] Erro crítico: {str(e)}")
         raise
 
-def executar_hop(id,arquivo, projeto, ambiente, timeout=1800):
+def executar_hop(id, arquivo, projeto, ambiente, timeout=1800):
     """Executa workflows/pipelines do Apache Hop"""
     try:
         arquivo = os.path.abspath(os.path.normpath(arquivo))
@@ -275,22 +281,28 @@ def executar_hop(id,arquivo, projeto, ambiente, timeout=1800):
         )
 
         start_time = time.time()
+        log_path = get_daily_log_path()
 
-        with open(get_daily_log_path(), "a", encoding='utf-8') as log_file:
-            while True:
-                linha = processo.stdout.readline()
-                if linha == '' and processo.poll() is not None:
-                    break
+        while True:
+            linha = processo.stdout.readline()
+            if linha == '' and processo.poll() is not None:
+                break
 
-                if linha:
+            if linha:
+                # Atualiza o caminho do log se o dia tiver mudado
+                novo_log_path = get_daily_log_path()
+                if novo_log_path != log_path:
+                    log_path = novo_log_path
+
+                with open(log_path, "a", encoding='utf-8') as log_file:
                     log_file.write(linha)
                     log_file.flush()
 
-                    if any(p in linha.upper() for p in ['ERROR', 'EXCEPTION', 'FATAL']):
-                        erros_detectados.append(linha.strip())
+                if any(p in linha.upper() for p in ['ERROR', 'EXCEPTION', 'FATAL']):
+                    erros_detectados.append(linha.strip())
 
-                if time.time() - start_time > timeout:
-                    raise subprocess.TimeoutExpired(comando, timeout)
+            if time.time() - start_time > timeout:
+                raise subprocess.TimeoutExpired(comando, timeout)
 
         processo.wait()
 
@@ -329,16 +341,17 @@ def executar_hop(id,arquivo, projeto, ambiente, timeout=1800):
         log_event(msg)
         notificar(f"[PyFlowT3] Erro ao executar o workflow: {str(e)}")
         raise
+
     
-def executar_comando_terminal(id,comando, timeout=1800, descricao="Comando genérico"):
+def executar_comando_terminal(id, comando, timeout=1800, descricao="Comando genérico"):
     """
     Executa um comando ou script no terminal (por exemplo .bat, .cmd, .sh, python, etc.)
-    
+
     Args:
         comando (str): Comando completo a ser executado.
         timeout (int): Tempo máximo de execução em segundos.
         descricao (str): Texto descritivo para logs e notificações.
-    
+
     Returns:
         int: Código de retorno do processo.
     """
@@ -360,27 +373,33 @@ def executar_comando_terminal(id,comando, timeout=1800, descricao="Comando gené
         )
 
         start_time = time.time()
+        log_path = get_daily_log_path()
 
-        with open(get_daily_log_path(), "a", encoding='utf-8') as log_file:
-            while True:
-                linha = processo.stdout.readline()
-                if linha == '' and processo.poll() is not None:
-                    break
+        while True:
+            linha = processo.stdout.readline()
+            if linha == '' and processo.poll() is not None:
+                break
 
-                if linha:
+            if linha:
+                # Rotaciona log se mudou o dia
+                novo_log_path = get_daily_log_path()
+                if novo_log_path != log_path:
+                    log_path = novo_log_path
+
+                with open(log_path, "a", encoding='utf-8') as log_file:
                     log_file.write(linha)
                     log_file.flush()
 
-                    if any(p in linha.upper() for p in ['ERROR', 'EXCEPTION', 'FATAL']):
-                        erros_detectados.append(linha.strip())
+                if any(p in linha.upper() for p in ['ERROR', 'EXCEPTION', 'FATAL']):
+                    erros_detectados.append(linha.strip())
 
-                if time.time() - start_time > timeout:
-                    raise subprocess.TimeoutExpired(comando, timeout)
+            if time.time() - start_time > timeout:
+                raise subprocess.TimeoutExpired(comando, timeout)
 
         processo.wait()
 
         end_time = time.time()
-        duracao = round((end_time - start_time) / 60, 2)  # em minutos
+        duracao = round((end_time - start_time) / 60, 2)
         ultima_execucao = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
         atualizar_execucao_no_banco(id, duracao, ultima_execucao)
