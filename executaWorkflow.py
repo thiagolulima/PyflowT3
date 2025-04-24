@@ -185,7 +185,7 @@ def executar_job_pentaho(id, job_path, timeout):
 
         with open(get_daily_log_path(), 'a', encoding='utf-8') as output_file:
             for linha in processo.stdout:
-                output_file.write(linha)
+                output_file.write(f"[PID {processo.pid}] {linha}")
                 output_file.flush()
 
                 if "ERROR" in linha.upper():
@@ -263,7 +263,7 @@ def executar_hop(id, arquivo_hop, projeto, local_run, timeout):
 
         with open(get_daily_log_path(), 'a', encoding='utf-8') as output_file:
             for linha in processo.stdout:
-                output_file.write(linha)
+                output_file.write(f"[PID {processo.pid}] {linha}")
                 output_file.flush()
 
                 if "ERROR" in linha.upper():
@@ -327,7 +327,7 @@ def executar_comando_terminal(id,comando, cwd, nome_arquivo, ferramenta="TERMINA
 
         with open(get_daily_log_path(), 'a', encoding='utf-8') as output_file:
             for linha in processo.stdout:
-                output_file.write(linha)
+                output_file.write(f"[PID {processo.pid}] {linha}")
                 output_file.flush()
 
                 if any(p in linha.upper() for p in ["ERROR", "EXCEPTION", "FATAL"]):
@@ -351,10 +351,10 @@ def executar_comando_terminal(id,comando, cwd, nome_arquivo, ferramenta="TERMINA
             notificar(msg)
 
         if processo.returncode == 0 and not erro_detectado:
-            logger.info(f"[{ferramenta}] Execução concluída com sucesso")
+            logger.info(f"[PID {processo.pid}][{ferramenta}] Execução concluída com sucesso")
             return True
         else:
-            logger.error(f"[{ferramenta}] Processo finalizado com código {processo.returncode}")
+            logger.error(f"[PID {processo.pid}][{ferramenta}] Processo finalizado com código {processo.returncode}")
             return False
 
     except subprocess.TimeoutExpired:

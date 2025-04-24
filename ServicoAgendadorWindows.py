@@ -192,7 +192,7 @@ def executar_pentaho(id, arquivo_kjb, timeout=3600):
                     log_path = novo_log_path
 
                 with open(log_path, "a", encoding='utf-8') as log_file:
-                    log_file.write(output)
+                    log_file.write(f"[PID {processo.pid}] {output}")
                     log_file.flush()
 
                 if "ERROR" in output.upper():
@@ -295,7 +295,7 @@ def executar_hop(id, arquivo, projeto, ambiente, timeout=1800):
                     log_path = novo_log_path
 
                 with open(log_path, "a", encoding='utf-8') as log_file:
-                    log_file.write(linha)
+                    log_file.write(f"[PID {processo.pid}] {linha}")
                     log_file.flush()
 
                 if any(p in linha.upper() for p in ['ERROR', 'EXCEPTION', 'FATAL']):
@@ -387,7 +387,7 @@ def executar_comando_terminal(id, comando, timeout=1800, descricao="Comando gen√
                     log_path = novo_log_path
 
                 with open(log_path, "a", encoding='utf-8') as log_file:
-                    log_file.write(linha)
+                    log_file.write(f"[PID {processo.pid}] {linha}")
                     log_file.flush()
 
                 if any(p in linha.upper() for p in ['ERROR', 'EXCEPTION', 'FATAL']):
