@@ -6,3 +6,4 @@ pywin32-ctypes
 python-dotenv
 python-telegram-bot
 httpx
+requests

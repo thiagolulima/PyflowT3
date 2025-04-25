@@ -68,7 +68,7 @@ Execute no terminal na raiz do projeto como administrador:
         # Para desativar os canais padrão, deixe em branco: NOTIFY_CHANNELS=
         NOTIFY_CHANNELS=telegram,email
 
-## 🧩 Instalação do Serviço (Windows) 
+## 🧩 Instalação do Serviço do (Windows) 
 
         python ServicoAgendadorWindows.py install
 - **Atenção**: caso seu python estiver instalado a nivel de usuário, apos instalar o serviço vá em **logon** coloque a conta do usuário onde esta instalado.
@@ -112,6 +112,17 @@ Na tela de monitoramento você verá:
 * Pesquisa e atualização de logs
 * Ativar para atualização automatica dos logs
 * Forçar execuções manuais
+
+## 🧩 Instalação do Serviço do bot telegram (Windows) 
+
+        python ServicoBotTelegram.py install
+- **Atenção**: caso seu python estiver instalado a nivel de usuário, apos instalar o serviço vá em **logon** coloque a conta do usuário onde esta instalado.
+
+## 🤖 BOT Telegram
+    /agendas                    # Lista agendas ativas
+    /buscar <termo_pesquisado>  # filtra agenda pesquisada
+
+- Serão listadas as agendas e você poderá forçar a execução pelo telegram.
 
 ## 📁 Logs
 
