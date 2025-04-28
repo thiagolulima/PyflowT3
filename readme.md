@@ -141,6 +141,6 @@ Em caso de dúvidas ou problemas, entre em contato com o desenvolvedor ou abra u
 
 [Assista no YouTube](https://www.youtube.com/watch?v=bXV4XzTNtds)
 
-- Caso não deseje instalar o bot, não precisa instalar o serviço, as notificações ainda continuaram funcionamento.
+- Caso não deseje instalar o bot, não é necessário instalar o serviço; as notificações continuarão funcionando.
 
 
