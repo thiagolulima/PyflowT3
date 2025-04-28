@@ -135,10 +135,10 @@ Em caso de dúvidas ou problemas, entre em contato com o desenvolvedor ou abra u
 
 ## Youtube instalação e configuração PyflowT3
 
-[![Assista no YouTube](https://img.youtube.com/vi/aAMSeCVJL9U/hqdefault.jpg)](https://www.youtube.com/watch?v=aAMSeCVJL9U)
+[Assista no YouTube](https://www.youtube.com/watch?v=aAMSeCVJL9U)
 
 ## Youtube configuração notificação por telegram PyflowT3
 
-[![Assista no YouTube](https://img.youtube.com/vi/NGwjYMoza20/hqdefault.jpg)](https://www.youtube.com/watch?v=NGwjYMoza20)
+[Assista no YouTube](https://www.youtube.com/watch?v=NGwjYMoza20)
 
 
