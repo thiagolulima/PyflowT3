@@ -139,6 +139,8 @@ Em caso de dúvidas ou problemas, entre em contato com o desenvolvedor ou abra u
 
 ## Configuração notificação por telegram PyflowT3
 
-[Assista no YouTube](https://www.youtube.com/watch?v=NGwjYMoza20)
+[Assista no YouTube](https://www.youtube.com/watch?v=bXV4XzTNtds)
+
+- Caso não deseje instalar o bot, não precisa instalar o serviço, as notificações ainda continuaram funcionamento.
 
 
