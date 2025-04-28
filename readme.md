@@ -133,11 +133,11 @@ Na tela de monitoramento você verá:
 
 Em caso de dúvidas ou problemas, entre em contato com o desenvolvedor ou abra uma issue no repositório.
 
-## Youtube instalação e configuração PyflowT3
+## Instalação e configuração PyflowT3
 
 [Assista no YouTube](https://www.youtube.com/watch?v=aAMSeCVJL9U)
 
-## Youtube configuração notificação por telegram PyflowT3
+## Configuração notificação por telegram PyflowT3
 
 [Assista no YouTube](https://www.youtube.com/watch?v=NGwjYMoza20)
 
