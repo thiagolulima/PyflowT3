@@ -1,0 +1,9 @@
+PyQt6
+PyQt6-Qt6
+PyQt6_sip
+pywin32
+pywin32-ctypes
+python-dotenv
+python-telegram-bot
+httpx
+requests

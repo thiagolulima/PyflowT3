@@ -31,6 +31,7 @@ from pathlib import Path
 import ctypes
 import unicodedata
 from dotenv import load_dotenv
+from notifications.notifier import notificar
 
 # Configuração do diretório de trabalho
 SERVICE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -100,35 +101,51 @@ def log_event(mensagem):
             log_file.write(log_line + "\n")
     except Exception as e:
         logging.error(f"Erro ao escrever no log: {str(e)}")
+        notificar(f"[PyFlowT3] Erro ao executar o workflow: {str(e)}")
     
     try:
         servicemanager.LogInfoMsg(log_line)
     except Exception as e:
         logging.error(f"Erro ao registrar no Event Viewer: {str(e)}")
+        notificar(f"[PyFlowT3] Erro ao executar o workflow: {str(e)}")
 
-def executar_pentaho(arquivo_kjb, timeout=3600):
+def atualizar_execucao_no_banco(id_agendamento, duracao_execucao, ultima_execucao):
+    """Atualiza a duração e data/hora da última execução do agendamento"""
+    try:
+        conn = sqlite3.connect(DB_PATH)
+        cursor = conn.cursor()
+
+        cursor.execute("""
+            UPDATE agendamentos
+            SET duracao_execucao = ?, ultima_execucao = ?
+            WHERE id = ?
+        """, (duracao_execucao, ultima_execucao, id_agendamento))
+
+        conn.commit()
+        conn.close()
+    except Exception as e:
+        log_event(f"[ERRO] Falha ao atualizar execução no banco: {str(e)}")
+
+def executar_pentaho(id, arquivo_kjb, timeout=3600):
     """Executa jobs/transformações do Pentaho com tratamento especial para serviço Windows"""
     try:
         arquivo = os.path.abspath(os.path.normpath(arquivo_kjb))
         extensao = Path(arquivo).suffix.lower()
-        
-        # Definir comando baseado no tipo de arquivo
+
         if extensao == '.ktr':
-            comando = f'{PENTAHO_TRANSFORMATION} /file:"{arquivo}"'
+            comando = f'"{PENTAHO_TRANSFORMATION}" /file:"{arquivo}"'
             diretorio = os.path.dirname(PENTAHO_TRANSFORMATION)
         else:
-            comando = f'{PENTAHO_JOB} /file:"{arquivo}"'
+            comando = f'"{PENTAHO_JOB}" /file:"{arquivo}"'
             diretorio = os.path.dirname(PENTAHO_JOB)
 
         log_event(f"[PENTAHO] Iniciando execução do arquivo: {arquivo}")
         log_event(f"[PENTAHO] Comando completo: {comando}")
         log_event(f"[PENTAHO] Diretório de trabalho: {diretorio}")
-        
-        # Configuração especial para serviço Windows
+
         startupinfo = subprocess.STARTUPINFO()
         startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
-        
-        # Variáveis de ambiente críticas para o Pentaho
+
         env = os.environ.copy()
         env.update({
             'PENTAHO_DI_JAVA_OPTIONS': '-Xms1024m -Xmx2048m',
@@ -138,85 +155,105 @@ def executar_pentaho(arquivo_kjb, timeout=3600):
             'TMP': os.environ.get('TMP', r'C:\Temp')
         })
 
-        # Garantir que o diretório TEMP exista
         os.makedirs(env['TEMP'], exist_ok=True)
 
         log_event(f"[PENTAHO] Variáveis de ambiente configuradas")
-        
-        with open(get_daily_log_path(), "a", encoding='utf-8') as log_file:
-            # Executar em um shell para garantir o contexto correto
-            processo = subprocess.Popen(
-                comando,
-                cwd=diretorio,
-                stdout=log_file,
-                stderr=subprocess.STDOUT,
-                stdin=subprocess.PIPE,
-                text=True,
-                encoding='utf-8',
-                errors='replace',
-                env=env,
-                startupinfo=startupinfo,
-                shell=True  # Crucial para funcionar como serviço
-            )
-            
-            start_time = time.time()
-            karaf_initialized = False
-            karaf_timeout = 300  # 5 minutos para inicializar o Karaf
-            
-            try:
-                # Processar saída em tempo real
-                while True:
-                    output = processo.stdout.readline()
-                    if output == '' and processo.poll() is not None:
-                        break
-                        
-                    if output:
-                        log_file.write(output)
-                        log_file.flush()
-                        
-                        # Verificar se o Karaf foi inicializado
-                        if not karaf_initialized and "OSGI Service Port" in output:
-                            karaf_initialized = True
-                            log_event("[PENTAHO] Karaf inicializado com sucesso")
-                            
-                        # Verificar timeout específico para inicialização do Karaf
-                        if not karaf_initialized and (time.time() - start_time) > karaf_timeout:
-                            raise subprocess.TimeoutExpired(comando, karaf_timeout, output, None)
-                            
-                        # Verificar timeout geral
-                        if (time.time() - start_time) > timeout:
-                            raise subprocess.TimeoutExpired(comando, timeout, output, None)
-                
-                # Capturar erros restantes
-                errors = processo.stderr.read()
-                if errors:
-                    log_file.write("\nERROS:\n" + errors)
+
+        linhas_erro = []
+
+        processo = subprocess.Popen(
+            comando,
+            cwd=diretorio,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
+            stdin=subprocess.PIPE,
+            text=True,
+            encoding='utf-8',
+            errors='replace',
+            env=env,
+            startupinfo=startupinfo,
+            shell=True  # Necessário no Windows como serviço
+        )
+
+        start_time = time.time()
+        karaf_initialized = False
+        karaf_timeout = 300  # 5 minutos para o Karaf
+        log_path = get_daily_log_path()
+
+        while True:
+            output = processo.stdout.readline()
+            if output == '' and processo.poll() is not None:
+                break
+
+            if output:
+                # Rotaciona o log se o dia mudou
+                novo_log_path = get_daily_log_path()
+                if novo_log_path != log_path:
+                    log_path = novo_log_path
+
+                with open(log_path, "a", encoding='utf-8') as log_file:
+                    log_file.write(f"[PID {processo.pid}] {output}")
                     log_file.flush()
-                
-                return_code = processo.wait()
-                
-                if return_code == 0:
-                    log_event("[PENTAHO] Executado com sucesso")
-                else:
-                    log_event(f"[PENTAHO] Erro (Código: {return_code})")
-                    if not karaf_initialized:
-                        log_event("[PENTAHO] Falha na inicialização do Karaf")
-                
-                return return_code
-                
-            except subprocess.TimeoutExpired as e:
-                processo.kill()
-                if not karaf_initialized:
-                    log_event("[PENTAHO] Timeout na inicialização do Karaf")
-                else:
-                    log_event("[PENTAHO] Timeout na execução do job")
-                return 1
-                
+
+                if "ERROR" in output.upper():
+                    linhas_erro.append(output.strip())
+
+                if not karaf_initialized and "OSGI Service Port" in output:
+                    karaf_initialized = True
+                    log_event("[PENTAHO] Karaf inicializado com sucesso")
+
+                if not karaf_initialized and (time.time() - start_time) > karaf_timeout:
+                    raise subprocess.TimeoutExpired(comando, karaf_timeout)
+
+                if (time.time() - start_time) > timeout:
+                    raise subprocess.TimeoutExpired(comando, timeout)
+
+        return_code = processo.wait()
+
+        end_time = time.time()
+        duracao = round((end_time - start_time) / 60, 2)
+        ultima_execucao = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+        atualizar_execucao_no_banco(id, duracao, ultima_execucao)
+
+        if linhas_erro:
+            msg = (
+                f"[Pentaho] ⚠️ Erros detectados na execução do arquivo:\n"
+                f"📄 Arquivo: {os.path.basename(arquivo)}\n\n"
+                f"🧾 Erros:\n" + "\n".join(linhas_erro[-5:])
+            )
+            log_event(msg)
+            notificar(msg)
+
+        if return_code == 0 and not linhas_erro:
+            log_event("[PENTAHO] Executado com sucesso")
+        else:
+            log_event(f"[PENTAHO] Erro (Código: {return_code})")
+            notificar(f"[PENTAHO] Erro (Código: {return_code})")
+
+            if not karaf_initialized:
+                log_event("[PENTAHO] Falha na inicialização do Karaf")
+                notificar("[PENTAHO] Falha na inicialização do Karaf")
+
+        return return_code
+
+    except subprocess.TimeoutExpired as e:
+        processo.kill()
+        if not karaf_initialized:
+            msg = "[PENTAHO] Timeout na inicialização do Karaf"
+        else:
+            msg = "[PENTAHO] Timeout na execução do job"
+
+        log_event(msg)
+        notificar(msg)
+        return 1
+
     except Exception as e:
         log_event(f"[PENTAHO] Erro crítico: {str(e)}")
+        notificar(f"[PyFlowT3] Erro crítico: {str(e)}")
         raise
 
-def executar_hop(arquivo, projeto, ambiente, timeout=1800):
+def executar_hop(id, arquivo, projeto, ambiente, timeout=1800):
     """Executa workflows/pipelines do Apache Hop"""
     try:
         arquivo = os.path.abspath(os.path.normpath(arquivo))
@@ -226,47 +263,169 @@ def executar_hop(arquivo, projeto, ambiente, timeout=1800):
             '-r', ambiente,
             '-f', arquivo
         ]
-        
+
         log_event(f"[HOP] Executando: {' '.join(comando)}")
         log_event(f"[HOP] Diretório: {os.path.dirname(APACHE_HOP)}")
-        
-        with open(get_daily_log_path(), "a", encoding='utf-8') as log_file:
-            processo = subprocess.Popen(
-                comando,
-                cwd=os.path.dirname(APACHE_HOP),
-                stdout=log_file,
-                stderr=subprocess.STDOUT,
-                text=True,
-                encoding='utf-8',
-                errors='replace'
-            )
-            
-            try:
-                for linha in processo.stdout:
-                    log_file.write(linha)
+
+        erros_detectados = []
+
+        processo = subprocess.Popen(
+            comando,
+            cwd=os.path.dirname(APACHE_HOP),
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
+            text=True,
+            encoding='utf-8',
+            errors='replace',
+            shell=True  # Necessário para execução como serviço no Windows
+        )
+
+        start_time = time.time()
+        log_path = get_daily_log_path()
+
+        while True:
+            linha = processo.stdout.readline()
+            if linha == '' and processo.poll() is not None:
+                break
+
+            if linha:
+                # Atualiza o caminho do log se o dia tiver mudado
+                novo_log_path = get_daily_log_path()
+                if novo_log_path != log_path:
+                    log_path = novo_log_path
+
+                with open(log_path, "a", encoding='utf-8') as log_file:
+                    log_file.write(f"[PID {processo.pid}] {linha}")
                     log_file.flush()
-                
-                erros = processo.stderr.read()
-                if erros:
-                    log_file.write("\nERROS:\n" + erros)
-                    log_file.flush()
-                
-                processo.wait(timeout=timeout)
-                
-                if processo.returncode == 0:
-                    log_event("[HOP] Executado com sucesso")
-                else:
-                    log_event(f"[HOP] Erro (Código: {processo.returncode})")
-                
-                return processo.returncode
-                
-            except subprocess.TimeoutExpired:
-                processo.kill()
-                log_event("[HOP] Timeout excedido - processo terminado")
-                return 1
-                
+
+                if any(p in linha.upper() for p in ['ERROR', 'EXCEPTION', 'FATAL']):
+                    erros_detectados.append(linha.strip())
+
+            if time.time() - start_time > timeout:
+                raise subprocess.TimeoutExpired(comando, timeout)
+
+        processo.wait()
+
+        end_time = time.time()
+        duracao = round((end_time - start_time) / 60, 2)  # em minutos
+        ultima_execucao = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+        atualizar_execucao_no_banco(id, duracao, ultima_execucao)
+
+        if processo.returncode == 0 and not erros_detectados:
+            log_event("[HOP] Executado com sucesso")
+        else:
+            log_event(f"[HOP] Erro (Código: {processo.returncode})")
+            if erros_detectados:
+                msg = (
+                    f"[HOP] ⚠️ Erros detectados no arquivo:\n"
+                    f"📄 Arquivo: {os.path.basename(arquivo)}\n\n"
+                    f"🧾 Linhas de erro:\n" + "\n".join(erros_detectados[-5:])  # últimos 5 erros
+                )
+                log_event(msg)
+                notificar(msg)
+            else:
+                notificar(f"[HOP] Erro (Código: {processo.returncode})")
+
+        return processo.returncode
+
+    except subprocess.TimeoutExpired:
+        processo.kill()
+        msg = "[HOP] Timeout excedido - processo terminado"
+        log_event(msg)
+        notificar(msg)
+        return 1
+
     except Exception as e:
-        log_event(f"[HOP] Erro inesperado: {str(e)}")
+        msg = f"[HOP] Erro inesperado: {str(e)}"
+        log_event(msg)
+        notificar(f"[PyFlowT3] Erro ao executar o workflow: {str(e)}")
+        raise
+
+    
+def executar_comando_terminal(id, comando, timeout=1800, descricao="Comando genérico"):
+    """
+    Executa um comando ou script no terminal (por exemplo .bat, .cmd, .sh, python, etc.)
+
+    Args:
+        comando (str): Comando completo a ser executado.
+        timeout (int): Tempo máximo de execução em segundos.
+        descricao (str): Texto descritivo para logs e notificações.
+
+    Returns:
+        int: Código de retorno do processo.
+    """
+    try:
+        log_event(f"[CMD] Iniciando: {descricao}")
+        log_event(f"[CMD] Comando: {comando}")
+
+        erros_detectados = []
+
+        processo = subprocess.Popen(
+            comando,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
+            stdin=subprocess.PIPE,
+            text=True,
+            encoding='utf-8',
+            errors='replace',
+            shell=True  # Necessário para .bat e comandos do terminal
+        )
+
+        start_time = time.time()
+        log_path = get_daily_log_path()
+
+        while True:
+            linha = processo.stdout.readline()
+            if linha == '' and processo.poll() is not None:
+                break
+
+            if linha:
+                # Rotaciona log se mudou o dia
+                novo_log_path = get_daily_log_path()
+                if novo_log_path != log_path:
+                    log_path = novo_log_path
+
+                with open(log_path, "a", encoding='utf-8') as log_file:
+                    log_file.write(f"[PID {processo.pid}] {linha}")
+                    log_file.flush()
+
+                if any(p in linha.upper() for p in ['ERROR', 'EXCEPTION', 'FATAL']):
+                    erros_detectados.append(linha.strip())
+
+            if time.time() - start_time > timeout:
+                raise subprocess.TimeoutExpired(comando, timeout)
+
+        processo.wait()
+
+        end_time = time.time()
+        duracao = round((end_time - start_time) / 60, 2)
+        ultima_execucao = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+        atualizar_execucao_no_banco(id, duracao, ultima_execucao)
+
+        if processo.returncode == 0 and not erros_detectados:
+            log_event(f"[CMD] Finalizado com sucesso: {descricao}")
+        else:
+            msg = f"[CMD] Erro ao executar: {descricao} (Código: {processo.returncode})"
+            if erros_detectados:
+                msg += "\n🧾 Linhas com erro:\n" + "\n".join(erros_detectados[-5:])
+            log_event(msg)
+            notificar(msg)
+
+        return processo.returncode
+
+    except subprocess.TimeoutExpired:
+        processo.kill()
+        msg = f"[CMD] Timeout excedido na execução de: {descricao}"
+        log_event(msg)
+        notificar(msg)
+        return 1
+
+    except Exception as e:
+        msg = f"[CMD] Erro inesperado ao executar '{descricao}': {str(e)}"
+        log_event(msg)
+        notificar(msg)
         raise
 
 def obter_dia_semana_ptbr():
@@ -286,7 +445,44 @@ class AgendadorHopService(win32serviceutil.ServiceFramework):
         self.timeout = 30000  # 30 segundos
         self.main_thread = None
         socket.setdefaulttimeout(60)
+        self.criar_banco_dados()
         self.verificar_ambiente()
+
+    def criar_banco_dados(self):
+        """Cria o banco de dados e tabela se não existirem"""
+        conn = sqlite3.connect(DB_PATH)
+        cursor = conn.cursor()
+        cursor.execute("""
+            CREATE TABLE IF NOT EXISTS agendamentos (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                arquivo TEXT NOT NULL,
+                projeto TEXT NULL,
+                local_run TEXT NULL,
+                horario TEXT,
+                intervalo INTEGER,
+                dias_semana TEXT,
+                dias_mes TEXT,
+                hora_inicio TEXT,
+                hora_fim TEXT,
+                status TEXT NOT NULL DEFAULT 'Ativo',
+                ferramenta_etl TEXT,
+                ultima_execucao DATETIME,
+                duracao_execucao REAL                
+                )
+            """)
+        
+        cursor.execute("PRAGMA table_info(agendamentos)")
+        colunas = [info[1] for info in cursor.fetchall()]
+        
+        if 'ultima_execucao' not in colunas:
+            cursor.execute("ALTER TABLE agendamentos ADD COLUMN ultima_execucao DATETIME")
+            conn.commit()
+            conn.close()
+
+        if 'duracao_execucao' not in colunas:
+            cursor.execute("ALTER TABLE agendamentos ADD COLUMN duracao_execucao REAL")
+            conn.commit()
+            conn.close()
 
     def verificar_ambiente(self):
         """Verifica requisitos do ambiente antes de iniciar"""
@@ -344,6 +540,7 @@ class AgendadorHopService(win32serviceutil.ServiceFramework):
                     
             except Exception as e:
                 log_event(f"Erro no loop principal: {str(e)}")
+                notificar(f"[PyFlowT3] Erro ao executar o workflow: {str(e)}")
                 if not self.stop_event.is_set():
                     time.sleep(10)
         
@@ -366,7 +563,7 @@ class AgendadorHopService(win32serviceutil.ServiceFramework):
                 cursor.execute("""
                     SELECT arquivo, horario, intervalo, dias_semana, 
                            dias_mes, hora_inicio, hora_fim, projeto, 
-                           local_run, ferramenta_etl
+                           local_run, ferramenta_etl,id
                     FROM agendamentos
                     WHERE status = 'Ativo'
                 """)
@@ -378,11 +575,12 @@ class AgendadorHopService(win32serviceutil.ServiceFramework):
                     
         except Exception as e:
             log_event(f"Erro ao verificar agendamentos: {str(e)}")
+            notificar(f"[PyFlowT3] Erro ao executar o workflow: {str(e)}")
 
     def _processar_agendamento(self, agendamento, hora_atual, dia_semana, dia_mes, agora, minuto_atual):
         """Processa um agendamento individual com todas as condições combinadas"""
         (arquivo, horario, intervalo, dias_semana_ag, dias_mes_ag, 
-        hora_inicio, hora_fim, projeto, local_run, ferramenta_etl) = agendamento
+        hora_inicio, hora_fim, projeto, local_run, ferramenta_etl,id) = agendamento
         
         # Inicializa como False - só deve executar se TODAS as condições aplicáveis forem atendidas
         deve_executar = False
@@ -440,23 +638,34 @@ class AgendadorHopService(win32serviceutil.ServiceFramework):
                 if ferramenta_etl == 'PENTAHO':
                     processo = multiprocessing.Process(
                         target=executar_pentaho,
-                        args=(arquivo,),
+                        args=(id, arquivo,),
                         kwargs={'timeout': 7200},  # 2 horas para jobs complexos
                         name=f"Pentaho_{Path(arquivo).name}"
                     )
-                else:
+                elif ferramenta_etl == 'APACHE_HOP':
                     processo = multiprocessing.Process(
                         target=executar_hop,
-                        args=(arquivo, projeto, local_run),
+                        args=(id,arquivo, projeto, local_run),
                         name=f"Hop_{Path(arquivo).name}"
                     )
-                
+                else:
+                    processo = multiprocessing.Process(
+                        target=executar_comando_terminal,
+                        args=(id, arquivo,),
+                        kwargs={
+                            'timeout': 1800,
+                            'descricao': f"Execução terminal: {Path(arquivo).name}"
+                        },
+                        name=f"Terminal_{Path(arquivo).name}"
+                    )
+
                 processo.daemon = True
                 processo.start()
                 log_event(f"Processo iniciado (PID: {processo.pid})")
                 
             except Exception as e:
                 log_event(f"Falha ao iniciar processo: {str(e)}")
+                notificar(f"[PyFlowT3] Erro ao executar o workflow: {str(e)}")
         
         return deve_executar
 
