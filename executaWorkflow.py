@@ -1,3 +1,17 @@
+# Copyright 2025 Thiago Luis de Lima
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 import os
 import subprocess
 import time
@@ -140,7 +154,7 @@ def executar_job_pentaho(id, job_path, timeout):
         pan_path = config_os['pentaho_pan']
         pentaho_dir = os.path.dirname(kitchen_path)
 
-        logger.info(f"Executando job Pentaho: {job_path}")
+        logger.info(f"Executando job Pentaho: {job_path} Timeout: {timeout}")
 
         env = os.environ.copy()
         env.update({
@@ -231,7 +245,7 @@ def executar_hop(id, arquivo_hop, projeto, local_run, timeout):
         hop_run_path = config_os['hop_run']
         hop_dir = os.path.dirname(hop_run_path)
 
-        logger.info(f"Executando arquivo Hop: {arquivo_hop}")
+        logger.info(f"Executando arquivo Hop: {arquivo_hop} Timeout: {timeout}")
         logger.info(f"Projeto: {projeto}, Local Run: {local_run}")
 
         comando = [
@@ -307,7 +321,8 @@ def executar_hop(id, arquivo_hop, projeto, local_run, timeout):
 def executar_comando_terminal(id,comando, cwd, nome_arquivo, ferramenta="TERMINAL", timeout=1800):
     """Executa um comando genérico no terminal, monitora o log e envia notificações em caso de erro"""
     try:
-        logger.info(f"[{ferramenta}] Executando comando: {' '.join(comando)}")
+        logger.info(f"[{ferramenta}] Executando comando: {' '.join(comando)} Timeout {timeout}")
+        
         erro_detectado = False
         linhas_erro = []
 
@@ -398,32 +413,34 @@ def monitorar_processo(processo, timeout):
 
 if __name__ == '__main__':
     logger.info("==== Início da Execução ETL ====")
-    
-    # Exemplo de uso:
-    # Para Pentaho: python script.py caminho/arquivo.kjb
-    # Para Hop: python script.py caminho/arquivo.hwf NomeProjeto /caminho/local_run
-    
+
     if len(sys.argv) < 3:
-        logger.error("Uso: python script.py <id> <arquivo> [projeto_hop] [local_run_hop]")
+        logger.error("Uso: python script.py <id> <arquivo> [projeto_hop] [local_run_hop] [timeout]")
         sys.exit(1)
 
     id_execucao = sys.argv[1]
     arquivo = sys.argv[2]
+
     projeto = sys.argv[3] if len(sys.argv) > 3 else None
     local_run = sys.argv[4] if len(sys.argv) > 4 else None
-    
+
+    # Captura o timeout como inteiro, se informado
+    try:
+        timeout = int(sys.argv[5]) if len(sys.argv) > 5 else 3600
+    except ValueError:
+        timeout = 3600
+
     success = executar_etl(
         id_execucao,
         arquivo_path=arquivo,
         projeto_hop=projeto,
         local_run_hop=local_run,
-        timeout=3600  # 1 hora de timeout
+        timeout=timeout
     )
-    
+
     if success:
         logger.info("Execução concluída com sucesso!")
         sys.exit(0)
     else:
         logger.error("Falha na execução")
-        #notificar("Falha na execução")
         sys.exit(1)

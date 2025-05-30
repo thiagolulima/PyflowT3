@@ -164,6 +164,11 @@ class AgendadorGUI(QMainWindow):
         self.combo_status.addItems(["Ativo", "Inativo"])
         self.layout_grid.addWidget(self.combo_status, 10, 1, 1, 2)
 
+        self.layout_grid.addWidget(QLabel("Timeout (segundos):"), 11, 0)
+        self.entry_timeout = QLineEdit()
+        self.entry_timeout.setValidator(QRegularExpressionValidator(QRegularExpression("[0-9]*")))
+        self.layout_grid.addWidget(self.entry_timeout, 11, 1, 1, 2)
+
         # Botão de salvar/cancelar
         self.btn_salvar = QPushButton("Salvar Agendamento")
         self.btn_salvar.clicked.connect(self.salvar_no_banco)
@@ -176,11 +181,11 @@ class AgendadorGUI(QMainWindow):
 
         # Tabela de agendamentos
         self.tabela = QTableWidget()
-        self.tabela.setColumnCount(12)
+        self.tabela.setColumnCount(13)
         self.tabela.setHorizontalHeaderLabels([
             "ID", "Arquivo", "Projeto", "Local RUN HOP", "Horário", 
             "Intervalo", "Dias Semana", "Dias Mês", "Hora Início", 
-            "Hora Fim", "Status", "Execução"
+            "Hora Fim", "Status", "Execução", "Timeout"
         ])
         
         # Configurações de seleção (PyQt6)
@@ -324,6 +329,10 @@ class AgendadorGUI(QMainWindow):
             conn.commit()
             conn.close()
 
+        if 'timeout_execucao' not in colunas:
+            cursor.execute("ALTER TABLE agendamentos ADD COLUMN timeout_execucao INTEGER DEFAULT 1800")
+            conn.commit()
+
     def listar_agendamentos(self, filtro=None):
         """Carrega os agendamentos do banco e exibe na tabela"""
         conn = sqlite3.connect(DB_PATH)
@@ -331,9 +340,9 @@ class AgendadorGUI(QMainWindow):
         
         if filtro:
             query = """
-                SELECT id, arquivo, projeto, local_run, horario, intervalo, 
-                       dias_semana, dias_mes, hora_inicio, hora_fim, status,ferramenta_etl
-                FROM agendamentos 
+                 SELECT id, arquivo, projeto, local_run, horario, intervalo, 
+                    dias_semana, dias_mes, hora_inicio, hora_fim, status, ferramenta_etl, timeout_execucao
+                FROM agendamentos
                 WHERE projeto LIKE ? OR arquivo LIKE ? OR local_run LIKE ? OR horario LIKE ? 
                       OR intervalo LIKE ? OR dias_semana LIKE ? OR dias_mes LIKE ? 
                       OR hora_inicio LIKE ? OR hora_fim LIKE ? OR status LIKE ? OR ferramenta_etl LIKE ? 
@@ -344,9 +353,9 @@ class AgendadorGUI(QMainWindow):
                                    ))
         else:
             query = """
-                SELECT id, arquivo, projeto, local_run, horario, intervalo, 
-                       dias_semana, dias_mes, hora_inicio, hora_fim, status,ferramenta_etl
-                FROM agendamentos
+                 SELECT id, arquivo, projeto, local_run, horario, intervalo, 
+                     dias_semana, dias_mes, hora_inicio, hora_fim, status, ferramenta_etl, timeout_execucao
+                 FROM agendamentos
             """
             cursor.execute(query)
             
@@ -391,6 +400,7 @@ class AgendadorGUI(QMainWindow):
         self.entry_etl.setCurrentIndex(0)  # Define como "Ativo"
         self.limpar_dias_semana()
         self.agendamento_editando = None
+        self.entry_timeout.clear()
 
     def validar_campos(self):
         """Valida os campos obrigatórios e formatos"""
@@ -448,6 +458,8 @@ class AgendadorGUI(QMainWindow):
         hora_fim = self.entry_hora_fim.text()
         status = self.combo_status.currentText()
         etl = self.entry_etl.currentText() 
+        timeout_execucao = self.entry_timeout.text().strip()
+        timeout_execucao = int(timeout_execucao) if timeout_execucao.isdigit() else 1800
 
         conn = sqlite3.connect(DB_PATH)
         cursor = conn.cursor()
@@ -456,28 +468,23 @@ class AgendadorGUI(QMainWindow):
             # Atualiza o agendamento existente
             cursor.execute("""
                 UPDATE agendamentos SET
-                    arquivo = ?,
-                    projeto = ?,
-                    local_run = ?,
-                    horario = ?,
-                    intervalo = ?,
-                    dias_semana = ?,
-                    dias_mes = ?,
-                    hora_inicio = ?,
-                    hora_fim = ?,
-                    status = ?,
-                    ferramenta_etl = ?
+                    arquivo = ?, projeto = ?, local_run = ?, horario = ?, intervalo = ?,
+                    dias_semana = ?, dias_mes = ?, hora_inicio = ?, hora_fim = ?,
+                    status = ?, ferramenta_etl = ?, timeout_execucao = ?
                 WHERE id = ?
-            """, (arquivo, projeto, local, horario, intervalo, dias_semana, dias_mes, hora_inicio, hora_fim, status, etl, self.agendamento_editando))
+            """, (arquivo, projeto, local, horario, intervalo, dias_semana, dias_mes,
+                hora_inicio, hora_fim, status, etl, timeout_execucao, self.agendamento_editando))
             mensagem = "Agendamento atualizado com sucesso!"
         else:
             # Insere um novo agendamento
             cursor.execute("""
                 INSERT INTO agendamentos (
                     arquivo, projeto, local_run, horario, intervalo, 
-                    dias_semana, dias_mes, hora_inicio, hora_fim, status, ferramenta_etl
-                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-            """, (arquivo, projeto, local, horario, intervalo, dias_semana, dias_mes, hora_inicio, hora_fim, status,etl))
+                    dias_semana, dias_mes, hora_inicio, hora_fim, 
+                    status, ferramenta_etl, timeout_execucao
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            """, (arquivo, projeto, local, horario, intervalo, dias_semana, dias_mes,
+                hora_inicio, hora_fim, status, etl, timeout_execucao))
             mensagem = "Agendamento salvo com sucesso!"
             
         conn.commit()
@@ -502,7 +509,7 @@ class AgendadorGUI(QMainWindow):
         cursor = conn.cursor()
         cursor.execute("""
             SELECT arquivo, projeto, local_run, horario, intervalo, 
-                   dias_semana, dias_mes, hora_inicio, hora_fim, status,ferramenta_etl
+                   dias_semana, dias_mes, hora_inicio, hora_fim, status,ferramenta_etl,timeout_execucao
             FROM agendamentos WHERE id = ?
         """, (id_agendamento,))
         agendamento = cursor.fetchone()
@@ -521,6 +528,7 @@ class AgendadorGUI(QMainWindow):
 
             
             self.set_dias_semana(agendamento[5] or "")
+            self.entry_timeout.setText(str(agendamento[11]) if agendamento[11] else "1800")
 
             # Define o status no combobox
             index = self.combo_status.findText(agendamento[9])
@@ -551,20 +559,24 @@ class AgendadorGUI(QMainWindow):
         arquivo = self.tabela.item(linha_selecionada, 1).text()
         local = self.tabela.item(linha_selecionada, 3).text()
         id = self.tabela.item(linha_selecionada, 0).text()
-        
+        timeout = self.tabela.item(linha_selecionada, 12).text()
+        if not timeout.isdigit():
+            timeout = "1800"
+
         resposta = QMessageBox.question(
             self, "Confirmar Execução", 
-            f"Tem certeza que deseja executar o agendamento: '{arquivo}'?",
+            f"Tem certeza que deseja executar o agendamento: '{arquivo}' com Timeout: {timeout}?",
             QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No
         )
         if resposta == QMessageBox.StandardButton.Yes:
-          if ferramenta_etl == 'PENTAHO':
-            subprocess.Popen([sys.executable, 'executaWorkflow.py', id, arquivo ]) 
-          elif ferramenta_etl == 'APACHE_HOP':
-            subprocess.Popen([sys.executable, 'executaWorkflow.py', id, arquivo , projeto , local])     
-          else:
-            subprocess.Popen([sys.executable, 'executaWorkflow.py',id, arquivo])             
-          QMessageBox.information(self, "Sucesso", "Agendamento enviado para execução, acompanhe no monitoramento!")
+            args = [sys.executable, 'executaWorkflow.py', id, arquivo]
+            if ferramenta_etl == 'APACHE_HOP':
+                args += [projeto, local, timeout]
+            elif ferramenta_etl == 'PENTAHO' or ferramenta_etl == 'TERMINAL':
+                args += [timeout]
+
+            subprocess.Popen(args)              
+            QMessageBox.information(self, "Sucesso", "Agendamento enviado para execução, acompanhe no monitoramento!")
           
     def excluir_agendamento(self):
         """Exclui um agendamento selecionado"""

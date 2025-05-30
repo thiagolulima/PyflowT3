@@ -126,7 +126,7 @@ def atualizar_execucao_no_banco(id_agendamento, duracao_execucao, ultima_execuca
     except Exception as e:
         log_event(f"[ERRO] Falha ao atualizar execução no banco: {str(e)}")
 
-def executar_pentaho(id, arquivo_kjb, timeout=3600):
+def executar_pentaho(id, arquivo_kjb, timeout):
     """Executa jobs/transformações do Pentaho com tratamento especial para serviço Windows"""
     try:
         arquivo = os.path.abspath(os.path.normpath(arquivo_kjb))
@@ -253,7 +253,7 @@ def executar_pentaho(id, arquivo_kjb, timeout=3600):
         notificar(f"[PyFlowT3] Erro crítico: {str(e)}")
         raise
 
-def executar_hop(id, arquivo, projeto, ambiente, timeout=1800):
+def executar_hop(id, arquivo, projeto, ambiente, timeout):
     """Executa workflows/pipelines do Apache Hop"""
     try:
         arquivo = os.path.abspath(os.path.normpath(arquivo))
@@ -484,6 +484,10 @@ class AgendadorHopService(win32serviceutil.ServiceFramework):
             conn.commit()
             conn.close()
 
+        if 'timeout_execucao' not in colunas:
+            cursor.execute("ALTER TABLE agendamentos ADD COLUMN timeout_execucao INTEGER DEFAULT 1800")
+            conn.commit()
+
     def verificar_ambiente(self):
         """Verifica requisitos do ambiente antes de iniciar"""
         if not os.path.exists(DB_PATH):
@@ -563,7 +567,7 @@ class AgendadorHopService(win32serviceutil.ServiceFramework):
                 cursor.execute("""
                     SELECT arquivo, horario, intervalo, dias_semana, 
                            dias_mes, hora_inicio, hora_fim, projeto, 
-                           local_run, ferramenta_etl,id
+                           local_run, ferramenta_etl,id, timeout_execucao
                     FROM agendamentos
                     WHERE status = 'Ativo'
                 """)
@@ -579,9 +583,11 @@ class AgendadorHopService(win32serviceutil.ServiceFramework):
 
     def _processar_agendamento(self, agendamento, hora_atual, dia_semana, dia_mes, agora, minuto_atual):
         """Processa um agendamento individual com todas as condições combinadas"""
-        (arquivo, horario, intervalo, dias_semana_ag, dias_mes_ag, 
-        hora_inicio, hora_fim, projeto, local_run, ferramenta_etl,id) = agendamento
         
+        (arquivo, horario, intervalo, dias_semana_ag, dias_mes_ag, 
+        hora_inicio, hora_fim, projeto, local_run, ferramenta_etl,id ,timeout_execucao ) = agendamento
+        
+        timeout_execucao = int(timeout_execucao or 1800)
         # Inicializa como False - só deve executar se TODAS as condições aplicáveis forem atendidas
         deve_executar = False
         
@@ -638,24 +644,22 @@ class AgendadorHopService(win32serviceutil.ServiceFramework):
                 if ferramenta_etl == 'PENTAHO':
                     processo = multiprocessing.Process(
                         target=executar_pentaho,
-                        args=(id, arquivo,),
-                        kwargs={'timeout': 7200},  # 2 horas para jobs complexos
+                        args=(id, arquivo),
+                        kwargs={'timeout': timeout_execucao},
                         name=f"Pentaho_{Path(arquivo).name}"
                     )
                 elif ferramenta_etl == 'APACHE_HOP':
                     processo = multiprocessing.Process(
                         target=executar_hop,
-                        args=(id,arquivo, projeto, local_run),
+                        args=(id, arquivo, projeto, local_run),
+                        kwargs={'timeout': timeout_execucao},
                         name=f"Hop_{Path(arquivo).name}"
                     )
                 else:
                     processo = multiprocessing.Process(
                         target=executar_comando_terminal,
-                        args=(id, arquivo,),
-                        kwargs={
-                            'timeout': 1800,
-                            'descricao': f"Execução terminal: {Path(arquivo).name}"
-                        },
+                        args=(id, arquivo),
+                        kwargs={'timeout': timeout_execucao, 'descricao': f"Execução terminal: {Path(arquivo).name}"},
                         name=f"Terminal_{Path(arquivo).name}"
                     )
 

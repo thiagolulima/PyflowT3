@@ -146,7 +146,7 @@ class AgendadorGUI(QWidget):
             conn = sqlite3.connect(DB_PATH)
             cursor = conn.cursor()
             cursor.execute("""
-                SELECT id, arquivo, projeto, local_run, ultima_execucao, duracao_execucao, horario, intervalo, dias_semana, dias_mes, hora_inicio, hora_fim, ferramenta_etl
+                SELECT id, arquivo, projeto, local_run, ultima_execucao, duracao_execucao, horario, intervalo, dias_semana, dias_mes, hora_inicio, hora_fim, ferramenta_etl,timeout_execucao
                 FROM agendamentos WHERE Status = 'Ativo' ORDER BY horario
             """)
             agendamentos = cursor.fetchall()
@@ -158,9 +158,9 @@ class AgendadorGUI(QWidget):
             self.tabela_agendamentos.setSortingEnabled(False)
             self.tabela_agendamentos.clearContents()
             self.tabela_agendamentos.setRowCount(len(filtrados))
-            self.tabela_agendamentos.setColumnCount(13)
+            self.tabela_agendamentos.setColumnCount(14)
             self.tabela_agendamentos.setHorizontalHeaderLabels(
-                ["ID", "Arquivo", "Projeto", "Local_run", "Última Execução", "Duração", "Horário", "Intervalo", "Dias Semana", "Dias Mês", "Hora Início", "Hora Fim", "Execução"]
+                ["ID", "Arquivo", "Projeto", "Local_run", "Última Execução", "Duração", "Horário", "Intervalo", "Dias Semana", "Dias Mês", "Hora Início", "Hora Fim", "Execução","Timeout"]
             )
 
             for i, row in enumerate(filtrados):
@@ -215,6 +215,9 @@ class AgendadorGUI(QWidget):
         arquivo = self.tabela_agendamentos.item(linha_selecionada, 1).text()
         local = self.tabela_agendamentos.item(linha_selecionada, 3).text()
         id = self.tabela_agendamentos.item(linha_selecionada, 0).text()
+        timeout = self.tabela_agendamentos.item(linha_selecionada, 13).text()
+        if not timeout.isdigit():
+            timeout = "1800"
 
         resposta = QMessageBox.question(
             self, "Confirmar Execução", 
@@ -223,12 +226,12 @@ class AgendadorGUI(QWidget):
         )
 
         if resposta == QMessageBox.StandardButton.Yes:
-            if ferramenta_etl == 'PENTAHO':
-                subprocess.Popen([sys.executable, 'executaWorkflow.py', id, arquivo])
-            elif ferramenta_etl == 'APACHE_HOP':
-                subprocess.Popen([sys.executable, 'executaWorkflow.py', id, arquivo, projeto, local])
-            else:
-                subprocess.Popen([sys.executable, 'executaWorkflow.py', id, arquivo])
+            args = [sys.executable, 'executaWorkflow.py', id, arquivo]
+            if ferramenta_etl == 'APACHE_HOP':
+                args += [projeto, local, timeout]
+            elif ferramenta_etl == 'PENTAHO' or ferramenta_etl == 'TERMINAL':
+                args += [timeout]
+            subprocess.Popen(args)              
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
