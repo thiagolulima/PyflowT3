@@ -65,9 +65,10 @@ def limpar_banco():
     conn = sqlite3.connect(DB_PATH)
     cursor = conn.cursor()
     cursor.execute("DELETE FROM agendamentos")
+    cursor.execute("DELETE FROM sqlite_sequence WHERE name='agendamentos'")
     conn.commit()
     conn.close()
-    print("⚠️ Tabela agendamentos limpa.")
+    print("⚠️ Tabela agendamentos limpa e contador de IDs reiniciado.")
 
 if __name__ == "__main__":
 
