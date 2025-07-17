@@ -44,13 +44,12 @@ CHAT_ID = int(os.getenv("CHAT_ID"))
 API_URL = f"https://api.telegram.org/bot{BOT_TOKEN}"
 DB_PATH = os.getenv("DB_PATH", "agendador.db")
 
-fluxo_map = {}
-
 class TelegramBot:
     def __init__(self, stop_event):
         self.stop_event = stop_event
         self.session = requests.Session()
         self.offset = None
+        self.fluxo_map = {}  # Dicionário para mapear callbacks para fluxos
         
     def buscar_fluxos(self):
         conn = sqlite3.connect(DB_PATH)
@@ -74,6 +73,12 @@ class TelegramBot:
         return fluxos
 
     def executar_fluxo(self, caminho):
+        # Validação do tipo do caminho
+        if isinstance(caminho, int):
+            caminho = str(caminho)
+        elif not isinstance(caminho, (str, bytes, os.PathLike)):
+            return f"❌ Tipo de caminho inválido: {type(caminho)}"
+        
         if not os.path.exists(caminho):
             return f"❌ Caminho não encontrado: {caminho}"
             
@@ -99,11 +104,11 @@ class TelegramBot:
             id_agendamento, projeto, local_run, arquivo, ferramenta_etl, timeout_execucao = row
 
             if ferramenta_etl.upper() == 'PENTAHO':
-                cmd = [python_exec, 'executaWorkflow.py', str(id_agendamento), arquivo, projeto or " ", local_run or " ", timeout_execucao]
+                cmd = [python_exec, 'executaWorkflow.py', str(id_agendamento), arquivo, projeto or " ", local_run or " ", str(timeout_execucao)]
             elif ferramenta_etl.upper() == 'APACHE_HOP':
-                cmd = [python_exec, 'executaWorkflow.py', str(id_agendamento), arquivo, projeto or " ", local_run or " ", timeout_execucao]
+                cmd = [python_exec, 'executaWorkflow.py', str(id_agendamento), arquivo, projeto or " ", local_run or " ", str(timeout_execucao)]
             elif ferramenta_etl.upper() == 'TERMINAL':
-                cmd = [python_exec, 'executaWorkflow.py', str(id_agendamento), arquivo, projeto or " ", local_run or " ", timeout_execucao]
+                cmd = [python_exec, 'executaWorkflow.py', str(id_agendamento), arquivo, projeto or " ", local_run or " ", str(timeout_execucao)]
             else:
                 return f"❌ Ferramenta ETL desconhecida: {ferramenta_etl}"
 
@@ -182,7 +187,7 @@ class TelegramBot:
 
                         if texto == "/agendas":
                             fluxos = self.buscar_fluxos()
-                            fluxo_map = {f"EXEC:{i}": caminho for i, caminho in enumerate(fluxos)}
+                            self.fluxo_map = {f"EXEC:{i}": caminho for i, caminho in enumerate(fluxos)}
                             botoes = [[{"text": os.path.basename(caminho), "callback_data": f"EXEC:{i}"}] for i, caminho in enumerate(fluxos)]
                             reply_markup = {"inline_keyboard": botoes}
                             self.enviar_resposta(chat_id, "Escolha uma agenda para executar:", reply_markup)
@@ -198,7 +203,7 @@ class TelegramBot:
                                 self.enviar_resposta(chat_id, f"🔍 Nenhuma agenda encontrada contendo: `{termo}`", reply_markup=None)
                                 continue
 
-                            fluxo_map = {f"EXEC:{i}": caminho for i, caminho in enumerate(fluxos)}
+                            self.fluxo_map = {f"EXEC:{i}": caminho for i, caminho in enumerate(fluxos)}
                             botoes = [[{"text": os.path.basename(caminho), "callback_data": f"EXEC:{i}"}] for i, caminho in enumerate(fluxos)]
                             reply_markup = {"inline_keyboard": botoes}
                             self.enviar_resposta(chat_id, f"🔍 Resultados da busca por: `{termo}`", reply_markup)
@@ -210,7 +215,7 @@ class TelegramBot:
                         chat_id = callback.get("message", {}).get("chat", {}).get("id")
 
                         if dados and dados.startswith("EXEC:") and chat_id == CHAT_ID:
-                            caminho = fluxo_map.get(dados)
+                            caminho = self.fluxo_map.get(dados)
                             self.responder_callback(callback_id)
                             if caminho:
                                 self.enviar_resposta(chat_id, f"⏳ Executando agenda:\n`{os.path.basename(caminho)}`")
